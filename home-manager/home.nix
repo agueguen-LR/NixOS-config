@@ -4,16 +4,14 @@
   imports = [
     outputs.homeManagerModules.zvm
     outputs.homeManagerModules.tmux
+    outputs.homeManagerModules.alacritty
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "adrien";
   home.homeDirectory = "/home/adrien";
 
   home.stateVersion = "25.05"; 
-  home.packages = [
-    # Do not add packages here unless necessary, prefer importing modules from homeManagerModules
+  home.packages = with pkgs; [
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -53,4 +51,5 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.zsh.enable = true;
 }
