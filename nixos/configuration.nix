@@ -8,7 +8,15 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.home-manager
     ];
+
+  home-manager = {
+    extraSpecialArgs = {inherit inputs outputs; };
+    users = {
+      adrien = import ../home-manager/home.nix;
+    };
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -78,14 +86,15 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
-    chezmoi
-    neovim
-    btop
-    alacritty
-    pavucontrol
+  environment.systemPackages = [
+    pkgs.vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    inputs.home-manager.packages.${pkgs.system}.default
+    pkgs.git
+    pkgs.chezmoi
+    pkgs.neovim
+    pkgs.btop
+    pkgs.alacritty
+    pkgs.pavucontrol
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
