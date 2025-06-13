@@ -3,6 +3,7 @@
 {
   imports = [
     outputs.homeManagerModules.zvm
+    outputs.homeManagerModules.tmux
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
