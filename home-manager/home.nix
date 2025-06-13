@@ -2,9 +2,11 @@
 
 {
   imports = [
+    inputs.nvf.homeManagerModules.default
     outputs.homeManagerModules.zvm
     outputs.homeManagerModules.tmux
     outputs.homeManagerModules.alacritty
+    outputs.homeManagerModules.nvf
   ];
 
   home.username = "adrien";
