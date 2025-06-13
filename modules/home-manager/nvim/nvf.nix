@@ -21,7 +21,10 @@
       languages = {
         enableTreesitter = true;
 
-        #nix.enable = true;
+        nix = {
+          enable = true;
+          lsp.server = "nixd";
+        };
       };
     };
   };

@@ -2,8 +2,8 @@
  
 programs.zsh = {
   enableCompletion = true;
-  enableAutosuggestions = true;
-  enableSyntaxHighlighting = true;      
+  autosuggestion.enable = true;
+  syntaxHighlighting.enable = true;      
      
   # Tweak settings for history
   history = {
