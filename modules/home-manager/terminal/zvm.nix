@@ -26,6 +26,10 @@ programs.zsh = {
       file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
     }
   ];
+
+  oh-my-zsh = {
+    enable = true;
+    theme = "gnzh";
+  };
  };
- 
 }

@@ -92,12 +92,16 @@
     pkgs.vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     inputs.home-manager.packages.${pkgs.system}.default
     pkgs.git
-    pkgs.chezmoi
     pkgs.neovim
-    pkgs.nerd-fonts.jetbrains-mono
     pkgs.btop
     pkgs.alacritty
     pkgs.pavucontrol
+    pkgs.acpi
+    pkgs.sysstat
+  ];
+
+  fonts.packages = with pkgs.nerd-fonts; [
+    jetbrains-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
