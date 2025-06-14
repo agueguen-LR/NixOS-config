@@ -1,7 +1,5 @@
-{ pkgs, ... }:  
-
+{ ... }:  
 {
-
   programs.nvf = {
     enable = true;
 
@@ -15,7 +13,13 @@
       statusline.lualine.enable = true;
       telescope.enable = true;
       autocomplete.nvim-cmp.enable = true;
+      filetree.neo-tree.enable = true;
+      tabline.nvimBufferline.enable = true;
 
+      options = {
+        shiftwidth = 2;
+        tabstop = 2;
+      };
 
       lsp.enable = true;
       languages = {
@@ -24,7 +28,6 @@
         nix = {
           enable = true;
           lsp.server = "nixd";
-          format.enable = true;
         };
       };
     };
