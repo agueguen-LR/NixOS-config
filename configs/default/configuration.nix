@@ -13,6 +13,8 @@ in
       modules.home-manager
     ];
 
+  system.nixos.tags = [ "default" ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use the systemd-boot EFI boot loader.

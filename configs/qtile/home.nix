@@ -1,12 +1,15 @@
 { pkgs, inputs, outputs, ... }:
-
+let
+  modules = outputs.homeManagerModules;
+in
 {
   imports = [
     inputs.nvf.homeManagerModules.default
-    outputs.homeManagerModules.zvm
-    outputs.homeManagerModules.tmux
-    outputs.homeManagerModules.alacritty
-    outputs.homeManagerModules.nvf
+    modules.zvm
+    modules.tmux
+    modules.alacritty
+    modules.nvf
+    modules.librewolf
   ];
 
   home.username = "adrien";

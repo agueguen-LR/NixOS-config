@@ -11,10 +11,11 @@ in
     [ 
       ./hardware-configuration.nix
       modules.home-manager
-      modules.firefox
       modules.zsh
       modules.neovim
     ];
+
+  system.nixos.tags = [ "qtile" ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -73,7 +74,13 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
+      btop
+      alacritty
+      pavucontrol
       tree
+      acpi
+      sysstat
+      librewolf
     ];
     shell = pkgs.zsh;
   };
@@ -84,11 +91,6 @@ in
     pkgs.vim
     inputs.home-manager.packages.${pkgs.system}.default
     pkgs.git
-    pkgs.btop
-    pkgs.alacritty
-    pkgs.pavucontrol
-    pkgs.acpi
-    pkgs.sysstat
   ];
 
   fonts.packages = with pkgs.nerd-fonts; [
@@ -103,8 +105,6 @@ in
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
@@ -113,14 +113,6 @@ in
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -21,7 +21,7 @@
       nrs (){
         cd ~/.dotfiles 
         git add . 
-        sudo nixos-rebuild switch --flake .$1
+        sudo nixos-rebuild switch --flake .#$1
       }
     '';
        

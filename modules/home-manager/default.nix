@@ -5,4 +5,5 @@
   tmux = import ./terminal/tmux.nix;
   alacritty = import ./terminal/alacritty.nix;
   nvf = import ./nvim/nvf.nix;
+  librewolf = import ./browser/librewolf.nix;
 }
