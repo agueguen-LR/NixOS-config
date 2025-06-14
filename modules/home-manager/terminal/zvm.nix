@@ -17,6 +17,12 @@
       if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ];
         then tmux a -t default || exec tmux new -s default && exit;
       fi
+
+      nrs (){
+        cd ~/.dotfiles 
+        git add . 
+        sudo nixos-rebuild switch --flake .$1
+      }
     '';
        
     plugins = [
@@ -32,8 +38,5 @@
       theme = "gnzh";
     };
 
-    shellAliases = {
-      nrs = "cd ~/.dotfiles && sudo git add . && sudo nixos-rebuild switch --flake .#nixos";
-    };
   };
 }

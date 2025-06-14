@@ -2,21 +2,19 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, outputs, ... }:
-
+{ pkgs, inputs, outputs, ... }:
+let
+  modules = outputs.nixosModules;
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
+      modules.home-manager
+      modules.firefox
+      modules.zsh
+      modules.neovim
     ];
-
-  home-manager = {
-    extraSpecialArgs = {inherit inputs outputs; };
-    users = {
-      adrien = import ../home-manager/home.nix;
-    };
-  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -44,8 +42,7 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  # Enable qtile
   services.xserver = {
     enable=true;
     windowManager.qtile.enable = true;
@@ -67,7 +64,9 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
+  services.libinput.enable = true;
+
+  home-manager.users.adrien = import ./home.nix;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adrien= {
@@ -79,20 +78,12 @@
     shell = pkgs.zsh;
   };
 
-  programs.zsh.enable = true;
-  programs.firefox.enable = true;
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = [
-    pkgs.vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    pkgs.vim
     inputs.home-manager.packages.${pkgs.system}.default
     pkgs.git
-    pkgs.neovim
     pkgs.btop
     pkgs.alacritty
     pkgs.pavucontrol

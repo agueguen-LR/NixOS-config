@@ -16,21 +16,26 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: 
-  let
-    inherit (self) outputs;
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in
+    let
+      inherit (self) outputs;
+    in
   {
     nixosModules = import ./modules/nixos;
 
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      default = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/configuration.nix
+          ./configs/default/configuration.nix
+        ];
+      };
+
+      qtile = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./configs/qtile/configuration.nix
         ];
       };
     };
