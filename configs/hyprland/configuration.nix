@@ -13,10 +13,10 @@ in
       modules.home-manager
       modules.zsh
       modules.neovim
-      modules.qtile
+      modules.hyprland
     ];
 
-  system.nixos.tags = [ "qtile" ];
+  system.nixos.tags = [ "hyprland" ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -44,7 +44,7 @@ in
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  # Configure keymap in X11
+  # Configure keymap with xwayland
   services.xserver.xkb.layout = "fr";
   services.xserver.xkb.options = "eurosign:e,caps:escape";
 

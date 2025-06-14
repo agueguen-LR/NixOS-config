@@ -6,4 +6,5 @@
   alacritty = import ./terminal/alacritty.nix;
   nvf = import ./nvim/nvf.nix;
   librewolf = import ./browser/librewolf.nix;
+  hyprland = import ./compositor/hyprland.nix;
 }

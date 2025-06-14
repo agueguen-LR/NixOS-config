@@ -38,6 +38,14 @@
           ./configs/qtile/configuration.nix
         ];
       };
+
+      hyprland = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./configs/hyprland/configuration.nix
+        ];
+      };
+
     };
   };
 }

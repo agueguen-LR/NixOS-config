@@ -1,0 +1,61 @@
+{ pkgs, inputs, outputs, ... }:
+let
+  modules = outputs.homeManagerModules;
+in
+{
+  imports = [
+    inputs.nvf.homeManagerModules.default
+    modules.zvm
+    modules.tmux
+    modules.alacritty
+    modules.nvf
+    modules.librewolf
+    modules.hyprland
+  ];
+
+  home.username = "adrien";
+  home.homeDirectory = "/home/adrien";
+
+  home.stateVersion = "25.05"; 
+  home.packages = with pkgs; [
+  ];
+
+  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  # plain files is through 'home.file'.
+  home.file = {
+    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # symlink to the Nix store copy.
+    # ".screenrc".source = dotfiles/screenrc;
+
+    # # You can also set the file content immediately.
+    # ".gradle/gradle.properties".text = ''
+    #   org.gradle.console=verbose
+    #   org.gradle.daemon.idletimeout=3600000
+    # '';
+  };
+
+  # Home Manager can also manage your environment variables through
+  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # shell provided by Home Manager. If you don't want to manage your shell
+  # through Home Manager then you have to manually source 'hm-session-vars.sh'
+  # located at either
+  #
+  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  /etc/profiles/per-user/adrien/etc/profile.d/hm-session-vars.sh
+  #
+  home.sessionVariables = {
+    # EDITOR = "emacs";
+  };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+  programs.zsh.enable = true;
+}

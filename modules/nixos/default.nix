@@ -5,4 +5,6 @@
   firefox = import ./browser/firefox.nix;
   zsh = import ./shell/zsh.nix;
   neovim = import ./editor/neovim.nix;
+  qtile = import ./tilingWM/qtile.nix;
+  hyprland = import ./compositor/hyprland.nix;
 }

@@ -21,7 +21,14 @@
       nrs (){
         cd ~/.dotfiles 
         git add . 
-        sudo nixos-rebuild switch --flake .#$1
+        sudo nixos-rebuild switch --flake .$1
+      }
+
+      ide (){
+        tmux split-window
+        tmux resize-pane -D 10
+        tmux select-pane -U
+        nvim .
       }
     '';
        
@@ -37,6 +44,5 @@
       enable = true;
       theme = "gnzh";
     };
-
   };
 }
