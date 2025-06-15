@@ -14,10 +14,6 @@
 
     # .zshrc
     initContent = ''
-      if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ];
-        then tmux a -t default || exec tmux new -s default && exit;
-      fi
-
       nrs (){
         cd ~/.dotfiles 
         git add . 
@@ -25,10 +21,11 @@
       }
 
       ide (){
-        tmux split-window
-        tmux resize-pane -D 10
-        tmux select-pane -U
-        nvim .
+        if command -v tmux &> /dev/null && command -v nvim &> /dev/null;
+          then tmux new-session -d 'nvim .' && tmux split-window && tmux resize-pane -D 10 && tmux a
+        else
+          echo "tmux or nvim modules are not loaded"
+        fi
       }
     '';
        

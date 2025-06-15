@@ -11,9 +11,10 @@ in
     [ 
       ./hardware-configuration.nix
       modules.home-manager
-      modules.zsh
       modules.neovim
       modules.hyprland
+      modules.tuigreet
+      modules.zsh
     ];
 
   system.nixos.tags = [ "hyprland" ];
@@ -38,11 +39,10 @@ in
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "fr";
+  };
 
   # Configure keymap with xwayland
   services.xserver.xkb.layout = "fr";

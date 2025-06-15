@@ -7,4 +7,5 @@
   neovim = import ./editor/neovim.nix;
   qtile = import ./tilingWM/qtile.nix;
   hyprland = import ./compositor/hyprland.nix;
+  tuigreet = import ./greeter/tuigreet.nix;
 }
