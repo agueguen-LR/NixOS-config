@@ -8,4 +8,5 @@
   qtile = import ./tilingWM/qtile.nix;
   hyprland = import ./compositor/hyprland.nix;
   tuigreet = import ./greeter/tuigreet.nix;
+  steam = import ./gaming/steam.nix;
 }

@@ -19,7 +19,7 @@
         enable = true;
         providers = {
           wl-copy.enable = true;
-        };
+       };
       };
 
       options = {

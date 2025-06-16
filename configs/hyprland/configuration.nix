@@ -15,6 +15,7 @@ in
       modules.hyprland
       modules.tuigreet
       modules.zsh
+      modules.steam
     ];
 
   system.nixos.tags = [ "hyprland" ];
