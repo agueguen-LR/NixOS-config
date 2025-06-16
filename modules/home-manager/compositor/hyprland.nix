@@ -19,7 +19,7 @@
       input = {
         kb_layout = "fr, ca";
         kb_variant = ", fr";
-        kb_options = "grp:ctrl_shift_toggle, caps:escape";
+        kb_options = "grp:ctrl_shift_tab_toggle, caps:escape";
       };
 
       "$mod" = "SUPER";
@@ -28,7 +28,7 @@
         "$mod, F, exec, librewolf"
         "$mod, T, exec, alacritty"
         "$mod, Q, killactive"
-        "$mod, D, exec, discord"
+        "$mod, D, exec, vesktop"
       ];
 
     };

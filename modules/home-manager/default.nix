@@ -7,4 +7,5 @@
   nvf = import ./nvim/nvf.nix;
   librewolf = import ./browser/librewolf.nix;
   hyprland = import ./compositor/hyprland.nix;
+  nixcord = import ./social/nixcord.nix;
 }

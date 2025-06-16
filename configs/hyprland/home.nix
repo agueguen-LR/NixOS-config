@@ -11,6 +11,7 @@ in
     modules.nvf
     modules.librewolf
     modules.hyprland
+    modules.nixcord
   ];
 
   home.username = "adrien";

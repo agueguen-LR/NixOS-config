@@ -62,8 +62,6 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
-
   home-manager.users.adrien = import ./home.nix;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -78,7 +76,6 @@ in
       acpi
       sysstat
       librewolf
-      discord
     ];
     shell = pkgs.zsh;
   };
