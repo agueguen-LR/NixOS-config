@@ -1,36 +1,44 @@
-# dotfiles
+# NixOS-config
 
-Dotfiles for my NixOS setup, currently in active development
+Dotfiles for my NixOS setup, currently there are three available configurations, each accessible through a different nix flake.
+
+
+The default flake, is equivalent to a completely bare installation with only git, vim and home-manager. There is no desktop environnement or wayland compositor.
+```bash
+sudo nixos-rebuild switch --flake .#default
+```
+
+
+The qtile flake comes with the X11 window manager [qtile](https://qtile.org/), a basic [nvf](https://github.com/NotAShelf/nvf) neovim configuration, the [librewolf](https://librewolf.net/) browser and a couple frills. A good simple config to use to start developping new modules for a larger configuration.
+```bash
+sudo nixos-rebuild switch --flake .#qtile
+```
+
+
+The hyprland flake comes with the wayland compositor [hyprland](https://hypr.land/) and many more apps and frills, it is currently in active development.
+```bash
+sudo nixos-rebuild switch --flake .#hyprland
+```
 
 ## NixOS
 
+After installation on NixOS, build a [simple flake](https://github.com/Misterio77/nix-starter-configs/tree/main/minimal) so you can store these config files outside of /etc/nixos
 
-To build directly for the first time with NixOS minimal install:
 
-> Temporarily install git and flakes through nix-shell
+Clone this repo into your directory of choice, like ~/.dotfiles/ and make sure to replace ./hardware-configuration.nix with your own:
 ```bash
-nix-shell -p git nixFlakes
+sudo cp /etc/nixos/hardware-configuration.nix <path-to-dotfiles>/hardware-configuration.nix
 ```
 
-> Clone this repo into /mnt/etc/nixos
+
+Then rebuild and switch to the desired flake
 ```bash
-git clone https://github.com/agueguen-LR/dotfiles.git /mnt/etc/nixos
+sudo nixos-rebuild switch --flake <path-to-dotfiles>#<flake-name>
 ```
 
-> Install with flakes
-```bash
-nixos-install --flake /mnt/etc/nixos#nixos
-```
+## Modules
 
-Rather than building everything directly from install, it's better to build a simple configuration first with only configuration.nix.
+All external applications should have their own .nix config file within the modules directory. I admit I haven't been careful to avoid dependencies between modules but all module config files are small so check their contents before importing.
 
 
-Then, add any needed packages to the config (git, vim...) and create a very simple flake so you can store these dotfiles outside of the /etc/nixos directory. 
-
-
-Rebuild and switch, and now you can clone this repo into your directory of choice (~/.dotfiles for example).
-
-> Run this command to rebuild nixos with these dotfiles.
-```bash
-sudo nixos-rebuild switch --flake <path-to-dotfiles>#nixos
-```
+If you have noticed a bad dependency between modules, you can always create your own, or create an issue on this repository if you notice anything particularly bad within my code.
