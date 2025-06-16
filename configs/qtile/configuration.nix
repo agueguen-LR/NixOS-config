@@ -77,7 +77,6 @@ in
       acpi
       sysstat
       librewolf
-      discord
     ];
     shell = pkgs.zsh;
   };
