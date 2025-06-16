@@ -15,6 +15,12 @@
       autocomplete.nvim-cmp.enable = true;
       filetree.neo-tree.enable = true;
       tabline.nvimBufferline.enable = true;
+      clipboard = {
+        enable = true;
+        providers = {
+          wl-copy.enable = true;
+        };
+      };
 
       options = {
         shiftwidth = 2;

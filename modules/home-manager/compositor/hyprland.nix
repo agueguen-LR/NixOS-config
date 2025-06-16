@@ -29,6 +29,7 @@
         "$mod, T, exec, alacritty"
         "$mod, Q, killactive"
         "$mod, D, exec, vesktop"
+        ", Print, exec, grimblast copy area"
       ];
 
     };

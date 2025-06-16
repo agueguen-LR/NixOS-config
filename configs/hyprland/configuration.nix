@@ -69,13 +69,20 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
+
       btop
+      fastfetch
+
       alacritty
-      pavucontrol
+      pavucontrol #volume control
       tree
-      acpi
-      sysstat
+      acpi #battery info
+      sysstat #system info commands: iostat mpstat pidstat ...
       librewolf
+
+      grimblast #screenshots
+
+      wl-clipboard
     ];
     shell = pkgs.zsh;
   };
