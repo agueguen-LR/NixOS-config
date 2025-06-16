@@ -9,7 +9,7 @@ in
 {
   imports =
     [ 
-      ./hardware-configuration.nix
+      ../../hardware-configuration.nix
       modules.home-manager
       modules.neovim
       modules.hyprland
