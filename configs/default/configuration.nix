@@ -14,12 +14,37 @@ in
     ];
 
   system.nixos.tags = [ "default" ];
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+  };
 
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 10d";
+  };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.optimise.automatic = true;
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 20;
+    extraEntries = { 
+      "latest-default.conf" = builtins.readFile ../../savedConfigs/latest-default.conf;
+      "latest-qtile.conf" = builtins.readFile ../../savedConfigs/latest-qtile.conf;
+      "latest-hyprland.conf" = builtins.readFile ../../savedConfigs/latest-hyprland.conf;
+    };
+  };
   boot.loader.efi.canTouchEfiVariables = true;
+
+  systemd.services.update-latest-configs = {
+    enable = true;
+    description = "Update the contents of the ../../savedConfigs folder with the latest builds";
+    wantedBy = [ "multi-user.target" ];
+    script = "exec ${../../savedConfigs/update-latest-configs.sh}";
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
