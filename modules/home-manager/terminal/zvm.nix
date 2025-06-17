@@ -17,7 +17,7 @@
       nrs (){
         cd ~/.dotfiles 
         git add . 
-        sudo nixos-rebuild switch --flake .$1
+        sudo nixos-rebuild switch --flake .\#$1 --profile-name $1
       }
 
       ide (){
