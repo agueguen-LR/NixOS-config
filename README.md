@@ -20,7 +20,19 @@ The hyprland flake comes with the wayland compositor [hyprland](https://hypr.lan
 sudo nixos-rebuild switch --flake .#hyprland
 ```
 
-## NixOS
+## Disko Install, with zfs impermanence
+
+To install this configuration on a new system with disko-install and zfs impermanence, use the NixOS minimal installer, connect to the internet, and enable flakes and git.
+
+Then simply run this command, replacing disk-name and device-name (device-name should be /dev/<something>):
+```bash
+sudo nix run 'github:nix-community/disko/latest#disko-install' \
+    -- --flake 'github:agueguen-LR/NixOS-config#default-install --disk <disk-name> <device-name>
+```
+
+After, boot into the system and rebuild and switch to your config of choice.
+
+## Custom Install
 
 After installation on NixOS, build a [simple flake](https://github.com/Misterio77/nix-starter-configs/tree/main/minimal) so you can store these config files outside of /etc/nixos
 
