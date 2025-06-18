@@ -18,6 +18,11 @@
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: 
@@ -30,10 +35,19 @@
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
+      default-install = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./configs/default/configuration.nix
+          ./disko-impermanence.nixos
+        ];
+      };
+
       default = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./configs/default/configuration.nix
+          ./hardware-configuration.nix
         ];
       };
 
@@ -41,6 +55,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./configs/qtile/configuration.nix
+          ./hardware-configuration.nix
         ];
       };
 
@@ -48,6 +63,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./configs/hyprland/configuration.nix
+          ./hardware-configuration.nix
         ];
       };
 
