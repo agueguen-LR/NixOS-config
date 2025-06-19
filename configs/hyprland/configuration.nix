@@ -108,6 +108,7 @@ in
       grimblast #screenshots
 
       wl-clipboard
+      quickemu
     ];
     shell = pkgs.zsh;
   };
