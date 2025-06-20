@@ -9,7 +9,7 @@ in
 {
   imports =
     [ 
-      modules.home-manager
+      #modules.home-manager
     ];
 
   system.nixos.tags = [ "default" ];
@@ -45,7 +45,11 @@ in
     script = "exec ${../../savedConfigs/update-latest-configs.sh}";
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking = {
+    hostName = "nixos"; # Define your hostname.
+    hostId = "a1b2c3d4"; # TODO: change this at some point
+  };
+
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -78,7 +82,7 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  home-manager.users.adrien = import ./home.nix;
+  #home-manager.users.adrien = import ./home.nix;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adrien= {

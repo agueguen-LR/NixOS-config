@@ -36,10 +36,11 @@
 
     nixosConfigurations = {
       default-install = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./configs/default/configuration.nix
-          ./disko-impermanence.nixos
+          ./disko-impermanence.nix
         ];
       };
 
