@@ -22,12 +22,16 @@ sudo nixos-rebuild switch --flake .#hyprland
 
 ## Disko Install, with zfs impermanence
 
-To install this configuration on a new system with disko-install and zfs impermanence, use the NixOS minimal installer, connect to the internet, and enable flakes and git.
+!!! WARNING !!!
+Disko-install seems to use extreme amounts of RAM, 6G wasn't enough to make it work in a qemu vm, so this is not fully tested, proceed at your own risk.
 
-Then simply run this command, replacing disk-name and device-name (device-name should be /dev/<something>):
+To install this configuration on a new system with disko-install and zfs impermanence, use the NixOS minimal installer and connect to the internet.
+
+Then simply run this command, replacing disk-name and device-name (disk-name can be anything but device-name should be /dev/something, use ```bash lsblk ``` to choose the device):
 ```bash
-sudo nix run 'github:nix-community/disko/latest#disko-install' \
-    -- --flake 'github:agueguen-LR/NixOS-config#default-install --disk <disk-name> <device-name>
+sudo nix --experimental-features 'nix-command flakes' run \
+    'github:nix-community/disko/latest#disko-install' -- --flake \
+    'github:agueguen-LR/NixOS-config#default-install' --disk <disk-name> <device-name>
 ```
 
 After, boot into the system and rebuild and switch to your config of choice.
