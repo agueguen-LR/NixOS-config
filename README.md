@@ -27,7 +27,7 @@ Disko-install seems to use extreme amounts of RAM, 6G wasn't enough to make it w
 
 To install this configuration on a new system with disko-install and zfs impermanence, use the NixOS minimal installer and connect to the internet.
 
-Then simply run this command, replacing disk-name and device-name (disk-name can be anything but device-name should be /dev/something, use ```bash lsblk ``` to choose the device):
+Then simply run this command, replacing disk-name and device-name (disk-name can be anything but device-name should be /dev/something, use ``` lsblk ``` to choose the device):
 ```bash
 sudo nix --experimental-features 'nix-command flakes' run \
     'github:nix-community/disko/latest#disko-install' -- --flake \
