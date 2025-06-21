@@ -9,6 +9,7 @@ in
 {
   imports =
     [ 
+      inputs.disko.nixosModules.disko
       #modules.home-manager
     ];
 
