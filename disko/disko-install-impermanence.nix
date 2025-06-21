@@ -63,10 +63,6 @@
             type = "zfs_fs";
             options.mountpoint = "none";
           };
-          "local/home" = {
-            type = "zfs_fs";
-            mountpoint = "/home";
-          };
           "local/nix" = {
             type = "zfs_fs";
             mountpoint = "/nix";

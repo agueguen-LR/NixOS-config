@@ -40,7 +40,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./configs/default/configuration.nix
-          ./disko-impermanence.nix
+          ./disko/disko-install-impermanence.nix
         ];
       };
 
