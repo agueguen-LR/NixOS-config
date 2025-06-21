@@ -32,9 +32,9 @@ in
     enable = true;
     configurationLimit = 20;
     extraEntries = { 
-      "latest-default.conf" = builtins.readFile ../../savedConfigs/latest-default.conf;
-      "latest-qtile.conf" = builtins.readFile ../../savedConfigs/latest-qtile.conf;
-      "latest-hyprland.conf" = builtins.readFile ../../savedConfigs/latest-hyprland.conf;
+      #"latest-default.conf" = builtins.readFile ../../savedConfigs/latest-default.conf;
+      #"latest-qtile.conf" = builtins.readFile ../../savedConfigs/latest-qtile.conf;
+      #"latest-hyprland.conf" = builtins.readFile ../../savedConfigs/latest-hyprland.conf;
     };
   };
   boot.loader.efi.canTouchEfiVariables = true;
