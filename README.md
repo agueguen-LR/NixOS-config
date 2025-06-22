@@ -101,38 +101,6 @@ vim configs/<your-chosen-config>/configuration.nix
 
 Following steps can be version-controlling your configuration and moving your configuration into a .dotfiles directory out of /etc/nixos
 
-## Disko-Install
-
-!!! WARNING !!!
-Disko-install seems to use extreme amounts of RAM, 6G wasn't enough to make it work in a qemu vm, so this is not fully tested, proceed at your own risk.
-
-To install this configuration on a new system with disko-install and zfs impermanence, use the NixOS minimal installer and connect to the internet.
-
-Then simply run this command, replacing disk-name and device-name (disk-name can be anything but device-name should be /dev/something, use ``` lsblk ``` to choose the device):
-```bash
-sudo nix --experimental-features 'nix-command flakes' run \
-    'github:nix-community/disko/latest#disko-install' -- --flake \
-'github:agueguen-LR/NixOS-config#default-install' --disk <disk-name> <device-name>
-```
-
-After, boot into the system and rebuild and switch to your config of choice.
-
-## Custom Install
-
-After installation on NixOS, build a [simple flake](https://github.com/Misterio77/nix-starter-configs/tree/main/minimal) so you can store these config files outside of /etc/nixos
-
-
-Clone this repo into your directory of choice, like ~/.dotfiles/ and make sure to replace ./hardware-configuration.nix with your own:
-```bash
-sudo cp /etc/nixos/hardware-configuration.nix <path-to-dotfiles>/hardware-configuration.nix
-```
-
-
-Then rebuild and switch to the desired flake
-```bash
-sudo nixos-rebuild switch --flake <path-to-dotfiles>#<flake-name>
-```
-
 ## Modules
 
 All external applications should have their own .nix config file within the modules directory. I admit I haven't been careful to avoid dependencies between modules but all module config files are small so check their contents before importing.
