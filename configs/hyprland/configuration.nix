@@ -2,13 +2,16 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, inputs, outputs, ... }:
+{ pkgs, inputs, outputs, config, ... }:
 let
   modules = outputs.nixosModules;
 in
 {
   imports =
     [ 
+      inputs.disko.nixosModules.disko
+      ../../disko/impermanence.nix
+      inputs.agenix.nixosModules.default
       modules.home-manager
       modules.neovim
       modules.hyprland
@@ -31,14 +34,16 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
 
+  fileSystems."/persist".neededForBoot = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 20;
     extraEntries = { 
-      "latest-default.conf" = builtins.readFile ../../savedConfigs/latest-default.conf;
-      "latest-qtile.conf" = builtins.readFile ../../savedConfigs/latest-qtile.conf;
-      "latest-hyprland.conf" = builtins.readFile ../../savedConfigs/latest-hyprland.conf;
+      #"latest-default.conf" = builtins.readFile ../../savedConfigs/latest-default.conf;
+      #"latest-qtile.conf" = builtins.readFile ../../savedConfigs/latest-qtile.conf;
+      #"latest-hyprland.conf" = builtins.readFile ../../savedConfigs/latest-hyprland.conf;
     };
   };
   boot.loader.efi.canTouchEfiVariables = true;
@@ -54,6 +59,7 @@ in
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.hostId = "a1b2c3d4";
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -89,10 +95,18 @@ in
 
   home-manager.users.adrien = import ./home.nix;
 
+  age = {
+    identityPaths = [ "/persist/adrien/.secrets/agenix-rsa-4096" ];
+    secrets.user-password.file = ../../secrets/user-password.age;
+  };
+
+  users.mutableUsers = false;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adrien= {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    hashedPasswordFile = config.age.secrets.user-password.path;
     packages = with pkgs; [
 
       btop

@@ -2,7 +2,7 @@
   disko.devices = {
       disk = {
         main = {
-          device = "/dev/<disk-name>"; 
+          device = "/dev/nvme0n1"; # Replace with your own device during install 
           type = "disk";
           content = {
             type = "gpt";

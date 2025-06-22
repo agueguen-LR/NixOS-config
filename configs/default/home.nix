@@ -1,5 +1,7 @@
 { pkgs, inputs, outputs, ... }:
-
+let
+  modules = outputs.homeManagerModules;
+in
 {
   imports = [
   ];

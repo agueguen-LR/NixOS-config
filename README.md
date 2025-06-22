@@ -3,7 +3,7 @@
 Dotfiles for my NixOS setup, currently there are three available configurations, each accessible through a different nix flake.
 
 
-The default flake, is equivalent to a completely bare installation with only git, vim and home-manager. There is no desktop environnement or wayland compositor.
+The default flake, is equivalent to a completely bare installation with only git and vim. There is no desktop environnement or wayland compositor.
 ```bash
 sudo nixos-rebuild switch --flake .#default
 ```
@@ -20,7 +20,73 @@ The hyprland flake comes with the wayland compositor [hyprland](https://hypr.lan
 sudo nixos-rebuild switch --flake .#hyprland
 ```
 
-## Disko Install, with zfs impermanence
+## Impermanence
+
+These configurations are built around a system with [ZFS impermanence](https://grahamc.com/blog/erase-your-darlings), as such, the root directory is reset at every reboot and only the files in the /persist directory are kept.
+
+
+The filesystems are handled by [disko](https://github.com/nix-community/disko).
+
+## Installation 
+
+Boot into the [NixOS minimal installer](https://nixos.org/download/) and connect to the internet.
+
+
+> Clone this repository
+```bash
+git clone https://github.com/agueguen-LR/NixOS-config
+cd NixOS-config
+```
+
+> Choose the device you want to install to with ```lsblk``` and replace the device name in disko/impermanence.nix with it 
+```bash
+nano disko/impermanence.nix
+```
+
+> Run disko
+```bash
+sudo nix --experimental-features 'nix-command flakes' \
+    run github:nix-community/disko/latest -- \
+    --mode destroy,format,mount ./disko/impermanence.nix
+```
+
+> Create your hardware-configuration.nix
+```bash
+sudo nixos-generate-config --no-filesystems --root /mnt
+cp /mnt/etc/nixos/hardware-configuration.nix .
+```
+
+> Move this repo to /mnt/etc/nixos
+```bash
+sudo mv ./* /mnt/etc/nixos
+cd /mnt/etc/nixos
+```
+
+> Create your password and TEMPORARILY put it into your chosen config by adding hashedPassword = <your-hashed-password> to users.users.<username>
+```bash
+mkpasswd <your-password> >> configs/<your-chosen-config>/configuration.nix #appends to end of file for copy-pasting
+sudo nano configs/<your-chosen-config>/configuration.nix
+```
+```nix
+users.users.<username> = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [];
+    hashedPassword = <your-hashed-password>; 
+};
+```
+
+> Install your configuration and reboot
+```bash
+sudo nixos-install --flake .#<your-chosen-config>
+reboot
+```
+
+> Replace your hashedPassword with an agenix encrypted secret
+```bash
+cd /etc/nixos/secrets
+
+## Disko-Install
 
 !!! WARNING !!!
 Disko-install seems to use extreme amounts of RAM, 6G wasn't enough to make it work in a qemu vm, so this is not fully tested, proceed at your own risk.

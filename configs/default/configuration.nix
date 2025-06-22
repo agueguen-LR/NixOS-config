@@ -2,14 +2,16 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, inputs, outputs, ... }:
+{ pkgs, inputs, outputs, config, ... }:
 let
-  modules = outputs.nixosModules;
+  #modules = outputs.nixosModules;
 in
 {
   imports =
     [ 
       inputs.disko.nixosModules.disko
+      ../../disko/impermanence.nix
+      inputs.agenix.nixosModules.default
       #modules.home-manager
     ];
 
@@ -26,6 +28,8 @@ in
   };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
+
+  fileSystems."/persist".neededForBoot = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot = {
@@ -84,12 +88,21 @@ in
   # services.libinput.enable = true;
 
   #home-manager.users.adrien = import ./home.nix;
+    
+  age = {
+    identityPaths = [ "/persist/adrien/.secrets/agenix-rsa-4096" ];
+    secrets.user-password.file = ../../secrets/user-password.age;
+  };
+
+  users.mutableUsers = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adrien= {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [];
+    #packages = with pkgs; [];
+    #initialHashedPassword = ""; # Set this and comment hashedPasswordFile during install
+    hashedPasswordFile = config.age.secrets.user-password.path;
   };
 
   # List packages installed in system profile.

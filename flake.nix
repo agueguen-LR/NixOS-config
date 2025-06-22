@@ -23,6 +23,11 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: 
@@ -30,12 +35,14 @@
       inherit (self) outputs;
     in
   {
+    system = "x86_64-linux";
+      
     nixosModules = import ./modules/nixos;
 
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
-      default-install = nixpkgs.lib.nixosSystem {
+      disko-install = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [

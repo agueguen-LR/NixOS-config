@@ -15,9 +15,11 @@
     # .zshrc
     initContent = ''
       nrs (){
-        cd ~/.dotfiles 
-        git add . 
         sudo nixos-rebuild switch --flake .\#$1 --profile-name $1
+      }
+
+      nrb (){
+        sudo nixos-rebuild boot --flake .\#$1 --profile-name $1
       }
 
       ide (){
