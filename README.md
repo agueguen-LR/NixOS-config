@@ -3,7 +3,7 @@
 Dotfiles for my NixOS setup, currently there are three available configurations, each accessible through a different nix flake.
 
 
-The default flake, is equivalent to a completely bare installation with only git and vim. There is no desktop environnement or wayland compositor.
+The default flake, is equivalent to a completely bare installation with only git and vim. There is no desktop environment or wayland compositor.
 ```bash
 sudo nixos-rebuild switch --flake .#default
 ```
@@ -32,37 +32,38 @@ The filesystems are handled by [disko](https://github.com/nix-community/disko).
 Boot into the [NixOS minimal installer](https://nixos.org/download/) and connect to the internet.
 
 
-> Clone this repository
+Clone this repository
 ```bash
 git clone https://github.com/agueguen-LR/NixOS-config
 cd NixOS-config
 ```
 
-> Choose the device you want to install to with ```lsblk``` and replace the device name in disko/impermanence.nix with it 
+Choose the device you want to install to with ```lsblk``` and replace the device name in disko/impermanence.nix with it 
 ```bash
 nano disko/impermanence.nix
 ```
 
-> Run disko
+Run disko
 ```bash
 sudo nix --experimental-features 'nix-command flakes' \
     run github:nix-community/disko/latest -- \
     --mode destroy,format,mount ./disko/impermanence.nix
 ```
 
-> Create your hardware-configuration.nix
+Create your hardware-configuration.nix
 ```bash
 sudo nixos-generate-config --no-filesystems --root /mnt
 cp /mnt/etc/nixos/hardware-configuration.nix .
 ```
 
-> Move this repo to /mnt/etc/nixos
+Move this repo to /mnt/etc/nixos
 ```bash
 sudo mv ./* /mnt/etc/nixos
 cd /mnt/etc/nixos
 ```
 
-> Create your password and TEMPORARILY put it into your chosen config by adding hashedPassword = <your-hashed-password> to users.users.<username>
+Create your password and TEMPORARILY put it into your chosen config by adding hashedPassword = <your-hashed-password> to users.users.<username>
+> hashedPasswordFile overwrites hashedPassword so comment it out temporarily
 ```bash
 mkpasswd <your-password> >> configs/<your-chosen-config>/configuration.nix #appends to end of file for copy-pasting
 sudo nano configs/<your-chosen-config>/configuration.nix
@@ -73,18 +74,32 @@ users.users.<username> = {
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [];
     hashedPassword = <your-hashed-password>; 
+    #hashedPasswordFile = ...;
 };
 ```
 
-> Install your configuration and reboot
+Install your configuration and reboot
 ```bash
 sudo nixos-install --flake .#<your-chosen-config>
 reboot
 ```
 
-> Replace your hashedPassword with an agenix encrypted secret
+Replace your hashedPassword with an agenix encrypted secret
 ```bash
 cd /etc/nixos/secrets
+mkpasswd <your-password> #copy this to paste in agenix -e
+agenix -e user-password.age -i <path-to-your-ssh-identity>
+cd ..
+vim configs/<your-chosen-config>/configuration.nix
+```
+```vim
+  age = {
+    identityPaths = [ "<path-to-your-ssh-identity>" ];
+    secrets.user-password.file = ../../secrets/user-password.age;
+  };
+```
+
+Following steps can be version-controlling your configuration and moving your configuration into a .dotfiles directory out of /etc/nixos
 
 ## Disko-Install
 
@@ -97,7 +112,7 @@ Then simply run this command, replacing disk-name and device-name (disk-name can
 ```bash
 sudo nix --experimental-features 'nix-command flakes' run \
     'github:nix-community/disko/latest#disko-install' -- --flake \
-    'github:agueguen-LR/NixOS-config#default-install' --disk <disk-name> <device-name>
+'github:agueguen-LR/NixOS-config#default-install' --disk <disk-name> <device-name>
 ```
 
 After, boot into the system and rebuild and switch to your config of choice.
