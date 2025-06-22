@@ -22,7 +22,7 @@ sudo nixos-rebuild switch --flake .#hyprland
 
 ## Impermanence
 
-These configurations are built around a system with [ZFS impermanence](https://grahamc.com/blog/erase-your-darlings), as such, the root directory is reset at every reboot and only the files in the /persist directory are kept.
+These configurations are built around a system with [ZFS impermanence](https://grahamc.com/blog/erase-your-darlings), as such, the root directory is reset at every reboot and only the files in the /persist directory or managed by the [impermanence module](https://github.com/nix-community/impermanence) are kept.
 
 
 The filesystems are handled by [disko](https://github.com/nix-community/disko).

@@ -36,6 +36,11 @@ in
 
   fileSystems."/persist".neededForBoot = true;
 
+  boot.initrd.postDeviceCommands = ''
+    zpool import zroot
+    zfs rollback -r zroot/local/root@blank >> /dev/kmsg 2>&1
+  '';
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot = {
     enable = true;
