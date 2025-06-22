@@ -42,15 +42,6 @@
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
-      disko-install = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./configs/default/configuration.nix
-          ./disko/disko-install-impermanence.nix
-        ];
-      };
-
       default = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
