@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SOURCE_DIR="/boot/loader/entries"
-DEST_DIR="/home/adrien/.dotfiles/savedConfigs"
+DEST_DIR="/persist/adrien/.dotfiles/savedConfigs"
 
 mkdir -p "$DEST_DIR"
 

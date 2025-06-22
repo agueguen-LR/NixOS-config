@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, inputs, outputs, config, ... }:
+{ pkgs, inputs, outputs, config, lib, ... }:
 let
   modules = outputs.nixosModules;
 in
@@ -38,26 +38,28 @@ in
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 20;
-    extraEntries = { 
-      #"latest-default.conf" = builtins.readFile ../../savedConfigs/latest-default.conf;
-      #"latest-qtile.conf" = builtins.readFile ../../savedConfigs/latest-qtile.conf;
-      #"latest-hyprland.conf" = builtins.readFile ../../savedConfigs/latest-hyprland.conf;
-    };
+    extraEntries = 
+      let
+        configDir = ../../savedConfigs;
+        files = builtins.attrNames (builtins.readDir configDir);
+        confFiles = builtins.filter (f: lib.hasSuffix ".conf" f) files;
+      in 
+        builtins.listToAttrs (map (name: {name = name; value = builtins.readFile (configDir + "/${name}");}) confFiles);      
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
   systemd.services.update-latest-configs = {
     enable = true;
-    description = "Update the contents of the ../../savedConfigs folder with the latest builds";
+    description = "Update the contents of the savedConfigs folder with the latest builds";
     wantedBy = [ "multi-user.target" ];
     script = "exec ${../../savedConfigs/update-latest-configs.sh}";
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.hostId = "a1b2c3d4";
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    hostId = "c65cfc29";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
