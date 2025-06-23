@@ -6,6 +6,7 @@ in
   imports = [
     inputs.nvf.homeManagerModules.default
     inputs.impermanence.homeManagerModules.impermanence
+    ../hm-persistence.nix
     modules.zvm
     modules.tmux
     modules.alacritty
@@ -15,13 +16,6 @@ in
 
   home.username = "adrien";
   home.homeDirectory = "/home/adrien";
-
-  home.persistence."/persist/adrien" = {
-    directories = [
-    ];
-    files = [
-    ];
-  };
 
   home.stateVersion = "25.05"; 
   home.packages = with pkgs; [

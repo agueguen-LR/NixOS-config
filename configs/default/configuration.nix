@@ -9,9 +9,11 @@ in
 {
   imports =
     [ 
-      inputs.disko.nixosModules.disko
       ../../disko/impermanence.nix
+      inputs.disko.nixosModules.disko
       inputs.agenix.nixosModules.default
+      inputs.impermanence.nixosModules.impermanence
+      ../persistence.nix
       modules.home-manager
     ];
 
@@ -33,7 +35,7 @@ in
 
   boot.initrd.postDeviceCommands = ''
     zpool import zroot
-    zfs rollback -r zroot/local/root@blank >> /dev/kmsg 2>&1
+    zfs rollback -r zroot/local/root@blank 
   '';
 
   # Use the systemd-boot EFI boot loader.
