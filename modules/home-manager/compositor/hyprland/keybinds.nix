@@ -1,7 +1,8 @@
 {
   input = {
     kb_layout = "fr";
-    kb_options = "caps:escape";
+    kb_options = "eurosign:e,caps:escape";
+    numlock_by_default = true;
   };
 
 

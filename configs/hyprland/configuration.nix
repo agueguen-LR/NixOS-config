@@ -85,10 +85,10 @@ in
   };
 
   # Configure keymap with xwayland
-  services.xserver.xkb = {
-    layout = "fr";
-    options = "eurosign:e,caps:escape";
-  };
+  #services.xserver.xkb = {
+    #layout = "fr";
+    #options = "eurosign:e,caps:escape";
+  #};
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;

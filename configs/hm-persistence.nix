@@ -1,6 +1,7 @@
 {
   home.persistence."/persist/adrien" = {
-    directories = [];
+    directories = [
+    ];
     files = [
       ".gitconfig"
     ];
