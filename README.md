@@ -9,16 +9,23 @@ sudo nixos-rebuild switch --flake .#default
 ```
 
 
-The qtile flake comes with the X11 window manager [qtile](https://qtile.org/), a basic [nvf](https://github.com/NotAShelf/nvf) neovim configuration, the [librewolf](https://librewolf.net/) browser and a couple frills. A good simple config to use to start developping new modules for a larger configuration.
+The qtile flake comes with the X11 window manager [Qtile](https://qtile.org/), a basic [NVF](https://github.com/NotAShelf/nvf) neovim configuration, the [Librewolf](https://librewolf.net/) browser and a couple frills. A good simple config to use to start developping new modules for a larger configuration.
 ```bash
 sudo nixos-rebuild switch --flake .#qtile
 ```
 
 
-The hyprland flake comes with the wayland compositor [hyprland](https://hypr.land/) and many more apps and frills, it is currently in active development.
+The hyprland flake comes with the wayland compositor [Hyprland](https://hypr.land/).
 ```bash
 sudo nixos-rebuild switch --flake .#hyprland
 ```
+
+
+The kde flake comes with the desktop environment [KDE Plasma 6](https://kde.org/plasma-desktop/).
+```bash
+sudo nixos-rebuild switch --flake .#kde
+```
+
 
 ## Impermanence
 

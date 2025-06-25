@@ -70,6 +70,14 @@
         ];
       };
 
+      kde = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./configs/kde/configuration.nix
+          ./hardware-configuration.nix
+        ];
+      };
+
     };
   };
 }
