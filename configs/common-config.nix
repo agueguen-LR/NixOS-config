@@ -42,7 +42,7 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    hostId = "c65cfc29";
+    hostId = "81cd2a4d";
   };
 
   # Set your time zone.
@@ -69,6 +69,11 @@
 
   # Enable touchpad support.
   services.libinput.enable = true;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
 
   age = {
     identityPaths = [ "/persist/adrien/.secrets/agenix-rsa-4096" ];
