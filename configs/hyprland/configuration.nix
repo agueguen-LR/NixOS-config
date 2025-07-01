@@ -1,20 +1,23 @@
-{ pkgs, outputs, ... }:
+{ pkgs, inputs, outputs, ... }:
 let
   modules = outputs.nixosModules;
 in
 {
   imports =
     [ 
+      inputs.catppuccin.nixosModules.catppuccin
       ../common-config.nix
       modules.neovim
       modules.hyprland
-      modules.tuigreet
       modules.zsh
+      modules.tuigreet
       modules.steam
     ];
 
   system.nixos.tags = [ "hyprland" ];
 
+  catppuccin.enable = true;
+      
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 

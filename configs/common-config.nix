@@ -42,7 +42,7 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    hostId = "81cd2a4d";
+    hostId = "81cd2a4d"; # Needed for ZFS
   };
 
   # Set your time zone.

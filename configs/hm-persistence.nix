@@ -6,6 +6,10 @@
         directory = ".local/share/Steam";
         method = "symlink";
       }
+      {
+        directory = ".local/share/PrismLauncher";
+        method = "symlink";
+      }
     ];
     files = [
       ".gitconfig"

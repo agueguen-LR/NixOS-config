@@ -8,4 +8,6 @@
   librewolf = import ./browser/librewolf.nix;
   hyprland = import ./compositor/hyprland.nix;
   nixcord = import ./social/nixcord.nix;
+  waybar = import ./statusBar/waybar.nix;
+  hyprpaper = import ./wallpaper/hyprpaper.nix;
 }

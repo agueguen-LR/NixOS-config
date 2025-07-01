@@ -32,6 +32,10 @@
     impermanence = {
       url = "github:nix-community/impermanence";
     };
+
+    catppuccin = {
+      url = "github:catppuccin/nix";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: 

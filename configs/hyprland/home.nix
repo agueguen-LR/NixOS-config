@@ -6,14 +6,19 @@ in
   imports = [
     ../common-home.nix
     inputs.nvf.homeManagerModules.default
+    inputs.catppuccin.homeModules.catppuccin
     modules.zvm
     modules.tmux
     modules.alacritty
     modules.nvf
     modules.librewolf
     modules.hyprland
+    modules.hyprpaper
+    modules.waybar
     modules.nixcord
   ];
+
+  catppuccin.enable = true;
 
   home.packages = with pkgs; [];
   

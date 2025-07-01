@@ -1,0 +1,62 @@
+/* 
+ * Colors come from catppuccin.enable = true; in configs/<config-name>/home.nix
+ * See https://github.com/catppuccin/waybar
+*/
+
+* {
+  font-family: JetbrainsMono Nerd Font;
+  font-size: 12px;
+}
+
+#waybar {
+  background-color: @base;
+  color: @text;
+}
+
+#workspaces button:hover {
+  color: @sapphire;
+}
+
+#clock,
+#battery,
+#pulseaudio,
+
+#custom-power {
+  background-color: @surface0;
+}
+
+#clock {
+  color: @blue;
+  padding-left: 1rem;
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#backlight, #battery {
+  border-radius: 0;
+}
+
+#pulseaudio {  
+  border-radius: 1rem 0px 0px 1rem;
+  color: @maroon;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+#custom-power {
+  color: @red;
+}
