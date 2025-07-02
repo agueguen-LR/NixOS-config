@@ -38,6 +38,7 @@ in
       quickemu # easy qemu VMs
       unzip
       shipwright # OoT SoH, launch command: soh
+      prismlauncher
     ];
     shell = pkgs.zsh;
   };

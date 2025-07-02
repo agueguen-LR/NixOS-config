@@ -20,7 +20,6 @@
 #clock,
 #battery,
 #pulseaudio,
-
 #custom-power {
   background-color: @surface0;
 }
@@ -28,6 +27,7 @@
 #clock {
   color: @blue;
   padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 #battery {
@@ -42,17 +42,9 @@
   color: @red;
 }
 
-#backlight {
-  color: @yellow;
-}
-
-#backlight, #battery {
-  border-radius: 0;
-}
-
 #pulseaudio {  
   border-radius: 1rem 0px 0px 1rem;
-  color: @maroon;
+  color: @yellow;
   padding-right: 1rem;
   padding-left: 1rem;
 }

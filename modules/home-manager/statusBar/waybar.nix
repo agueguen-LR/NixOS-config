@@ -4,7 +4,7 @@
     enable = true;
 
     systemd.enable = true;
-    style = lib.readFile ./waybarStyle/catppuccin-mocha.css;
+    style = lib.readFile ./waybarStyle/style.css;
 
     settings = {
       mainbar = {
@@ -17,11 +17,13 @@
           "pulseaudio"
           "battery"
           "clock"
+          "custom/power"
         ];
 
         "clock" = {
           timezone = "Europe/Paris";
           format = "{:%H:%M %d-%m-%Y}";
+          tooltip = false;
         };
 
         "pulseaudio" = {
@@ -40,6 +42,13 @@
         "battery" = {
           format = "{capacity}% {icon}";
           format-icons = [" " " " " " " " " "];
+          tooltip = false;
+        };
+
+        "custom/power" = {
+          format = " ";
+          on-click = "shutdown now";
+          tooltip = false;
         };
 
       };

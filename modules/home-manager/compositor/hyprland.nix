@@ -12,6 +12,8 @@ in
       general = {
         gaps_in = 1;
         gaps_out = 2;
+
+        resize_on_border = true;
       };
 
       decoration = {
@@ -30,6 +32,7 @@ in
 
       input = keybinds.input;
       bind = keybinds.bind;
+
     };
   };
 }
