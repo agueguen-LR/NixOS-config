@@ -16,6 +16,11 @@
         Folder = "Nix"; # No need for Placement as folder already placed before
       }
       {
+        Title = "Hyprland";
+        URL = "https://wiki.hypr.land/";
+        Folder = "Nix";
+      }
+      {
         Title = "GitHub";
         URL = "https://github.com/agueguen-LR";
         Placement = "toolbar";

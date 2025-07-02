@@ -7,6 +7,8 @@ in
     enable = true;
     settings = {
 
+      monitor = ", preferred, auto, 1";
+
       general = {
         gaps_in = 1;
         gaps_out = 2;
@@ -19,6 +21,10 @@ in
         fullscreen_opacity = 1.0;
       };
 
+      ecosystem = {
+        no_update_news = true;
+        no_donation_nag = true;
+      };
 
       "$mod" = "SUPER";
 

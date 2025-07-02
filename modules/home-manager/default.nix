@@ -1,13 +1,14 @@
 {
-  # List module files here
+  # List module files here, alphabetically please :)
   # my-module = import ./my-module.nix;
-  zvm = import ./terminal/zvm.nix;
-  tmux = import ./terminal/tmux.nix;
   alacritty = import ./terminal/alacritty.nix;
-  nvf = import ./nvim/nvf.nix;
   librewolf = import ./browser/librewolf.nix;
   hyprland = import ./compositor/hyprland.nix;
-  nixcord = import ./social/nixcord.nix;
-  waybar = import ./statusBar/waybar.nix;
   hyprpaper = import ./wallpaper/hyprpaper.nix;
+  hyprcursor = import ./cursor/hyprcursor.nix;
+  nixcord = import ./social/nixcord.nix;
+  nvf = import ./nvim/nvf.nix;
+  tmux = import ./terminal/tmux.nix;
+  waybar = import ./statusBar/waybar.nix;
+  zvm = import ./terminal/zvm.nix;
 }

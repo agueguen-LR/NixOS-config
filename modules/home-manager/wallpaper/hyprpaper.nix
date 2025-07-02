@@ -1,9 +1,12 @@
+let
+  wallpaperPath = ./catppuccin-nixos.png;
+in
 {
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = [ "/persist/adrien/wallpaper/catppuccin-nixos.png" ];
-      wallpaper = [ "eDP-1,/persist/adrien/wallpaper/catppuccin-nixos.png" "HDMI-A-1,/persist/adrien/wallpaper/catppuccin-nixos.png" ];
+      preload = [ (builtins.toString wallpaperPath) ];
+      wallpaper = [ ",${builtins.toString wallpaperPath}" ];
     };
   };
 }

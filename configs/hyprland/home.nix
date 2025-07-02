@@ -14,6 +14,7 @@ in
     modules.librewolf
     modules.hyprland
     modules.hyprpaper
+    modules.hyprcursor
     modules.waybar
     modules.nixcord
   ];
