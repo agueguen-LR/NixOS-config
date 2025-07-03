@@ -25,20 +25,20 @@
       }
 
       ide (){
-        if command -v tmux &> /dev/null && command -v nvim &> /dev/null;
+        if command -v tmux &> /dev/null;
           then tmux new-session -d 'nvim .' && tmux split-window && tmux resize-pane -D 10 && tmux a
         else
-          echo "tmux or nvim modules are not loaded"
+          echo "tmux module is not loaded"
         fi
       }
     '';
        
     plugins = [
-      {
-        name = "vi-mode";
-        src = pkgs.zsh-vi-mode;
-        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-      }
+      #{
+      #  name = "vi-mode";
+      #  src = pkgs.zsh-vi-mode;
+      #  file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      #}
     ];
 
     oh-my-zsh = {
