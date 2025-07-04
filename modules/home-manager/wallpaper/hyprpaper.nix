@@ -5,7 +5,7 @@ in
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = [ (builtins.toString wallpaperPath) ];
+      preload = [ "${builtins.toString wallpaperPath}" ];
       wallpaper = [ ",${builtins.toString wallpaperPath}" ];
     };
   };
