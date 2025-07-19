@@ -42,6 +42,8 @@ in
       quickemu # easy qemu VMs
       unzip
       shipwright # OoT SoH, launch command: soh
+      scrcpy
+      android-tools
       prismlauncher
     ];
     shell = pkgs.zsh;

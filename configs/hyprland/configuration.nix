@@ -39,6 +39,8 @@ in
       unzip
       shipwright # OoT SoH, launch command: soh
       prismlauncher
+      #scrcpy # Display phone screen
+      #android-tools
     ];
     shell = pkgs.zsh;
   };

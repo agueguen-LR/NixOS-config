@@ -25,6 +25,10 @@
       }
 
       ide (){
+        nvim .
+      }
+
+      tmux-ide (){
         if command -v tmux &> /dev/null;
           then tmux new-session -d 'nvim .' && tmux split-window && tmux resize-pane -D 10 && tmux a
         else

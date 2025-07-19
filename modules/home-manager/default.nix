@@ -7,6 +7,7 @@
   hyprpaper = import ./wallpaper/hyprpaper.nix;
   hyprcursor = import ./cursor/hyprcursor.nix;
   nixcord = import ./social/nixcord.nix;
+  nixvim = import ./nvim/nixvim.nix;
   nvf = import ./nvim/nvf.nix;
   tmux = import ./terminal/tmux.nix;
   waybar = import ./statusBar/waybar.nix;

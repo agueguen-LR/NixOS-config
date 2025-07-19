@@ -1,9 +1,13 @@
 {
   keymaps = [ 
+		{
+			key = "<C-t>";
+			mode = "n";
+			action = "<Cmd>ToggleTerm<CR>";
+		}
     {
       key = "<Esc>";
       mode = "t";
-      silent = true;
       action = "<C-\\><C-n>";
     }
     {
