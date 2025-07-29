@@ -36,6 +36,8 @@ The filesystems are handled by [disko](https://github.com/nix-community/disko).
 
 ## Installation 
 
+!!! Not up to date with new multi-host setup !!!
+
 Boot into the [NixOS minimal installer](https://nixos.org/download/) and connect to the internet.
 
 
