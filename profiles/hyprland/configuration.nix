@@ -37,7 +37,7 @@ in
       wl-clipboard
       quickemu # easy qemu VMs
       unzip
-      shipwright # OoT SoH, launch command: soh
+      #shipwright # OoT SoH, launch command: soh
       prismlauncher
       #scrcpy # Display phone screen
       #android-tools
@@ -56,9 +56,6 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

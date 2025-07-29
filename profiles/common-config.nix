@@ -1,11 +1,10 @@
-# This contains everything that's shared across configurations
+# This contains everything that's shared across profiles
 
 { inputs, outputs, config, pkgs, ... }:
 {
   imports =
     [ 
       inputs.disko.nixosModules.disko
-      ../disko/impermanence.nix
       inputs.impermanence.nixosModules.impermanence
       ./persistence.nix
       inputs.agenix.nixosModules.default # secret management
@@ -39,11 +38,7 @@
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking = {
-    hostName = "nixos";
-    networkmanager.enable = true;
-    hostId = "81cd2a4d"; # Needed for ZFS
-  };
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -76,7 +71,7 @@
   services.blueman.enable = true;
 
   age = {
-    identityPaths = [ "/persist/adrien/.secrets/agenix-rsa-4096" ];
+    identityPaths = [ "/persist/home/adrien/.secrets/agenix-rsa-4096" ];
     secrets.user-password.file = ../secrets/user-password.age;
   };
 
@@ -85,11 +80,14 @@
   users.users.adrien = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    #initialHashedPassword = ""; # Set this and comment hashedPasswordFile during install
+    #initialHashedPassword = # Set this and comment hashedPasswordFile during install
     hashedPasswordFile = config.age.secrets.user-password.path;
-  };
+ };
 
   programs.fuse.userAllowOther = true; # see https://github.com/nix-community/impermanence#home-manager
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
   environment.systemPackages = [
     pkgs.vim

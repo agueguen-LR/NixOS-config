@@ -2,7 +2,7 @@
   disko.devices = {
       disk = {
         main = {
-          device = "/dev/nvme0n1"; # Replace with your own device during install 
+          device = "/dev/sdb"; # Replace with your own device during install 
           type = "disk";
           content = {
             type = "gpt";
@@ -15,12 +15,6 @@
                   format = "vfat";
                   mountpoint = "/boot";
                   mountOptions = [ "umask=0077" ];
-                };
-              };
-              swap = {
-                size = "4G";
-                content = {
-                  type = "swap";
                 };
               };
               zfs = {

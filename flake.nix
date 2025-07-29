@@ -15,8 +15,8 @@
     };
 
     nixvim = {
-        url = "github:nix-community/nixvim";
-        inputs.nixpkgs.follows = "nixpkgs";
+			url = "github:nix-community/nixvim";
+			inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixcord = {
@@ -46,47 +46,26 @@
   outputs = { self, nixpkgs, ... }@inputs: 
     let
       inherit (self) outputs;
+			mkHost = hostFile: profileFile: nixpkgs.lib.nixosSystem {
+				specialArgs = {inherit inputs outputs;};
+				modules = [
+					./hosts/${hostFile}
+					./profiles/${profileFile}
+				];
+			};
     in
   {
-    system = "x86_64-linux";
+		system = "x86_64-linux";
       
     nixosModules = import ./modules/nixos;
 
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
-      default = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./configs/default/configuration.nix
-          ./hardware-configuration.nix
-        ];
-      };
-
-      qtile = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./configs/qtile/configuration.nix
-          ./hardware-configuration.nix
-        ];
-      };
-
-      hyprland = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./configs/hyprland/configuration.nix
-          ./hardware-configuration.nix
-        ];
-      };
-
-      kde = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./configs/kde/configuration.nix
-          ./hardware-configuration.nix
-        ];
-      };
-
+      server-default = mkHost "server.nix" "default/configuration.nix";
+      server-qtile = mkHost "server.nix" "qtile/configuration.nix";
+      server-hypr = mkHost "server.nix" "hyprland/configuration.nix";
+      server-kde = mkHost "server.nix" "kde/configuration.nix";
     };
   };
 }

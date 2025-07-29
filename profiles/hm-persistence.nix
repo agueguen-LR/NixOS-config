@@ -1,6 +1,10 @@
 {
-  home.persistence."/persist/adrien" = {
+  home.persistence."/persist/home/adrien" = {
     directories = [
+			{
+				directory = ".ssh";
+				method = "symlink";
+			}
       {
         directory = ".local/share/soh"; #Ship of harkinian
         method = "symlink";
