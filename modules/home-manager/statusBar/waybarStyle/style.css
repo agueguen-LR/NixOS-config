@@ -22,16 +22,17 @@
 #pulseaudio,
 #custom-power {
   background-color: @surface0;
+  padding-left: 1rem;
 }
 
 #clock {
   color: @blue;
   padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 #battery {
   color: @green;
+  padding-left: 1rem;
 }
 
 #battery.charging {
@@ -45,7 +46,6 @@
 #pulseaudio {  
   border-radius: 1rem 0px 0px 1rem;
   color: @yellow;
-  padding-right: 1rem;
   padding-left: 1rem;
 }
 

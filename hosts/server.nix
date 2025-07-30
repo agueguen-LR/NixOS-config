@@ -9,4 +9,9 @@
 		hostName = "nixos-server";
     hostId = "7fdbbd2"; # Needed for ZFS
 	};
+
+  environment.variables = {
+    IS_LAPTOP = "false";
+  };
+
 }
