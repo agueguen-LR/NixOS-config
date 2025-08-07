@@ -19,6 +19,11 @@
         Title = "Hyprland";
         URL = "https://wiki.hypr.land/";
         Folder = "Nix";
+      } 
+			{
+        Title = "NixVim";
+        URL = "https://mattsturgeon.github.io/nixvim/";
+        Folder = "Nix";
       }
       {
         Title = "GitHub";
