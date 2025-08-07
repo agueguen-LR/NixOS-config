@@ -11,5 +11,5 @@
   nvf = import ./nvim/nvf.nix;
   tmux = import ./terminal/tmux.nix;
   waybar = import ./statusBar/waybar.nix;
-  zvm = import ./terminal/zvm.nix;
+  zsh = import ./terminal/zsh.nix;
 }

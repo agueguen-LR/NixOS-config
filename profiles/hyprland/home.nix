@@ -7,7 +7,7 @@ in
     ../common-home.nix
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
-    modules.zvm
+    modules.zsh
     modules.alacritty
     modules.nixvim
     modules.librewolf
@@ -29,6 +29,4 @@ in
   home.file = {};
 
   home.sessionVariables = {};
-
-  programs.zsh.enable = true;
 }
