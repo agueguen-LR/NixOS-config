@@ -9,4 +9,5 @@
   hyprland = import ./compositor/hyprland.nix;
   tuigreet = import ./greeter/tuigreet.nix;
   steam = import ./gaming/steam.nix;
+	fish = import ./shell/fish.nix;
 }

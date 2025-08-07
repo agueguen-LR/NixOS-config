@@ -23,9 +23,12 @@ in
     };
     
     plugins = {
+			dap.enable = true; # debugging
+			image.enable = true;
 			lazygit.enable = true;
       lualine.enable = true;
 			lspconfig.enable = true;
+			markdown-preview.enable = true;
       toggleterm.enable = true;
       neo-tree.enable = true;
       bufferline.enable = true;

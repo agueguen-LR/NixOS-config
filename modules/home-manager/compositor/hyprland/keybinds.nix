@@ -8,7 +8,7 @@
 
   bind = [
     "$mod, B, exec, librewolf"                # Open browser
-    "$mod, T, exec, alacritty"                # Open terminal
+    "$mod, T, exec, kitty"                # Open terminal
     "$mod, D, exec, vesktop"                  # Open discord
 
     "$mod, Q, killactive"                     # Kill active window

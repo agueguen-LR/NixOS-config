@@ -9,7 +9,7 @@ in
       ../common-config.nix
       modules.neovim
       modules.hyprland
-      modules.zsh
+      modules.fish
       modules.tuigreet
       modules.steam
     ];
@@ -37,7 +37,7 @@ in
       wl-clipboard
       unzip
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   fonts.packages = with pkgs.nerd-fonts; [

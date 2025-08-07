@@ -13,6 +13,8 @@ in
     modules.librewolf
   ];
 
+  catppuccin.enable = true;
+
   home.packages = with pkgs; [];
 
   home.file = {};

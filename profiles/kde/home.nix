@@ -14,6 +14,8 @@ in
     modules.nixcord
   ];
 
+  catppuccin.enable = true;
+
   home.packages = with pkgs; [];
   
   home.activation.createDiscordConfigDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

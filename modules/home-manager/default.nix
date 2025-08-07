@@ -2,6 +2,8 @@
   # List module files here, alphabetically please :)
   # my-module = import ./my-module.nix;
   alacritty = import ./terminal/alacritty.nix;
+	fish = import ./terminal/fish.nix;
+	kitty = import ./terminal/kitty.nix;
   librewolf = import ./browser/librewolf.nix;
   hyprland = import ./compositor/hyprland.nix;
   hyprpaper = import ./wallpaper/hyprpaper.nix;

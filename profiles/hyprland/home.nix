@@ -7,8 +7,8 @@ in
     ../common-home.nix
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
-    modules.zsh
-    modules.alacritty
+    modules.fish
+    modules.kitty
     modules.nixvim
     modules.librewolf
     modules.hyprland
