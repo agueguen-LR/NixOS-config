@@ -5,11 +5,11 @@ in
 {
   imports = [
     ../common-home.nix
-    inputs.nixvim.homeModules.nixvim
+    inputs.nvf.homeManagerModules.default
     inputs.catppuccin.homeModules.catppuccin
     modules.fish
     modules.kitty
-    modules.nixvim
+    modules.nvf
     modules.librewolf
     modules.hyprland
     modules.hyprpaper

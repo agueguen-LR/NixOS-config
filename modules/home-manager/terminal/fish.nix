@@ -18,6 +18,7 @@
 		shellAliases = {
       ide = "nvim .";
 			l = "ls -l";
+			nix-shell = "nix-shell --run 'fish'";
 		};
 
 

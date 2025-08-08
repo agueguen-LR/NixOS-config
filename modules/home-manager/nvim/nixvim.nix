@@ -3,6 +3,9 @@ let
   keybinds = import ./keybinds.nix;
 in
 {
+	imports = [
+		./nixvim-dap.nix
+	];
   programs.nixvim = {
     enable = true;
     globalOpts = {

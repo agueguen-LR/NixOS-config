@@ -3,7 +3,7 @@
 		{
 			key = "<C-t>";
 			mode = "n";
-			action = "<Cmd>ToggleTerm<CR>";
+			action = "<Cmd>ToggleTerm size=15<CR>";
 		}
     {
       key = "<Esc>";

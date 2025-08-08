@@ -1,4 +1,4 @@
-{ ... }:  
+{ pkgs, ... }:  
 let
   keybinds = import ./keybinds.nix;
 in
@@ -14,68 +14,87 @@ in
     enable = true;
 
     settings.vim = {
-      keymaps = keybinds.keymaps;
+			keymaps = keybinds.keymaps;
 
-      theme = {
-        enable = true;
-        name = "catppuccin";
-        style = "mocha";
-      };
+			theme = {
+				enable = true;
+				name = "catppuccin";
+				style = "mocha";
+			};
 
-      terminal.toggleterm.enable = true;
+			terminal.toggleterm.enable = true;
 
-      statusline.lualine.enable = true;
-      telescope.enable = true;
-      #autocomplete.nvim-cmp.enable = true;
-      filetree.neo-tree.enable = true;
-      tabline.nvimBufferline.enable = true;
+			statusline.lualine.enable = true;
+			telescope.enable = true;
+			#autocomplete.nvim-cmp.enable = true;
+			filetree.neo-tree.enable = true;
+			tabline.nvimBufferline.enable = true;
 
-      binds.whichKey = {
-        enable = true;
-      };
+			binds.whichKey = {
+				enable = true;
+			};
 
-      mini = {
-        ai.enable = true;
-        fuzzy.enable = true;
-        git.enable = true;
-        surround.enable = true;
-        completion.enable = true;
-      };
+			mini = {
+				ai.enable = true;
+				fuzzy.enable = true;
+				git.enable = true;
+				surround.enable = true;
+				completion.enable = true;
+			};
 
-      clipboard = {
-        enable = true;
-        providers = {
-          wl-copy.enable = true;
-       };
-      };
+			clipboard = {
+				enable = true;
+				providers = {
+					wl-copy.enable = true;
+			 };
+			};
 
-      options = {
-        shiftwidth = 2;
-        tabstop = 2;
-      };
+			options = {
+				shiftwidth = 2;
+				tabstop = 2;
+			};
 
-      lsp.enable = true;
-      languages = {
-        enableTreesitter = true;
+			debugger.nvim-dap = {
+				enable = true;
+				mappings = {};
+				sources = {};
+				ui.enable = true;
+			};
 
-        nix = {
-          enable = true;
-          lsp.server = "nixd";
-        };
+			lsp.enable = true;
+			languages = {
+				enableTreesitter = true;
+				enableDAP = true;
 
-        clang = { # c and c++
-          enable = true;
-          lsp.server = "clangd";
-        };
+				nix = {
+					enable = true;
+					lsp.server = "nixd";
+				};
 
-        java.enable = true;
+				clang = { # c and c++
+					enable = true;
+					lsp.server = "clangd";
+					dap.enable = true;
+				};
 
-        python = {
-          enable = true;
-          format.enable = true;
-        };
+				java.enable = true;
 
-      };
+				python = {
+					enable = true;
+					format.enable = true;
+					dap.enable = true;
+				};
+
+			};
+
+			extraPlugins = {
+				nvim-java.package = pkgs.vimPlugins.nvim-java;
+				nvim-java-dap.package = pkgs.vimPlugins.nvim-java-dap;
+				nvim-java-test.package = pkgs.vimPlugins.nvim-java-test;
+				nvim-java-refactor.package = pkgs.vimPlugins.nvim-java-refactor;
+				nvim-java-core.package = pkgs.vimPlugins.nvim-java-core;
+			};
+
     };
   };
 }
