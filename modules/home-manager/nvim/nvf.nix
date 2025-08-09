@@ -22,7 +22,14 @@ in
 				style = "mocha";
 			};
 
-			terminal.toggleterm.enable = true;
+			terminal.toggleterm = {
+        enable = true;
+        lazygit = {
+          enable = true;
+          direction = "float";
+          mappings.open = "<leader>g";
+        };
+      };
 
 			statusline.lualine.enable = true;
 			telescope.enable = true;
