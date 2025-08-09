@@ -21,6 +21,12 @@
 			nix-shell = "nix-shell --run 'fish'";
 		};
 
+    shellInit = ''
+      if test -S "$XDG_RUNTIME_DIR/ssh-agent"
+        set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
+      end
+    '';
+
 
 		plugins = [
 			{
