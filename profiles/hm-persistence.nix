@@ -5,6 +5,7 @@
 				directory = ".ssh";
 				method = "symlink";
 			}
+      ".gnupg"
       {
         directory = ".local/share/soh"; #Ship of harkinian
         method = "symlink";

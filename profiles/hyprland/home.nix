@@ -20,6 +20,8 @@ in
 
   catppuccin.enable = true;
 
+  services.gpg-agent.enableFishIntegration = true;
+
   home.packages = with pkgs; [];
   
   home.activation.createDiscordConfigDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
