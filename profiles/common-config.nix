@@ -96,7 +96,6 @@
     pkgs.vim
     pkgs.git
     inputs.home-manager.packages.${outputs.system}.default
-    pkgs.pinentry-tty
   ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,

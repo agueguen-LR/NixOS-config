@@ -10,14 +10,7 @@
 
   services = {
     ssh-agent.enable = true;
-    gpg-agent = {
-      enable = true;
-      enableSshSupport = true;
-      pinentry = {
-        package = pkgs.pinentry-tty;
-        program = "pinentry-tty";
-      };
-    };
+
   };
   programs.gpg.enable = true;
 

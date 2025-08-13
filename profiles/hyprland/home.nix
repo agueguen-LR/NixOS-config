@@ -20,7 +20,18 @@ in
 
   catppuccin.enable = true;
 
-  services.gpg-agent.enableFishIntegration = true;
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    enableFishIntegration = true;
+    extraConfig = ''
+      allow-loopback-pinentry
+    '';
+    pinentry = {
+      package = pkgs.pinentry-rofi;
+      program = "pinentry-rofi";
+    };
+  };
 
   home.packages = with pkgs; [];
   

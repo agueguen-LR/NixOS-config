@@ -14,7 +14,14 @@ in
     enable = true;
 
     settings.vim = {
+      autopairs.nvim-autopairs.enable = true;
+
 			keymaps = keybinds.keymaps;
+
+      utility.images.image-nvim = {
+        enable = true;
+        setupOpts.backend = "kitty";
+      };
 
 			theme = {
 				enable = true;
@@ -47,6 +54,7 @@ in
 				git.enable = true;
 				surround.enable = true;
 				completion.enable = true;
+        comment.enable = true;
 			};
 
 			clipboard = {
