@@ -64,9 +64,6 @@
     pulse.enable = true;
   };
 
-  # Enable touchpad support.
-  services.libinput.enable = true;
-
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;

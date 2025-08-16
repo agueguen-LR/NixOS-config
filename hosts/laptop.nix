@@ -10,6 +10,9 @@
     hostId = "81cd2a4d"; # Needed for ZFS
 	};
 
+  # Enable touchpad support.
+  services.libinput.enable = true;
+
   environment.variables = {
     IS_LAPTOP = "true";
   };
