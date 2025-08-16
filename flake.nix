@@ -69,6 +69,11 @@
       laptop-default = mkHost "laptop.nix" "default/configuration.nix";
       laptop-qtile = mkHost "laptop.nix" "qtile/configuration.nix";
       laptop-hypr = mkHost "laptop.nix" "hyprland/configuration.nix";
-      laptop-kde = mkHost "laptop.nix" "kde/configuration.nix";   };
+      laptop-kde = mkHost "laptop.nix" "kde/configuration.nix"; 
+		  pc-default = mkHost "pc.nix" "default/configuration.nix";
+      pc-qtile = mkHost "pc.nix" "qtile/configuration.nix";
+      pc-hypr = mkHost "pc.nix" "hyprland/configuration.nix";
+      pc-kde = mkHost "pc.nix" "kde/configuration.nix"; 
+};
   };
 }

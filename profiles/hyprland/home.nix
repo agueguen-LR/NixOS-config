@@ -5,11 +5,11 @@ in
 {
   imports = [
     ../common-home.nix
-    inputs.nixvim.homeModules.nixvim
+    inputs.nvf.homeManagerModules.default
     inputs.catppuccin.homeModules.catppuccin
-    modules.zvm
-    modules.alacritty
-    modules.nixvim
+    modules.fish
+    modules.kitty
+    modules.nvf
     modules.librewolf
     modules.hyprland
     modules.hyprpaper
@@ -20,6 +20,19 @@ in
 
   catppuccin.enable = true;
 
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    enableFishIntegration = true;
+    extraConfig = ''
+      allow-loopback-pinentry
+    '';
+    pinentry = {
+      package = pkgs.pinentry-rofi;
+      program = "pinentry-rofi";
+    };
+  };
+
   home.packages = with pkgs; [];
   
   home.activation.createDiscordConfigDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -29,6 +42,4 @@ in
   home.file = {};
 
   home.sessionVariables = {};
-
-  programs.zsh.enable = true;
 }

@@ -87,6 +87,7 @@
  };
 
   programs.fuse.userAllowOther = true; # see https://github.com/nix-community/impermanence#home-manager
+	programs.nix-ld.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

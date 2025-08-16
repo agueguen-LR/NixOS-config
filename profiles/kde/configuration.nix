@@ -39,12 +39,7 @@ in
       sysstat #system info commands: iostat mpstat pidstat ...
       librewolf
       wl-clipboard
-      quickemu # easy qemu VMs
       unzip
-      shipwright # OoT SoH, launch command: soh
-      scrcpy
-      android-tools
-      prismlauncher
     ];
     shell = pkgs.zsh;
   };

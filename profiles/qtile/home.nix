@@ -5,19 +5,19 @@ in
 {
   imports = [
     ../common-home.nix
-    inputs.nvf.homeManagerModules.default
-    modules.zvm
-    modules.tmux
+		inputs.nixvim.homeModules.nixvim
+    inputs.catppuccin.homeModules.catppuccin
+    modules.zsh
+		modules.nixvim
     modules.alacritty
-    modules.nvf
     modules.librewolf
   ];
+
+  catppuccin.enable = true;
 
   home.packages = with pkgs; [];
 
   home.file = {};
 
   home.sessionVariables = {};
-
-  programs.zsh.enable = true;
 }

@@ -3,7 +3,7 @@
 		{
 			key = "<C-t>";
 			mode = "n";
-			action = "<Cmd>ToggleTerm<CR>";
+			action = "<Cmd>ToggleTerm size=15 name=ToggleTerm<CR>";
 		}
     {
       key = "<Esc>";
@@ -16,9 +16,10 @@
       action = "<Cmd>Neotree toggle action=show<CR>";
     }
     {
-      key = "<leader>g";
+      key = "<leader>bd";
       mode = "n";
-      action = "<Cmd>Neotree git_status position=float<CR>";
+      action = "<Cmd>wa | %bd! | e\# | bd\#<CR>";
+      desc = "Write and close all buffers, keeps current one open for editing";
     }
   ];
 }
