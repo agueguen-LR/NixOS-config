@@ -7,6 +7,6 @@
 
 	networking = {
 		hostName = "nixos-server";
-    hostId = "7fdbbd2"; # Needed for ZFS
+    hostId = "a58d9f9e"; # Needed for ZFS
 	};
 }
