@@ -62,10 +62,7 @@
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
-      server-default = mkHost "server.nix" "default/configuration.nix";
-      server-qtile = mkHost "server.nix" "qtile/configuration.nix";
-      server-hypr = mkHost "server.nix" "hyprland/configuration.nix";
-      server-kde = mkHost "server.nix" "kde/configuration.nix";
+      server = mkHost "server.nix" "server/configuration.nix";
       laptop-default = mkHost "laptop.nix" "default/configuration.nix";
       laptop-qtile = mkHost "laptop.nix" "qtile/configuration.nix";
       laptop-hypr = mkHost "laptop.nix" "hyprland/configuration.nix";
