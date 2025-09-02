@@ -15,16 +15,12 @@
         modules-center = [];
         # Conditionally add "battery" module to modules-right based on IS_LAPTOP
 				
-        modules-right = if (builtins.getEnv "IS_LAPTOP" == "true") then [
+        modules-right = [
           "pulseaudio"
           "battery"
           "clock"
           "custom/power"
-        ] else [
-          "pulseaudio"
-          "clock"
-          "custom/power"
-        ];
+        ]; 
 
         "clock" = {
           timezone = "Europe/Paris";

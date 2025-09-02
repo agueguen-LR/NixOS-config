@@ -10,8 +10,4 @@
     hostId = "466b81e1"; # Needed for ZFS
 	};
 
-  environment.variables = {
-    IS_LAPTOP = "false";
-  };
-
 }

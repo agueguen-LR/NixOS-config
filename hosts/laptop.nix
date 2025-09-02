@@ -13,8 +13,4 @@
   # Enable touchpad support.
   services.libinput.enable = true;
 
-  environment.variables = {
-    IS_LAPTOP = "true";
-  };
-
 }
