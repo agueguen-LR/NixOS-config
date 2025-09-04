@@ -13,8 +13,6 @@
 
         modules-left = [];
         modules-center = [];
-        # Conditionally add "battery" module to modules-right based on IS_LAPTOP
-				
         modules-right = [
           "pulseaudio"
           "battery"

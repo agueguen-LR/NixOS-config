@@ -1,6 +1,6 @@
 { pkgs, ... }:  
 let
-  keybinds = import ./keybinds.nix;
+  keybinds = import ./keybinds/nvf_keybinds.nix;
 in
 {
   programs.neovim = {

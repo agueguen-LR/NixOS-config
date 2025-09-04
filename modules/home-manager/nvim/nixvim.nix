@@ -1,6 +1,6 @@
 { ... }:
 let
-  keybinds = import ./keybinds.nix;
+  keybinds = import ./keybinds/nixvim_keys.nix;
 in
 {
 	imports = [
@@ -34,6 +34,7 @@ in
 			markdown-preview.enable = true;
       toggleterm.enable = true;
       neo-tree.enable = true;
+			nvim-autopairs.enable = true;
       bufferline.enable = true;
       which-key.enable = true;
       web-devicons.enable = true;
