@@ -1,21 +1,20 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ pkgs, outputs, ... }:
+{ pkgs, inputs, outputs, ... }:
 let
   modules = outputs.nixosModules;
 in
 {
   imports =
     [
+      inputs.catppuccin.nixosModules.catppuccin
       ../common-config.nix
-      modules.zsh
+      modules.fish
       modules.neovim
       modules.qtile
     ];
 
   system.nixos.tags = [ "qtile" ];
+
+  catppuccin.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "fr";
@@ -29,14 +28,14 @@ in
   users.users.adrien= {
     packages = with pkgs; [
       btop
-      alacritty
+      fastfetch
       pavucontrol
       tree
       acpi
       sysstat
       librewolf
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   fonts.packages = with pkgs.nerd-fonts; [
