@@ -8,8 +8,9 @@
 
   bind = [
     "$mod, B, exec, librewolf"                # Open browser
-    "$mod, T, exec, kitty"                # Open terminal
+    "$mod, T, exec, kitty"                		# Open terminal
     "$mod, D, exec, vesktop"                  # Open discord
+    "$mod, Y, exec, kitty yazi"               # Open yazi file explorer
 
     "$mod, Q, killactive"                     # Kill active window
     "$mod, H, movefocus, l"                   # Move focus left
@@ -57,7 +58,7 @@
 
     "$mod, F, fullscreen, 1"                  # Maximize window
 
-    ", Print, exec, grimblast copy area"      # Screenshot
+    ", Print, exec, grimblast copysave area"      # Screenshot
 
   ];
 }
