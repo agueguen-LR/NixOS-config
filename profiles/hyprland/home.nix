@@ -16,6 +16,7 @@ in
     modules.hyprcursor
     modules.waybar
     modules.nixcord
+		modules.yazi
   ];
 
   catppuccin.enable = true;

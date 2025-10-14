@@ -13,5 +13,6 @@
   nvf = import ./nvim/nvf.nix;
   tmux = import ./terminal/tmux.nix;
   waybar = import ./statusBar/waybar.nix;
+	yazi = import ./fileManager/yazi.nix;
   zsh = import ./terminal/zsh.nix;
 }
