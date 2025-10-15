@@ -1,12 +1,9 @@
-{ ... }:
-let
+{...}: let
   keybinds = import ./hyprland/keybinds.nix;
-in
-{
+in {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-
       monitor = ", preferred, auto, 1";
 
       general = {
@@ -32,7 +29,6 @@ in
 
       input = keybinds.input;
       bind = keybinds.bind;
-
     };
   };
 }

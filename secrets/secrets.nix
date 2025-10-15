@@ -1,6 +1,5 @@
 let
   adrien = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDKmCtLK5go0Tw//FTHbGETroG9QGldIDN4qKsxeYds2Z2z2whBa/k6XA6MHsnm64D7xZ/2eXjDZ0DqgWb9+xglUJBtoEuzYdb+gIWj23/okQEi0uAkrIg9goO+l8Zp2eXPcph7JqJ9auMVEgmLyM4kcJU35Ml3J7+fRN3vqc3ZRsb+yfh7PGdkiFuIgUjgU/Be7OY/YWz3flo8WMtulxq6SP2I6v2yQKM/YkTNBpaTDdN/ErEDAyXZkR8rLG2/JMKlPhtsr3FS2yJeyXFGRafXEObh+YYjT6wFV4eixf75CLwggr6mTV1TK0JghySTCn1PKIdL8kmt32i7lArOV4RH4drlZqyZyU5JO5AHfL0ws0b1Q6Ep/m7jiaoyhvRtO3YK/kI+M3Yv7RiXQEwT9D8iGrS4MF5sgm1Nzq2B9a8sQp+WmnAbv95aCkz0ich7T8DlLhKsbSgH9gQMIjnin0WekDniqSX9cPxfB0JU9mPRzIlZPZXto8vjacVm3Y9KX8LqJ6xvJnx6HKT6woSgcytTU496M6pgmktj4c5xJNI2pYgfswsf1L7oTgATuHzZJ+ltDsfVXCaG8ZB7wugSdqOEsf2HVC8HWg6RF6ILU5UWztYay372NRYDX6BaFOSZfaJmgIoHzR0ctCWd6iGKQRSkdq6QyqkbgJIIkdTtabwwdw== adrien@nixos";
-in
-{
-  "user-password.age".publicKeys = [ adrien ];
+in {
+  "user-password.age".publicKeys = [adrien];
 }

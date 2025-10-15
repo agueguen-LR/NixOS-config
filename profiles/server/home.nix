@@ -1,8 +1,12 @@
-{ pkgs, inputs, outputs, lib, ... }:
-let
-  modules = outputs.homeManagerModules;
-in
 {
+  pkgs,
+  inputs,
+  outputs,
+  lib,
+  ...
+}: let
+  modules = outputs.homeManagerModules;
+in {
   imports = [
     ../common-home.nix
     inputs.nvf.homeManagerModules.default

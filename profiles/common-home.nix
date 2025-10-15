@@ -1,5 +1,8 @@
-{ inputs, pkgs, ...}:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
     ./hm-persistence.nix
@@ -10,11 +13,10 @@
 
   services = {
     ssh-agent.enable = true;
-
   };
   programs.gpg.enable = true;
 
-  home.stateVersion = "25.05"; 
+  home.stateVersion = "25.05";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

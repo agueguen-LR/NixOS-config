@@ -1,16 +1,18 @@
-{ pkgs, inputs, outputs, ... }:
-let
-  modules = outputs.nixosModules;
-in
 {
-  imports =
-    [ 
-      ../common-config.nix
-      modules.neovim
-      modules.fish
-    ];
+  pkgs,
+  inputs,
+  outputs,
+  ...
+}: let
+  modules = outputs.nixosModules;
+in {
+  imports = [
+    ../common-config.nix
+    modules.neovim
+    modules.fish
+  ];
 
-  system.nixos.tags = [ "server" ];
+  system.nixos.tags = ["server"];
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;

@@ -1,8 +1,6 @@
-{ pkgs, ... }:  
-let
+{pkgs, ...}: let
   keybinds = import ./keybinds/nvf_keybinds.nix;
-in
-{
+in {
   programs.neovim = {
     enable = true;
     extraConfig = ''
@@ -16,20 +14,20 @@ in
     settings.vim = {
       autopairs.nvim-autopairs.enable = true;
 
-			keymaps = keybinds.keymaps;
+      keymaps = keybinds.keymaps;
 
       utility.images.image-nvim = {
         enable = true;
         setupOpts.backend = "kitty";
       };
 
-			theme = {
-				enable = true;
-				name = "catppuccin";
-				style = "mocha";
-			};
+      theme = {
+        enable = true;
+        name = "catppuccin";
+        style = "mocha";
+      };
 
-			terminal.toggleterm = {
+      terminal.toggleterm = {
         enable = true;
         lazygit = {
           enable = true;
@@ -38,79 +36,77 @@ in
         };
       };
 
-			statusline.lualine.enable = true;
-			telescope.enable = true;
-			#autocomplete.nvim-cmp.enable = true;
-			filetree.neo-tree.enable = true;
-			tabline.nvimBufferline.enable = true;
+      statusline.lualine.enable = true;
+      telescope.enable = true;
+      #autocomplete.nvim-cmp.enable = true;
+      filetree.neo-tree.enable = true;
+      tabline.nvimBufferline.enable = true;
 
-			binds.whichKey = {
-				enable = true;
-			};
+      binds.whichKey = {
+        enable = true;
+      };
 
-			mini = {
-				ai.enable = true;
-				fuzzy.enable = true;
-				git.enable = true;
-				surround.enable = true;
-				completion.enable = true;
+      mini = {
+        ai.enable = true;
+        fuzzy.enable = true;
+        git.enable = true;
+        surround.enable = true;
+        completion.enable = true;
         comment.enable = true;
-			};
+      };
 
-			clipboard = {
-				enable = true;
-				providers = {
-					wl-copy.enable = true;
-			 };
-			};
+      clipboard = {
+        enable = true;
+        providers = {
+          wl-copy.enable = true;
+        };
+      };
 
-			options = {
-				shiftwidth = 2;
-				tabstop = 2;
-			};
+      options = {
+        shiftwidth = 2;
+        tabstop = 2;
+      };
 
-			debugger.nvim-dap = {
-				enable = true;
-				mappings = {};
-				sources = {};
-				ui.enable = true;
-			};
+      debugger.nvim-dap = {
+        enable = true;
+        mappings = {};
+        sources = {};
+        ui.enable = true;
+      };
 
-			lsp.enable = true;
-			languages = {
-				enableTreesitter = true;
-				enableDAP = true;
+      lsp.enable = true;
+      languages = {
+        enableTreesitter = true;
+        enableDAP = true;
 
-				nix = {
-					enable = true;
-					lsp.server = "nixd";
-				};
+        nix = {
+          enable = true;
+          lsp.server = "nixd";
+        };
 
-				clang = { # c and c++
-					enable = true;
-					lsp.server = "clangd";
-					dap.enable = true;
-				};
+        clang = {
+          # c and c++
+          enable = true;
+          lsp.server = "clangd";
+          dap.enable = true;
+        };
 
-				java.enable = true;
+        java.enable = true;
 
-				python = {
-					enable = true;
-					format.enable = true;
-					dap.enable = true;
-				};
+        python = {
+          enable = true;
+          format.enable = true;
+          dap.enable = true;
+        };
+      };
 
-			};
-
-			extraPlugins = {
-				nvim-java.package = pkgs.vimPlugins.nvim-java;
-				nvim-java-dap.package = pkgs.vimPlugins.nvim-java-dap;
-				nvim-java-test.package = pkgs.vimPlugins.nvim-java-test;
-				nvim-java-refactor.package = pkgs.vimPlugins.nvim-java-refactor;
-				nvim-java-core.package = pkgs.vimPlugins.nvim-java-core;
-			};
-
+      extraPlugins = {
+        nvim-java.package = pkgs.vimPlugins.nvim-java;
+        nvim-java-dap.package = pkgs.vimPlugins.nvim-java-dap;
+        nvim-java-test.package = pkgs.vimPlugins.nvim-java-test;
+        nvim-java-refactor.package = pkgs.vimPlugins.nvim-java-refactor;
+        nvim-java-core.package = pkgs.vimPlugins.nvim-java-core;
+      };
     };
   };
 }
-

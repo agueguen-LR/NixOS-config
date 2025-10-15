@@ -1,18 +1,18 @@
-{ pkgs, outputs, ... }:
-let
-  modules = outputs.nixosModules;
-in
 {
-  imports =
-    [ 
-      ../common-config.nix
-      modules.neovim
-      modules.zsh
-      modules.steam
-    ];
+  pkgs,
+  outputs,
+  ...
+}: let
+  modules = outputs.nixosModules;
+in {
+  imports = [
+    ../common-config.nix
+    modules.neovim
+    modules.zsh
+    modules.steam
+  ];
 
-  system.nixos.tags = [ "kde" ];
-
+  system.nixos.tags = ["kde"];
 
   services = {
     xserver = {

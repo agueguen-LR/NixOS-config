@@ -1,11 +1,10 @@
-{ pkgs, ... }: 
-{ 
+{pkgs, ...}: {
   programs.zsh = {
-		enable = true;
+    enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;      
-       
+    syntaxHighlighting.enable = true;
+
     # Tweak settings for history
     history = {
       save = 1000;
@@ -37,7 +36,7 @@
         fi
       }
     '';
-       
+
     plugins = [
       #{
       #  name = "vi-mode";

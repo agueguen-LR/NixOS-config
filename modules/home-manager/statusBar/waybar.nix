@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   programs.waybar = {
     enable = true;
 
@@ -18,7 +17,7 @@
           "battery"
           "clock"
           "custom/power"
-        ]; 
+        ];
 
         "clock" = {
           timezone = "Europe/Paris";
@@ -33,8 +32,8 @@
           format-source = "{volume}%  ";
           format-source-muted = " ";
           format-icons = {
-              headphone = " ";
-              default = [" " " " " "];
+            headphone = " ";
+            default = [" " " " " "];
           };
           on-click = "pavucontrol";
         };
@@ -50,7 +49,6 @@
           on-click = "shutdown now";
           tooltip = false;
         };
-
       };
     };
   };

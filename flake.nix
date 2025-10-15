@@ -15,8 +15,8 @@
     };
 
     nixvim = {
-			url = "github:nix-community/nixvim";
-			inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixcord = {
@@ -43,20 +43,23 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: 
-    let
-      inherit (self) outputs;
-			mkHost = hostFile: profileFile: nixpkgs.lib.nixosSystem {
-				specialArgs = {inherit inputs outputs;};
-				modules = [
-					./hosts/${hostFile}
-					./profiles/${profileFile}
-				];
-			};
-    in
-  {
-		system = "x86_64-linux";
-      
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    mkHost = hostFile: profileFile:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/${hostFile}
+          ./profiles/${profileFile}
+        ];
+      };
+  in {
+    system = "x86_64-linux";
+
     nixosModules = import ./modules/nixos;
 
     homeManagerModules = import ./modules/home-manager;
@@ -66,11 +69,11 @@
       laptop-default = mkHost "laptop.nix" "default/configuration.nix";
       laptop-qtile = mkHost "laptop.nix" "qtile/configuration.nix";
       laptop-hypr = mkHost "laptop.nix" "hyprland/configuration.nix";
-      laptop-kde = mkHost "laptop.nix" "kde/configuration.nix"; 
-		  pc-default = mkHost "pc.nix" "default/configuration.nix";
+      laptop-kde = mkHost "laptop.nix" "kde/configuration.nix";
+      pc-default = mkHost "pc.nix" "default/configuration.nix";
       pc-qtile = mkHost "pc.nix" "qtile/configuration.nix";
       pc-hypr = mkHost "pc.nix" "hyprland/configuration.nix";
-      pc-kde = mkHost "pc.nix" "kde/configuration.nix"; 
-};
+      pc-kde = mkHost "pc.nix" "kde/configuration.nix";
+    };
   };
 }

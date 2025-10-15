@@ -1,7 +1,6 @@
-{ ... }:
-{
+{...}: {
   services.xserver = {
-    enable=true;
+    enable = true;
     windowManager.qtile.enable = true;
   };
 }

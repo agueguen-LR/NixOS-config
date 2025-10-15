@@ -1,15 +1,19 @@
 # This contains everything that's shared across profiles
-
-{ inputs, outputs, config, pkgs, lib, ... }:
 {
-  imports =
-    [ 
-      inputs.disko.nixosModules.disko
-      inputs.impermanence.nixosModules.impermanence
-      ./persistence.nix
-      inputs.agenix.nixosModules.default # secret management
-      outputs.nixosModules.home-manager
-    ];
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  imports = [
+    inputs.disko.nixosModules.disko
+    inputs.impermanence.nixosModules.impermanence
+    ./persistence.nix
+    inputs.agenix.nixosModules.default # secret management
+    outputs.nixosModules.home-manager
+  ];
 
   system.autoUpgrade = {
     enable = true;
@@ -21,16 +25,16 @@
     dates = "daily";
     options = "--delete-older-than 10d";
   };
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.optimise.automatic = true;
 
   fileSystems."/persist".neededForBoot = true;
 
   boot.initrd.postDeviceCommands = ''
-		echo 'starting rollback'
-    zpool import zroot
-    zfs rollback -r zroot/local/root@blank 
-		echo 'finished rollback'
+    echo 'starting rollback'
+      zpool import zroot
+      zfs rollback -r zroot/local/root@blank
+    echo 'finished rollback'
   '';
 
   # Use the systemd-boot EFI boot loader.
@@ -70,7 +74,7 @@
   services.blueman.enable = true;
 
   age = {
-    identityPaths = [ "/persist/home/adrien/.secrets/agenix-rsa-4096" ];
+    identityPaths = ["/persist/home/adrien/.secrets/agenix-rsa-4096"];
     secrets.user-password.file = ../secrets/user-password.age;
   };
 
@@ -78,23 +82,24 @@
 
   users.users.adrien = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     #initialHashedPassword = # Set this and comment hashedPasswordFile during install
     hashedPasswordFile = config.age.secrets.user-password.path;
- };
+  };
 
   programs.fuse.userAllowOther = true; # see https://github.com/nix-community/impermanence#home-manager
-	programs.nix-ld.enable = true;
+  programs.nix-ld.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-	# Any unfree packages
-	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-		"discord"	
-		"steam"
-	];
-	# nixpkgs.config.allowUnfree = true; # Allow all unfree packages :(
+  # Any unfree packages
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "discord"
+      "steam"
+    ];
+  # nixpkgs.config.allowUnfree = true; # Allow all unfree packages :(
 
   environment.systemPackages = [
     pkgs.vim

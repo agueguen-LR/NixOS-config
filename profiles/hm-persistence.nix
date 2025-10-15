@@ -1,10 +1,10 @@
 {
   home.persistence."/persist/home/adrien" = {
     directories = [
-			{
-				directory = ".ssh";
-				method = "symlink";
-			}
+      {
+        directory = ".ssh";
+        method = "symlink";
+      }
       ".gnupg"
       {
         directory = ".local/share/soh"; #Ship of harkinian

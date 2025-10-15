@@ -1,18 +1,20 @@
-{ pkgs, inputs, outputs, ... }:
-let
-  modules = outputs.nixosModules;
-in
 {
-  imports =
-    [
-      inputs.catppuccin.nixosModules.catppuccin
-      ../common-config.nix
-      modules.fish
-      modules.neovim
-      modules.qtile
-    ];
+  pkgs,
+  inputs,
+  outputs,
+  ...
+}: let
+  modules = outputs.nixosModules;
+in {
+  imports = [
+    inputs.catppuccin.nixosModules.catppuccin
+    ../common-config.nix
+    modules.fish
+    modules.neovim
+    modules.qtile
+  ];
 
-  system.nixos.tags = [ "qtile" ];
+  system.nixos.tags = ["qtile"];
 
   catppuccin.enable = true;
 
@@ -25,7 +27,7 @@ in
 
   home-manager.users.adrien = import ./home.nix;
 
-  users.users.adrien= {
+  users.users.adrien = {
     packages = with pkgs; [
       btop
       fastfetch

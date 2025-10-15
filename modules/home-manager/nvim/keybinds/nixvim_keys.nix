@@ -1,13 +1,13 @@
 {
-  keymaps = [ 
-		{
-			key = "<C-t>";
-			mode = "n";
-			action = "<Cmd>ToggleTerm size=15 name=ToggleTerm<CR>";
-			options = {
+  keymaps = [
+    {
+      key = "<C-t>";
+      mode = "n";
+      action = "<Cmd>ToggleTerm size=15 name=ToggleTerm<CR>";
+      options = {
         desc = "Open ToggleTerm";
       };
-		}
+    }
     {
       key = "<Esc>";
       mode = "t";
@@ -17,7 +17,7 @@
       key = "<C-b>";
       mode = "n";
       action = "<Cmd>Neotree toggle action=show<CR>";
-			options = {
+      options = {
         desc = "Open Neotree";
       };
     }
@@ -29,7 +29,7 @@
         desc = "Write and close all buffers, keeps current one open for editing";
       };
     }
-		{
+    {
       key = "<leader>g";
       mode = "n";
       action = "<Cmd>LazyGit<CR>";
@@ -37,7 +37,7 @@
         desc = "Open LazyGit";
       };
     }
-		{
+    {
       key = "<leader>cc";
       mode = "n";
       action = "<Cmd>CopilotChatToggle<CR>";
@@ -45,7 +45,7 @@
         desc = "Toggle Copilot Chat";
       };
     }
-		{
+    {
       key = "<leader>ce";
       mode = "n";
       action = "<Cmd>Copilot enable<CR>";
@@ -53,7 +53,7 @@
         desc = "Enable Copilot Completions";
       };
     }
-		{
+    {
       key = "<leader>cd";
       mode = "n";
       action = "<Cmd>Copilot disable<CR>";
@@ -61,7 +61,7 @@
         desc = "Disable Copilot Completions";
       };
     }
-		{
+    {
       key = "<leader>cs";
       mode = "n";
       action = "<Cmd>Copilot setup<CR>";
@@ -69,7 +69,7 @@
         desc = "Setup Copilot Completions";
       };
     }
-		{
+    {
       key = "<leader>mi";
       mode = "n";
       action = "<Cmd>MoltenInit<CR>";
@@ -77,7 +77,7 @@
         desc = "Initialize Molten";
       };
     }
-		{
+    {
       key = "<leader>ml";
       mode = "n";
       action = "<Cmd>MoltenEvaluateLine<CR>";
@@ -85,7 +85,7 @@
         desc = "Evaluate Line";
       };
     }
-		{
+    {
       key = "<leader>mo";
       mode = "n";
       action = "<Cmd>MoltenEvaluateOperator<CR>";
@@ -93,7 +93,7 @@
         desc = "Evaluate Operator";
       };
     }
-		{
+    {
       key = "<leader>mr";
       mode = "n";
       action = "<Cmd>MoltenReevaluateCell<CR>";
@@ -101,7 +101,7 @@
         desc = "Reevaluate Cell";
       };
     }
-		{
+    {
       key = "<leader>mv";
       mode = "v";
       action = "<Cmd>MoltenEvaluateVisual<CR>";
@@ -109,7 +109,7 @@
         desc = "Evaluate Visual Selection";
       };
     }
-		{
+    {
       key = "<leader>mh";
       mode = "n";
       action = "<Cmd>MoltenHideOutput<CR>";
@@ -117,7 +117,7 @@
         desc = "Hide Output";
       };
     }
-		{
+    {
       key = "<leader>me";
       mode = "n";
       action = "<Cmd>noautocmd MoltenEnterOutput<CR>";
@@ -125,6 +125,5 @@
         desc = "Enter Output";
       };
     }
-
   ];
 }

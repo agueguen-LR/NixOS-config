@@ -1,6 +1,4 @@
-{ inputs, ... }:
-
-{
+{inputs, ...}: {
   imports = [
     inputs.nixcord.homeModules.nixcord
   ];
@@ -17,6 +15,5 @@
         fakeNitro.enable = true;
       };
     };
-
   };
 }

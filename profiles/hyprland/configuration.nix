@@ -1,24 +1,26 @@
-{ pkgs, inputs, outputs, ... }:
-let
-  modules = outputs.nixosModules;
-in
 {
-  imports =
-    [ 
-      inputs.catppuccin.nixosModules.catppuccin
-      ../common-config.nix
-      modules.neovim
-      modules.hyprland
-      modules.fish
-      modules.tuigreet
-    ];
+  pkgs,
+  inputs,
+  outputs,
+  ...
+}: let
+  modules = outputs.nixosModules;
+in {
+  imports = [
+    inputs.catppuccin.nixosModules.catppuccin
+    ../common-config.nix
+    modules.neovim
+    modules.hyprland
+    modules.fish
+    modules.tuigreet
+  ];
 
-  system.nixos.tags = [ "hyprland" ];
+  system.nixos.tags = ["hyprland"];
 
-	boot.kernelModules = [ "cp210x" ];
+  boot.kernelModules = ["cp210x"];
 
   catppuccin.enable = true;
-      
+
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
