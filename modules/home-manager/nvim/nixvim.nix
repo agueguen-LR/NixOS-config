@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 let
   keybinds = import ./keybinds/nixvim_keys.nix;
 in
@@ -8,8 +8,13 @@ in
 	];
   programs.nixvim = {
     enable = true;
+		nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+			"copilot.vim"	
+		];
+
 		opts = {
 			relativenumber = true;
+			splitright = true;
 		};
 		globals = {
 			mapleader = " ";
@@ -25,10 +30,25 @@ in
       enable = true;
       settings.flavour = "mocha";
     };
+
+    clipboard.providers.wl-copy.enable = true;
     
     plugins = {
       bufferline.enable = true;
-			dap.enable = true; # debugging
+			copilot-chat.enable = true;
+			copilot-vim.enable = true;
+			lazygit.enable = true;
+      lualine.enable = true;
+			lspconfig.enable = true;
+			markdown-preview.enable = true;
+			otter.enable = true;
+			quarto.enable = true;
+      toggleterm.enable = true;
+      neo-tree.enable = true;
+			nvim-autopairs.enable = true;
+      which-key.enable = true;
+      web-devicons.enable = true;
+
 			image = {
 				enable = true;
 				settings = {
@@ -38,10 +58,7 @@ in
 					max_width_window_percentage = {__raw = "math.huge";};
 				};
 			};
-			lazygit.enable = true;
-      lualine.enable = true;
-			lspconfig.enable = true;
-			markdown-preview.enable = true;
+
 			molten = { #jupyter
 				enable = true;
 				settings = {
@@ -49,17 +66,12 @@ in
 					image_provider = "image.nvim";
 				};
 			};
-			quarto.enable = true;
-			otter.enable = true;
-      toggleterm.enable = true;
+
 			treesitter = {
 				enable = true;
 				settings.highlight.enable = true;
 			};
-      neo-tree.enable = true;
-			nvim-autopairs.enable = true;
-      which-key.enable = true;
-      web-devicons.enable = true;
+
       mini = {
         enable = true;
         modules = {
@@ -70,9 +82,8 @@ in
           completion = {};
         };
       };
-    };
+    }; # end of plugins
 
-    clipboard.providers.wl-copy.enable = true;
 
     lsp.servers = {
       nixd.enable = true;
@@ -84,6 +95,7 @@ in
 						"cpp"
 						"h"
 						"inc"
+						"ino"
 					];
 				};
 			};

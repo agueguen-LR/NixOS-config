@@ -9,13 +9,13 @@ in
     inputs.catppuccin.homeModules.catppuccin
     modules.fish
     modules.kitty
-    modules.nixvim
     modules.librewolf
+    modules.nixcord
+    modules.nixvim
+    modules.hyprcursor
     modules.hyprland
     modules.hyprpaper
-    modules.hyprcursor
     modules.waybar
-    modules.nixcord
 		modules.yazi
   ];
 

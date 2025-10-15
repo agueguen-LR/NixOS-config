@@ -11,10 +11,11 @@ in
       modules.hyprland
       modules.fish
       modules.tuigreet
-      modules.steam
     ];
 
   system.nixos.tags = [ "hyprland" ];
+
+	boot.kernelModules = [ "cp210x" ];
 
   catppuccin.enable = true;
       
@@ -27,7 +28,6 @@ in
     packages = with pkgs; [
       btop
       fastfetch
-      alacritty
       pavucontrol #volume control
       tree
       acpi #battery info

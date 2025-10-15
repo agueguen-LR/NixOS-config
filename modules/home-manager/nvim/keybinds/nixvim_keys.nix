@@ -37,5 +37,94 @@
         desc = "Open LazyGit";
       };
     }
+		{
+      key = "<leader>cc";
+      mode = "n";
+      action = "<Cmd>CopilotChatToggle<CR>";
+      options = {
+        desc = "Toggle Copilot Chat";
+      };
+    }
+		{
+      key = "<leader>ce";
+      mode = "n";
+      action = "<Cmd>Copilot enable<CR>";
+      options = {
+        desc = "Enable Copilot Completions";
+      };
+    }
+		{
+      key = "<leader>cd";
+      mode = "n";
+      action = "<Cmd>Copilot disable<CR>";
+      options = {
+        desc = "Disable Copilot Completions";
+      };
+    }
+		{
+      key = "<leader>cs";
+      mode = "n";
+      action = "<Cmd>Copilot setup<CR>";
+      options = {
+        desc = "Setup Copilot Completions";
+      };
+    }
+		{
+      key = "<leader>mi";
+      mode = "n";
+      action = "<Cmd>MoltenInit<CR>";
+      options = {
+        desc = "Initialize Molten";
+      };
+    }
+		{
+      key = "<leader>ml";
+      mode = "n";
+      action = "<Cmd>MoltenEvaluateLine<CR>";
+      options = {
+        desc = "Evaluate Line";
+      };
+    }
+		{
+      key = "<leader>mo";
+      mode = "n";
+      action = "<Cmd>MoltenEvaluateOperator<CR>";
+      options = {
+        desc = "Evaluate Operator";
+      };
+    }
+		{
+      key = "<leader>mr";
+      mode = "n";
+      action = "<Cmd>MoltenReevaluateCell<CR>";
+      options = {
+        desc = "Reevaluate Cell";
+      };
+    }
+		{
+      key = "<leader>mv";
+      mode = "v";
+      action = "<Cmd>MoltenEvaluateVisual<CR>";
+      options = {
+        desc = "Evaluate Visual Selection";
+      };
+    }
+		{
+      key = "<leader>mh";
+      mode = "n";
+      action = "<Cmd>MoltenHideOutput<CR>";
+      options = {
+        desc = "Hide Output";
+      };
+    }
+		{
+      key = "<leader>me";
+      mode = "n";
+      action = "<Cmd>noautocmd MoltenEnterOutput<CR>";
+      options = {
+        desc = "Enter Output";
+      };
+    }
+
   ];
 }
