@@ -36,6 +36,7 @@ in {
       bufferline.enable = true;
       copilot-chat.enable = true;
       copilot-vim.enable = true;
+			indent-blankline.enable = true;
       lazygit.enable = true;
       lualine.enable = true;
       lspconfig.enable = true;
