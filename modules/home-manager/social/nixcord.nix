@@ -1,8 +1,6 @@
 { inputs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-
   imports = [
     inputs.nixcord.homeModules.nixcord
   ];

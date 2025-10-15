@@ -1,6 +1,6 @@
 # This contains everything that's shared across profiles
 
-{ inputs, outputs, config, pkgs, ... }:
+{ inputs, outputs, config, pkgs, lib, ... }:
 {
   imports =
     [ 
@@ -88,6 +88,13 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+	# Any unfree packages
+	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+		"discord"	
+		"steam"
+	];
+	# nixpkgs.config.allowUnfree = true; # Allow all unfree packages :(
 
   environment.systemPackages = [
     pkgs.vim
