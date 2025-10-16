@@ -10,12 +10,18 @@ in {
     inputs.catppuccin.nixosModules.catppuccin
     inputs.mango.nixosModules.mango
     ../common-config.nix
+    modules.fish
     modules.neovim
     modules.mango
-    modules.fish
+    modules.tuigreet
   ];
 
   system.nixos.tags = ["mangoWC"];
+
+  services.greetd.tuigreet = {
+    enable = true;
+    command = "mango";
+  };
 
   boot.kernelModules = ["cp210x"];
 

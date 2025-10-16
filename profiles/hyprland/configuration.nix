@@ -17,6 +17,11 @@ in {
 
   system.nixos.tags = ["hyprland"];
 
+  services.greetd.tuigreet = {
+    enable = true;
+    command = "hyprland";
+  };
+
   boot.kernelModules = ["cp210x"];
 
   catppuccin.enable = true;
