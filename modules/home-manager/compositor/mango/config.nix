@@ -3,29 +3,8 @@
 		# More option see https://github.com/DreamMaoMao/mango/wiki/
 
 		# Window effect
-		blur=0
-		blur_layer=0
-		blur_optimized=1
-		blur_params_num_passes = 2
-		blur_params_radius = 5
-		blur_params_noise = 0.02
-		blur_params_brightness = 0.9
-		blur_params_contrast = 0.9
-		blur_params_saturation = 1.2
-
-		shadows = 0
-		layer_shadows = 0
-		shadow_only_floating = 1
-		shadows_size = 10
-		shadows_blur = 15
-		shadows_position_x = 0
-		shadows_position_y = 0
-		shadowscolor= 0x000000ff
-
-		border_radius=6
-		no_radius_when_single=0
-		focused_opacity=1.0
-		unfocused_opacity=1.0
+		unfocused_opacity=0.8
+		border_radius=2
 
 		# Animation Configuration(support type:zoom,slide)
 		# tag_animation_direction: 0-horizontal,1-vertical
@@ -52,11 +31,11 @@
 		# Scroller Layout Setting
 		scroller_structs=20
 		scroller_default_proportion=0.8
-		scroller_focus_center=0
-		scroller_prefer_center=0
+		scroller_focus_center=1
+		scroller_prefer_center=1
 		edge_scroller_pointer_focus=1
 		scroller_default_proportion_single=1.0
-		scroller_proportion_preset=0.5,0.8,1.0
+		scroller_proportion_preset=0.8,1.0
 
 		# Master-Stack Layout Setting
 		new_is_master=1
@@ -72,11 +51,8 @@
 		overviewgappo=30
 
 		# Misc
-		no_border_when_single=0
-		axis_bind_apply_timeout=100
 		focus_on_activate=1
-		inhibit_regardless_of_visibility=0
-		sloppyfocus=1
+		sloppyfocus=1 # focus follows mouse
 		warpcursor=1
 		focus_cross_monitor=0
 		focus_cross_tag=0
@@ -86,10 +62,9 @@
 		drag_tile_to_tile=1
 
 		# keyboard
-		repeat_rate=25
-		repeat_delay=600
 		numlockon=1
-		xkb_rules_layout=us
+		xkb_rules_layout=fr
+		xkb_rules_options=eurosign:e,caps:escape
 
 		# Trackpad
 		# need relogin to make it apply
@@ -110,8 +85,8 @@
 		# Appearance
 		gappih=5
 		gappiv=5
-		gappoh=10
-		gappov=10
+		gappoh=5
+		gappov=5
 		scratchpad_width_ratio=0.8
 		scratchpad_height_ratio=0.9
 		borderpx=4
@@ -126,6 +101,7 @@
 
 		# layout support:
 		# tile,scroller,grid,deck,monocle,center_tile,vertical_tile,vertical_scroller
+		# basically sets default layout per workspace (=tag)
 		tagrule=id:1,layout_name:tile
 		tagrule=id:2,layout_name:tile
 		tagrule=id:3,layout_name:tile
@@ -136,6 +112,8 @@
 		tagrule=id:8,layout_name:tile
 		tagrule=id:9,layout_name:tile
 
+		circle_layout=tile,scroller
+
 		# Key Bindings
 		# key name refer to `xev` or `wev` command output,
 		# mod keys name: super,ctrl,alt,shift,none
@@ -145,17 +123,18 @@
 
 		# menu and terminal
 		bind=SUPER,t,spawn,kitty
+		bind=SUPER,d,spawn,vesktop
+		bind=SUPER,b,spawn,librewolf
 
 		# exit
-		bind=SUPER,q,quit
-		bind=SUPER + ALT,q,killclient,
+		bind=SUPER,q,killclient
 
 		# switch window focus
 		bind=SUPER,Tab,focusstack,next
-		bind=ALT,Left,focusdir,left
-		bind=ALT,Right,focusdir,right
-		bind=ALT,Up,focusdir,up
-		bind=ALT,Down,focusdir,down
+		bind=SUPER,Left,focusdir,left
+		bind=SUPER,Right,focusdir,right
+		bind=SUPER,Up,focusdir,up
+		bind=SUPER,Down,focusdir,down
 
 		# swap window
 		bind=SUPER+SHIFT,Up,exchange_client,up
@@ -169,72 +148,57 @@
 		bind=ALT,backslash,togglefloating,
 		bind=ALT,a,togglemaxmizescreen,
 		bind=ALT,f,togglefullscreen,
-		bind=ALT+SHIFT,f,togglefakefullscreen,
-		bind=SUPER,i,minimized,
-		bind=SUPER,o,toggleoverlay,
-		bind=SUPER+SHIFT,I,restore_minimized
-		bind=ALT,z,toggle_scratchpad
 
 		# scroller layout
-		bind=ALT,e,set_proportion,1.0
-		bind=ALT,x,switch_proportion_preset,
+		bind=SUPER,x,switch_proportion_preset,
 
 		# switch layout
 		bind=SUPER,n,switch_layout
 
 		# tag switch
-		bind=SUPER,Left,viewtoleft,0
-		bind=CTRL,Left,viewtoleft_have_client,0
-		bind=SUPER,Right,viewtoright,0
-		bind=CTRL,Right,viewtoright_have_client,0
-		bind=CTRL+SUPER,Left,tagtoleft,0
-		bind=CTRL+SUPER,Right,tagtoright,0
+		bind=SUPER+CTRL,Left,viewtoleft_have_client,0
+		bind=SUPER+CTRL,Right,viewtoright_have_client,0
 
-		bind=Ctrl,1,view,1,0
-		bind=Ctrl,2,view,2,0
-		bind=Ctrl,3,view,3,0
-		bind=Ctrl,4,view,4,0
-		bind=Ctrl,5,view,5,0
-		bind=Ctrl,6,view,6,0
-		bind=Ctrl,7,view,7,0
-		bind=Ctrl,8,view,8,0
-		bind=Ctrl,9,view,9,0
+		bind=SUPER,code:10,view,1,0
+		bind=SUPER,code:11,view,2,0
+		bind=SUPER,code:12,view,3,0
+		bind=SUPER,code:13,view,4,0
+		bind=SUPER,code:14,view,5,0
+		bind=SUPER,code:15,view,6,0
+		bind=SUPER,code:16,view,7,0
+		bind=SUPER,code:17,view,8,0
+		bind=SUPER,code:18,view,9,0
 
 		# tag: move client to the tag and focus it
 		# tagsilent: move client to the tag and not focus it
 		# bind=Alt,1,tagsilent,1
-		bind=Alt,1,tag,1,0
-		bind=Alt,2,tag,2,0
-		bind=Alt,3,tag,3,0
-		bind=Alt,4,tag,4,0
-		bind=Alt,5,tag,5,0
-		bind=Alt,6,tag,6,0
-		bind=Alt,7,tag,7,0
-		bind=Alt,8,tag,8,0
-		bind=Alt,9,tag,9,0
+		bind=SUPER+SHIFT,code:10,tag,1,0
+		bind=SUPER+SHIFT,code:11,tag,2,0
+		bind=SUPER+SHIFT,code:12,tag,3,0
+		bind=SUPER+SHIFT,code:13,tag,4,0
+		bind=SUPER+SHIFT,code:14,tag,5,0
+		bind=SUPER+SHIFT,code:15,tag,6,0
+		bind=SUPER+SHIFT,code:16,tag,7,0
+		bind=SUPER+SHIFT,code:17,tag,8,0
+		bind=SUPER+SHIFT,code:18,tag,9,0
 
 		# monitor switch
-		bind=alt+shift,Left,focusmon,left
-		bind=alt+shift,Right,focusmon,right
-		bind=SUPER+Alt,Left,tagmon,left
-		bind=SUPER+Alt,Right,tagmon,right
-
-		# gaps
-		bind=ALT+SHIFT,X,incgaps,1
-		bind=ALT+SHIFT,Z,incgaps,-1
-		bind=ALT+SHIFT,R,togglegaps
+		bind=SUPER+ALT,Left,focusmon,left
+		bind=SUPER+ALT,Right,focusmon,right
+		bind=SUPER+Alt+CTRL,Left,tagmon,left
+		bind=SUPER+Alt+CTRL,Right,tagmon,right
 
 		# movewin
-		bind=CTRL+SHIFT,Up,movewin,+0,-50
-		bind=CTRL+SHIFT,Down,movewin,+0,+50
-		bind=CTRL+SHIFT,Left,movewin,-50,+0
-		bind=CTRL+SHIFT,Right,movewin,+50,+0
+		# bind=CTRL+SHIFT,Up,movewin,+0,-50
+		# bind=CTRL+SHIFT,Down,movewin,+0,+50
+		# bind=CTRL+SHIFT,Left,movewin,-50,+0
+		# bind=CTRL+SHIFT,Right,movewin,+50,+0
 
 		# resizewin
-		bind=CTRL+ALT,Up,resizewin,+0,-50
-		bind=CTRL+ALT,Down,resizewin,+0,+50
-		bind=CTRL+ALT,Left,resizewin,-50,+0
-		bind=CTRL+ALT,Right,resizewin,+50,+0
+		# bind=CTRL+ALT,Up,resizewin,+0,-50
+		# bind=CTRL+ALT,Down,resizewin,+0,+50
+		# bind=CTRL+ALT,Left,resizewin,-50,+0
+		# bind=CTRL+ALT,Right,resizewin,+50,+0
 
 		# Mouse Button Bindings
 		# NONE mode key only work in ov mode
@@ -243,11 +207,6 @@
 		mousebind=SUPER,btn_right,moveresize,curresize
 		mousebind=NONE,btn_left,toggleoverview,-1
 		mousebind=NONE,btn_right,killclient,0
-
-		# Axis Bindings
-		axisbind=SUPER,UP,viewtoleft_have_client
-		axisbind=SUPER,DOWN,viewtoright_have_client
-
 
 		# layer rule
 		layerrule=animation_type_open:zoom,layer_name:rofi
