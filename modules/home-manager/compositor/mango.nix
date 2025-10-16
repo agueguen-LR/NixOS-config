@@ -5,8 +5,7 @@ in {
     enable = true;
     settings = config.config;
     autostart_sh = ''
-      # see autostart.sh
-      # Note: here no need to add shebang
+      swww img "${builtins.toString ../wallpaper/catppuccin-nixos.png}"
     '';
   };
 }

@@ -12,6 +12,7 @@
   nixvim = import ./nvim/nixvim.nix;
   nvf = import ./nvim/nvf.nix;
   mango = import ./compositor/mango.nix;
+  swww = import ./wallpaper/swww.nix;
   tmux = import ./terminal/tmux.nix;
   waybar = import ./statusBar/waybar.nix;
   yazi = import ./fileManager/yazi.nix;

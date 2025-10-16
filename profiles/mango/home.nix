@@ -18,6 +18,7 @@ in {
     modules.nixcord
     modules.nixvim
     modules.mango
+    modules.swww
     modules.waybar
     modules.yazi
   ];
