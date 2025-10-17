@@ -1,9 +1,8 @@
-{...}: let
-  config = import ./mango/config.nix;
-in {
+{ lib, ... }:
+{
   wayland.windowManager.mango = {
     enable = true;
-    settings = config.config;
+    settings = lib.readFile ./mango/config.conf;
     autostart_sh = ''
       swww img "${builtins.toString ../wallpaper/catppuccin-nixos.png}"
     '';
