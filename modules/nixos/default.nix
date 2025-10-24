@@ -10,5 +10,6 @@
   qtile = import ./tilingWM/qtile.nix;
   steam = import ./gaming/steam.nix;
   tuigreet = import ./greeter/tuigreet.nix;
+	virt-manager = import ./virtualisation/virt-manager.nix;
   zsh = import ./shell/zsh.nix;
 }
