@@ -19,6 +19,7 @@ in {
     modules.nixvim
     modules.mango
     modules.swww
+		modules.rofi
     modules.waybar
     modules.yazi
   ];

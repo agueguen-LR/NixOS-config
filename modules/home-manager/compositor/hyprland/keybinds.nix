@@ -9,7 +9,7 @@
     "$mod, B, exec, librewolf" # Open browser
     "$mod, T, exec, kitty" # Open terminal
     "$mod, D, exec, vesktop" # Open discord
-    "$mod, Y, exec, kitty yazi" # Open yazi file explorer
+    "$mod, R, exec, rofi -show drun" # Open rofi
 
     "$mod, Q, killactive" # Kill active window
     "$mod, H, movefocus, l" # Move focus left

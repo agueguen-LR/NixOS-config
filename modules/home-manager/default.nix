@@ -14,6 +14,7 @@
   mango = import ./compositor/mango.nix;
   swww = import ./wallpaper/swww.nix;
   tmux = import ./terminal/tmux.nix;
+	rofi = import ./appLauncher/rofi.nix;
   waybar = import ./statusBar/waybar.nix;
   yazi = import ./fileManager/yazi.nix;
   zsh = import ./terminal/zsh.nix;
