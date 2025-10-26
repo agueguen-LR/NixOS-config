@@ -14,7 +14,7 @@ in {
     modules.neovim
     modules.mango
     modules.tuigreet
-		modules.virt-manager
+    modules.virt-manager
   ];
 
   system.nixos.tags = ["mangoWC"];
@@ -24,10 +24,10 @@ in {
     command = "mango";
   };
 
-	virtualisation = {
-		enable = true;
-		users = [ "adrien" ];
-	};
+  virtualisation = {
+    enable = true;
+    users = ["adrien"];
+  };
 
   boot.kernelModules = ["cp210x"];
 

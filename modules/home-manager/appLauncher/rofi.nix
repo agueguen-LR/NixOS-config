@@ -1,7 +1,6 @@
-{ ... }:
-{
-	programs.rofi = {
-		enable = true;
-		modes = [ "drun" ];
-	};
+{...}: {
+  programs.rofi = {
+    enable = true;
+    modes = ["drun"];
+  };
 }

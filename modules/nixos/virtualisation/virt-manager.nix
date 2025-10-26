@@ -1,23 +1,26 @@
-{ config, lib, ... }: let
-	cfg = config.virtualisation;
-in
 {
-	options.virtualisation = {
-		enable = lib.mkEnableOption "Enable Virt-Manager GUI.";
-		users = lib.mkOption {
-			type = lib.types.listOf lib.types.str;
-			default = [];
-			description = "List of users to add to the libvirtd group for Virt-Manager access.";
-		};
-	};
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.virtualisation;
+in {
+  options.virtualisation = {
+    enable = lib.mkEnableOption "Enable Virt-Manager GUI.";
+    users = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "List of users to add to the libvirtd group for Virt-Manager access.";
+    };
+  };
 
-	config = lib.mkIf cfg.enable {
-		programs.virt-manager.enable = true;
+  config = lib.mkIf cfg.enable {
+    programs.virt-manager.enable = true;
 
-		users.groups.libvirtd.members = cfg.users;
+    users.groups.libvirtd.members = cfg.users;
 
-		virtualisation.libvirtd.enable = true;
+    virtualisation.libvirtd.enable = true;
 
-		virtualisation.spiceUSBRedirection.enable = true;
-	};
+    virtualisation.spiceUSBRedirection.enable = true;
+  };
 }
