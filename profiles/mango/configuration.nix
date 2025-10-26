@@ -40,16 +40,17 @@ in {
 
   users.users.adrien = {
     packages = with pkgs; [
+      acpi #battery info
       btop
       fastfetch
-      pavucontrol #volume control
-      tree
-      acpi #battery info
-      sysstat #system info commands: iostat mpstat pidstat ...
-      librewolf
       grimblast #screenshots
-      wl-clipboard
+      librewolf
+      pavucontrol #volume control
+      ripgrep
+      sysstat #system info commands: iostat mpstat pidstat ...
+      tree
       unzip
+      wl-clipboard
     ];
     shell = pkgs.fish;
   };
