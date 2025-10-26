@@ -6,6 +6,7 @@
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
     ./hm-persistence.nix
+		../modules/hostSpec.nix
   ];
 
   home.username = "adrien";

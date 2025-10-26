@@ -8,10 +8,11 @@
   ...
 }: {
   imports = [
+    inputs.agenix.nixosModules.default # secret management
     inputs.disko.nixosModules.disko
     inputs.impermanence.nixosModules.impermanence
     ./persistence.nix
-    inputs.agenix.nixosModules.default # secret management
+		../modules/hostSpec.nix
     outputs.nixosModules.home-manager
   ];
 
