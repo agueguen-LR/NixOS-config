@@ -1,5 +1,6 @@
+{ config, ... }:
 {
-  home.persistence."/persist/home/adrien" = {
+  home.persistence."/persist/home/${config.hostSpec.username}" = {
     directories = [
       {
         directory = ".ssh";

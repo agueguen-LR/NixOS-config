@@ -1,4 +1,4 @@
-{outputs, ...}: let
+{...}: let
   hostSpecs = {
     username = "adrien";
     monitor = {
@@ -22,6 +22,6 @@ in {
     hostId = "466b81e1"; # Needed for ZFS
   };
 
-  home-manager.users.adrien.hostSpec = hostSpecs;
+  home-manager.users.${hostSpecs.username}.hostSpec = hostSpecs;
   hostSpec = hostSpecs;
 }

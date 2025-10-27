@@ -12,7 +12,7 @@
     inputs.disko.nixosModules.disko
     inputs.impermanence.nixosModules.impermanence
     ./persistence.nix
-		../modules/hostSpec.nix
+    ../modules/hostSpec.nix
     outputs.nixosModules.home-manager
   ];
 
@@ -75,13 +75,13 @@
   services.blueman.enable = true;
 
   age = {
-    identityPaths = ["/persist/home/adrien/.secrets/agenix-rsa-4096"];
+    identityPaths = ["/persist/home/${config.hostSpec.username}/.secrets/agenix-rsa-4096"];
     secrets.user-password.file = ../secrets/user-password.age;
   };
 
   users.mutableUsers = false;
 
-  users.users.adrien = {
+  users.users.${config.hostSpec.username} = {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     #initialHashedPassword = # Set this and comment hashedPasswordFile during install
