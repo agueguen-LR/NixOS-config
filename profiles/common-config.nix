@@ -8,12 +8,11 @@
   ...
 }: {
   imports = [
-    inputs.agenix.nixosModules.default # secret management
-    inputs.disko.nixosModules.disko
     inputs.impermanence.nixosModules.impermanence
     ./persistence.nix
     ../modules/hostSpec.nix
     outputs.nixosModules.home-manager
+    inputs.disko.nixosModules.disko
   ];
 
   system.autoUpgrade = {
@@ -47,19 +46,11 @@
 
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Paris";
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "fr";
-  };
+  console.font = "Lat2-Terminus16";
 
   # Enable sound.
   # services.pulseaudio.enable = true;
@@ -74,18 +65,11 @@
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
-  age = {
-    identityPaths = ["/persist/home/${config.hostSpec.username}/.secrets/agenix-rsa-4096"];
-    secrets.user-password.file = ../secrets/user-password.age;
-  };
-
   users.mutableUsers = false;
 
   users.users.${config.hostSpec.username} = {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    #initialHashedPassword = # Set this and comment hashedPasswordFile during install
-    hashedPasswordFile = config.age.secrets.user-password.path;
   };
 
   programs.fuse.userAllowOther = true; # see https://github.com/nix-community/impermanence#home-manager
@@ -93,14 +77,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Any unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "discord"
-      "steam"
-    ];
-  # nixpkgs.config.allowUnfree = true; # Allow all unfree packages :(
 
   environment.systemPackages = [
     pkgs.vim

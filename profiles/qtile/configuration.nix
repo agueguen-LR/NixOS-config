@@ -2,7 +2,7 @@
   pkgs,
   inputs,
   outputs,
-	config,
+  config,
   ...
 }: let
   modules = outputs.nixosModules;

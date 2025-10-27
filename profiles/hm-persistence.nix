@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   home.persistence."/persist/home/${config.hostSpec.username}" = {
     directories = [
       {

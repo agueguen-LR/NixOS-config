@@ -2,7 +2,7 @@
   pkgs,
   inputs,
   outputs,
-	config,
+  config,
   ...
 }: let
   modules = outputs.nixosModules;
@@ -27,7 +27,7 @@ in {
 
   virtualisation = {
     enable = true;
-    users = [ config.hostSpec.username ];
+    users = [config.hostSpec.username];
   };
 
   boot.kernelModules = ["cp210x"];
