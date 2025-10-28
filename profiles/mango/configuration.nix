@@ -44,10 +44,11 @@ in {
       acpi #battery info
       btop
       fastfetch
-      grimblast #screenshots
+      grim # screenshots
       librewolf
       pavucontrol #volume control
-      ripgrep
+      ripgrep #nvim telescope live_grep
+      slurp # screenshots
       sysstat #system info commands: iostat mpstat pidstat ...
       tree
       unzip
