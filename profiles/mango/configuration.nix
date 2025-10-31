@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   outputs,
+  config,
   ...
 }: let
   modules = outputs.nixosModules;
@@ -14,7 +15,7 @@ in {
     modules.neovim
     modules.mango
     modules.tuigreet
-		modules.virt-manager
+    modules.virt-manager
   ];
 
   system.nixos.tags = ["mangoWC"];
@@ -24,10 +25,10 @@ in {
     command = "mango";
   };
 
-	virtualisation = {
-		enable = true;
-		users = [ "adrien" ];
-	};
+  virtualisation = {
+    enable = true;
+    users = [config.hostSpec.username];
+  };
 
   boot.kernelModules = ["cp210x"];
 
@@ -36,20 +37,22 @@ in {
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  home-manager.users.adrien = import ./home.nix;
+  home-manager.users.${config.hostSpec.username} = import ./home.nix;
 
-  users.users.adrien = {
+  users.users.${config.hostSpec.username} = {
     packages = with pkgs; [
+      acpi #battery info
       btop
       fastfetch
-      pavucontrol #volume control
-      tree
-      acpi #battery info
-      sysstat #system info commands: iostat mpstat pidstat ...
+      grim # screenshots
       librewolf
-      grimblast #screenshots
-      wl-clipboard
+      pavucontrol #volume control
+      ripgrep #nvim telescope live_grep
+      slurp # screenshots
+      sysstat #system info commands: iostat mpstat pidstat ...
+      tree
       unzip
+      wl-clipboard
     ];
     shell = pkgs.fish;
   };

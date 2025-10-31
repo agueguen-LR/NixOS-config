@@ -38,6 +38,22 @@
       };
     }
     {
+      key = "<leader>ff";
+      mode = "n";
+      action = "<Cmd>Telescope find_files<CR>";
+      options = {
+        desc = "Telescope find file";
+      };
+    }
+    {
+      key = "<leader>fg";
+      mode = "n";
+      action = "<Cmd>Telescope live_grep<CR>";
+      options = {
+        desc = "Telescope grep";
+      };
+    }
+    {
       key = "<leader>cc";
       mode = "n";
       action = "<Cmd>CopilotChatToggle<CR>";

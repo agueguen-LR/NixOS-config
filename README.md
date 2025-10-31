@@ -9,7 +9,7 @@ sudo nixos-rebuild switch --flake .#default
 ```
 
 
-The qtile flake comes with the X11 window manager [Qtile](https://qtile.org/), a basic [NVF](https://github.com/NotAShelf/nvf) neovim configuration, the [Librewolf](https://librewolf.net/) browser and a couple frills. A good simple config to use to start developping new modules for a larger configuration.
+The qtile flake comes with the X11 window manager [Qtile](https://qtile.org/).
 ```bash
 sudo nixos-rebuild switch --flake .#qtile
 ```
@@ -18,6 +18,12 @@ sudo nixos-rebuild switch --flake .#qtile
 The hyprland flake comes with the wayland compositor [Hyprland](https://hypr.land/).
 ```bash
 sudo nixos-rebuild switch --flake .#hyprland
+```
+
+
+The mango flake comes with the wayland compositor [MangoWC](https://github.com/DreamMaoMao/mangowc).
+```bash
+sudo nixos-rebuild switch --flake .#mango
 ```
 
 
@@ -36,9 +42,7 @@ The filesystems are handled by [disko](https://github.com/nix-community/disko).
 
 ## Installation 
 
-!!! Not up to date with new multi-host setup !!!
-
-Boot into the [NixOS minimal installer](https://nixos.org/download/) and connect to the internet.
+Boot into the [NixOS minimal installer](https://nixos.org/download/) and [connect to the internet with wpa](https://wiki.archlinux.org/title/Wpa_supplicant#Connecting_with_wpa_cli).
 
 
 Clone this repository
@@ -47,8 +51,10 @@ git clone https://github.com/agueguen-LR/NixOS-config
 cd NixOS-config
 ```
 
-Choose the device you want to install to with ```lsblk``` and replace the device name in disko/impermanence.nix with it 
+Copy a template from one of the disko configs in disko/ and modify it to your needs.
+Choose the device you want to install to with ```lsblk``` and replace the device name with it 
 ```bash
+cp disko/pc-disko.nix disko/<your-host>-disko.nix
 nano disko/impermanence.nix
 ```
 
@@ -56,13 +62,39 @@ Run disko
 ```bash
 sudo nix --experimental-features 'nix-command flakes' \
     run github:nix-community/disko/latest -- \
-    --mode destroy,format,mount ./disko/impermanence.nix
+    --mode destroy,format,mount ./disko/<your-host>-disko.nix
 ```
 
 Create your hardware-configuration.nix
 ```bash
 sudo nixos-generate-config --no-filesystems --root /mnt
-cp /mnt/etc/nixos/hardware-configuration.nix .
+cp /mnt/etc/nixos/hardware-configuration.nix ./hardware/<your-host>-hardware.nix
+```
+
+Copy a template from hosts/ and modify it to your needs, adding your hashed password to initialHashedPassword
+!! Also set your hostId to the first 8 characters of your machine-id found in /etc/machine-id if you're using ZFS !!
+```bash
+cp hosts/pc.nix hosts/<your-host>.nix
+
+#appends to end of <your-host.nix>, then copy-paste to users.users.${hostSpecs.username}.initialHashedPassword
+mkpasswd <your-password> >> hosts/<your-host>.nix
+#appends to end of <your-host.nix>, then copy-paste to networking.hostId
+head -c 8 /etc/machine-id >> hosts/<your-host>.nix
+
+nano hosts/<your-host>.nix
+```
+
+Edit flake.nix to set your desired nixosConfigurations
+> !!! You should remove the others to avoid building them, as that could break things by loading wrong hardware configs, or break ZFS by loading the wrong hostId. 
+```bash
+nano flake.nix
+```
+```nix
+nixosConfigurations = {
+  <your-host>-kde = mkHost "<your-host>.nix" "kde/configuration.nix";
+  <your-host>-<other-profile> = mkHost "<your-host>.nix" "<other-profile>/configuration.nix";
+  # ...
+};
 ```
 
 Move this repo to /mnt/etc/nixos
@@ -71,48 +103,27 @@ sudo mv ./* /mnt/etc/nixos
 cd /mnt/etc/nixos
 ```
 
-Create your password and TEMPORARILY put it into your chosen config by adding hashedPassword = <your-hashed-password> to users.users.<username>
-> hashedPasswordFile overwrites hashedPassword so comment it out temporarily
-```bash
-mkpasswd <your-password> >> configs/<your-chosen-config>/configuration.nix #appends to end of file for copy-pasting
-sudo nano configs/<your-chosen-config>/configuration.nix
-```
-```nix
-users.users.<username> = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [];
-    hashedPassword = <your-hashed-password>; 
-    #hashedPasswordFile = ...;
-};
-```
-
 Install your configuration and reboot
 ```bash
 sudo nixos-install --flake .#<your-chosen-config>
 reboot
 ```
 
-Replace your hashedPassword with an agenix encrypted secret
+Replace your hashedPassword with an agenix encrypted secret if you wish to version control your config with git
 ```bash
 cd /etc/nixos/secrets
 mkpasswd <your-password> #copy this to paste in agenix -e
 agenix -e user-password.age -i <path-to-your-ssh-identity>
 cd ..
-vim configs/<your-chosen-config>/configuration.nix
+vim hosts/<your-host>.nix
 ```
-```vim
-  age = {
-    identityPaths = [ "<path-to-your-ssh-identity>" ];
-    secrets.user-password.file = ../../secrets/user-password.age;
-  };
+```nix
+age = {
+identityPaths = [ "<path-to-your-ssh-identity>" ];
+secrets.user-password.file = ../secrets/user-password.age;
+};
+users.users.${hostSpecs.username}.hashedPasswordFile = config.age.secrets.user-password.path;
 ```
 
 Following steps can be version-controlling your configuration and moving your configuration into a .dotfiles directory out of /etc/nixos
 
-## Modules
-
-All external applications should have their own .nix config file within the modules directory. I admit I haven't been careful to avoid dependencies between modules but all module config files are small so check their contents before importing.
-
-
-If you have noticed a bad dependency between modules, you can always create your own, or create an issue on this repository if you notice anything particularly bad within my code.

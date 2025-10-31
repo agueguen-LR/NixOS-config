@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   outputs,
+  config,
   ...
 }: let
   modules = outputs.nixosModules;
@@ -25,9 +26,9 @@ in {
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  home-manager.users.adrien = import ./home.nix;
+  home-manager.users.${config.hostSpec.username} = import ./home.nix;
 
-  users.users.adrien = {
+  users.users.${config.hostSpec.username} = {
     packages = with pkgs; [
       btop
       fastfetch

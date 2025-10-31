@@ -184,31 +184,31 @@
     ];
 
     extraConfigLua = ''
-			local dap = require("dap")
-			dap.adapters.gdb = {
-				type = "executable",
-				command = "${pkgs.gdb}/bin/gdb",
-				args = {'--interpreter=dap', '--eval-command', 'set print pretty on'},
-			}
-			dap.configurations.c = {
-				{
-					name = "Launch",
-					type = "gdb",
-					request = "launch",
-					program = function()
-						return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-					end,
-					args = {}, -- provide arguments if needed
-					cwd = "''${workspaceFolder}",
-					stopAtBeginningOfMainSubprogram = false,
-				}
-			}
-			dap.configurations.cpp = dap.configurations.c
-			dap.configurations.rust = dap.configurations.c
+      local dap = require("dap")
+      dap.adapters.gdb = {
+      	type = "executable",
+      	command = "${pkgs.gdb}/bin/gdb",
+      	args = {'--interpreter=dap', '--eval-command', 'set print pretty on'},
+      }
+      dap.configurations.c = {
+      	{
+      		name = "Launch",
+      		type = "gdb",
+      		request = "launch",
+      		program = function()
+      			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      		end,
+      		args = {}, -- provide arguments if needed
+      		cwd = "''${workspaceFolder}",
+      		stopAtBeginningOfMainSubprogram = false,
+      	}
+      }
+      dap.configurations.cpp = dap.configurations.c
+      dap.configurations.rust = dap.configurations.c
 
-      require('dap').listeners.after.event_initialized['dapui_config'] = require('dapui').open
-      require('dap').listeners.before.event_terminated['dapui_config'] = require('dapui').close
-      require('dap').listeners.before.event_exited['dapui_config'] = require('dapui').close
+         require('dap').listeners.after.event_initialized['dapui_config'] = require('dapui').open
+         require('dap').listeners.before.event_terminated['dapui_config'] = require('dapui').close
+         require('dap').listeners.before.event_exited['dapui_config'] = require('dapui').close
     '';
 
     extraPlugins = [(pkgs.vimPlugins.telescope-dap-nvim)];

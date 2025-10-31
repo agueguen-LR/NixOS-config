@@ -43,6 +43,7 @@ in {
       markdown-preview.enable = true;
       otter.enable = true;
       quarto.enable = true;
+      telescope.enable = true;
       toggleterm.enable = true;
       neo-tree.enable = true;
       nvim-autopairs.enable = true;
