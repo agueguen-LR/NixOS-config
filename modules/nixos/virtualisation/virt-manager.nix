@@ -1,7 +1,7 @@
 {
   config,
   lib,
-	pkgs,
+  pkgs,
   ...
 }: let
   cfg = config.virtualisation;
@@ -20,10 +20,10 @@ in {
 
     users.groups.libvirtd.members = cfg.users;
 
-		virtualisation.libvirtd = {
-			enable = true;
-			qemu.vhostUserPackages = [ pkgs.virtiofsd ];
-		};
+    virtualisation.libvirtd = {
+      enable = true;
+      qemu.vhostUserPackages = [pkgs.virtiofsd];
+    };
 
     virtualisation.spiceUSBRedirection.enable = true;
   };

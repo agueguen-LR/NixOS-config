@@ -14,6 +14,7 @@ in {
     modules.hyprland
     modules.fish
     modules.tuigreet
+    modules.virt-manager
   ];
 
   system.nixos.tags = ["hyprland"];
@@ -21,6 +22,11 @@ in {
   services.greetd.tuigreet = {
     enable = true;
     command = "hyprland";
+  };
+
+  virtualisation = {
+    enable = true;
+    users = [config.hostSpec.username];
   };
 
   boot.kernelModules = ["cp210x"];

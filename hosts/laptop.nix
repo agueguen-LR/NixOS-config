@@ -1,4 +1,9 @@
-{inputs, config, lib, ...}: let
+{
+  inputs,
+  config,
+  lib,
+  ...
+}: let
   hostSpecs = {
     username = "adrien";
   };
@@ -42,6 +47,22 @@ in {
 
   # Enable touchpad support.
   services.libinput.enable = true;
+
+  # Power management for laptops
+  powerManagement.enable = true;
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
 
   home-manager.users.${hostSpecs.username}.hostSpec = hostSpecs;
   hostSpec = hostSpecs;

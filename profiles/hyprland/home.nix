@@ -11,6 +11,7 @@ in {
     ../common-home.nix
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
+    modules.direnv
     modules.fish
     modules.kitty
     modules.librewolf
@@ -19,6 +20,7 @@ in {
     modules.hyprcursor
     modules.hyprland
     modules.hyprpaper
+    modules.rofi
     modules.waybar
     modules.yazi
   ];

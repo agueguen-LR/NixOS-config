@@ -1,4 +1,9 @@
-{inputs, config, lib, ...}: let
+{
+  inputs,
+  config,
+  lib,
+  ...
+}: let
   hostSpecs = {
     username = "adrien";
   };
