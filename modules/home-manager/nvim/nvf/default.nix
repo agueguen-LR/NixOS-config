@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  keybinds = import ./keybinds/nvf_keybinds.nix;
+  keybinds = import ./keybinds.nix;
 in {
   programs.neovim = {
     enable = true;

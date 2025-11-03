@@ -1,8 +1,8 @@
 {lib, ...}: let
-  keybinds = import ./keybinds/nixvim_keys.nix;
+  keybinds = import ./keybinds.nix;
 in {
   imports = [
-    ./nixvim-dap.nix
+    ./dap.nix
   ];
   programs.nixvim = {
     enable = true;
@@ -12,6 +12,7 @@ in {
       ];
 
     opts = {
+      number = true;
       relativenumber = true;
       splitright = true;
     };
@@ -103,6 +104,7 @@ in {
       java_language_server.enable = true;
       cmake.enable = true;
       pylsp.enable = true;
+      pyright.enable = true;
     };
   };
 }
