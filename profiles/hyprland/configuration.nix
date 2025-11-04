@@ -8,8 +8,8 @@
   modules = outputs.nixosModules;
 in {
   imports = [
-    inputs.catppuccin.nixosModules.catppuccin
     ../common-config.nix
+		modules.catppuccin
     modules.neovim
     modules.hyprland
     modules.fish
@@ -30,8 +30,6 @@ in {
   };
 
   boot.kernelModules = ["cp210x"];
-
-  catppuccin.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -66,10 +64,4 @@ in {
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 }

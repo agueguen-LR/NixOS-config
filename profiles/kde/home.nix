@@ -9,16 +9,13 @@
 in {
   imports = [
     ../common-home.nix
-    inputs.nixvim.homeModules.nixvim
-    inputs.catppuccin.homeModules.catppuccin
-    modules.zsh
     modules.alacritty
+		modules.catppuccin
+		modules.fish
+    modules.nixcord
     modules.nixvim
     modules.librewolf
-    modules.nixcord
   ];
-
-  catppuccin.enable = true;
 
   home.packages = with pkgs; [];
 

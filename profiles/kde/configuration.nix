@@ -8,9 +8,9 @@
 in {
   imports = [
     ../common-config.nix
+		modules.catppuccin
     modules.neovim
-    modules.zsh
-    modules.steam
+    modules.fish
   ];
 
   system.nixos.tags = ["kde"];
@@ -42,7 +42,7 @@ in {
       wl-clipboard
       unzip
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   fonts.packages = with pkgs.nerd-fonts; [
@@ -56,13 +56,4 @@ in {
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 }

@@ -9,8 +9,7 @@
 in {
   imports = [
     ../common-home.nix
-    inputs.nixvim.homeModules.nixvim
-    inputs.catppuccin.homeModules.catppuccin
+		modules.catppuccin
     modules.direnv
     modules.fish
     modules.kitty
@@ -24,8 +23,6 @@ in {
     modules.waybar
     modules.yazi
   ];
-
-  catppuccin.enable = true;
 
   services.gpg-agent = {
     enable = true;

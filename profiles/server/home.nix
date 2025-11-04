@@ -9,10 +9,9 @@
 in {
   imports = [
     ../common-home.nix
-    inputs.nvf.homeManagerModules.default
     modules.fish
     modules.kitty
-    modules.nvf
+    modules.nixvim
   ];
 
   home.packages = with pkgs; [];

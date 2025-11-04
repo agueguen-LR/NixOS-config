@@ -8,16 +8,14 @@
   modules = outputs.nixosModules;
 in {
   imports = [
-    inputs.catppuccin.nixosModules.catppuccin
     ../common-config.nix
+		modules.catppuccin
     modules.fish
     modules.neovim
     modules.qtile
   ];
 
   system.nixos.tags = ["qtile"];
-
-  catppuccin.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "fr";
@@ -52,13 +50,4 @@ in {
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 }

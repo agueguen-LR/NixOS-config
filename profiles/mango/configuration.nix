@@ -8,9 +8,8 @@
   modules = outputs.nixosModules;
 in {
   imports = [
-    inputs.catppuccin.nixosModules.catppuccin
-    inputs.mango.nixosModules.mango
     ../common-config.nix
+		modules.catppuccin
     modules.fish
     modules.neovim
     modules.mango
@@ -68,10 +67,4 @@ in {
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 }
