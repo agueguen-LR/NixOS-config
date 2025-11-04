@@ -1,5 +1,5 @@
 {...}: let
-  keybinds = import ./hyprland/keybinds.nix;
+  keybinds = import ./keybinds.nix;
 in {
   wayland.windowManager.hyprland = {
     enable = true;

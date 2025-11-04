@@ -17,28 +17,28 @@
         description = "List of monitor names.";
       };
       width = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = ["1920"];
+        type = lib.types.listOf lib.types.int;
+        default = [1920];
         description = "List of monitor widths in pixels.";
       };
       height = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = ["1080"];
+        type = lib.types.listOf lib.types.int;
+        default = [1080];
         description = "List of monitor heights in pixels.";
       };
       xoffset = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = ["0"];
+        type = lib.types.listOf lib.types.int;
+        default = [0];
         description = "List of monitor X offsets in pixels.";
       };
       yoffset = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = ["0"];
+        type = lib.types.listOf lib.types.int;
+        default = [0];
         description = "List of monitor Y offsets in pixels.";
       };
       refreshRate = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = ["60"];
+        type = lib.types.listOf lib.types.float;
+        default = [60.0];
         description = "List of monitor refresh rates in Hz.";
       };
     };

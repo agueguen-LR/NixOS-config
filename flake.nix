@@ -27,6 +27,8 @@
       url = "github:nix-community/impermanence";
     };
 
+		niri.url = "github:sodiboo/niri-flake";
+
     nixcord = {
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -58,8 +60,8 @@
       nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/${hostFile}
-          ./profiles/${profileFile}
+          ./hosts/${hostFile}.nix
+          ./profiles/${profileFile}/configuration.nix
         ];
       };
   in {
@@ -70,17 +72,19 @@
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
-      server = mkHost "server.nix" "server/configuration.nix";
-      laptop-default = mkHost "laptop.nix" "default/configuration.nix";
-      laptop-qtile = mkHost "laptop.nix" "qtile/configuration.nix";
-      laptop-hypr = mkHost "laptop.nix" "hyprland/configuration.nix";
-      laptop-kde = mkHost "laptop.nix" "kde/configuration.nix";
-      laptop-mango = mkHost "laptop.nix" "mango/configuration.nix";
-      pc-default = mkHost "pc.nix" "default/configuration.nix";
-      pc-qtile = mkHost "pc.nix" "qtile/configuration.nix";
-      pc-hypr = mkHost "pc.nix" "hyprland/configuration.nix";
-      pc-kde = mkHost "pc.nix" "kde/configuration.nix";
-      pc-mango = mkHost "pc.nix" "mango/configuration.nix";
+      server = mkHost "server" "server";
+      laptop-default = mkHost "laptop" "default";
+      laptop-qtile = mkHost "laptop" "qtile";
+      laptop-hypr = mkHost "laptop" "hyprland";
+      laptop-kde = mkHost "laptop" "kde";
+      laptop-mango = mkHost "laptop" "mango";
+			laptop-niri = mkHost "laptop" "niri";
+      pc-default = mkHost "pc" "default";
+      pc-qtile = mkHost "pc" "qtile";
+      pc-hypr = mkHost "pc" "hyprland";
+      pc-kde = mkHost "pc" "kde";
+      pc-mango = mkHost "pc" "mango";
+			pc-niri = mkHost "pc" "niri";
     };
   };
 }

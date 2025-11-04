@@ -2,17 +2,20 @@
   # List module files here, alphabetically please :)
   # my-module = import ./my-module.nix;
   alacritty = import ./terminal/alacritty.nix;
+  catppuccin = import ./style/catppuccin.nix;
   direnv = import ./devEnvironments/direnv.nix;
   fish = import ./terminal/fish.nix;
+	fuzzel = import ./appLauncher/fuzzel.nix;
   kitty = import ./terminal/kitty.nix;
   librewolf = import ./browser/librewolf.nix;
-  hyprland = import ./compositor/hyprland.nix;
+  hyprland = import ./compositor/hyprland;
   hyprpaper = import ./wallpaper/hyprpaper.nix;
   hyprcursor = import ./cursor/hyprcursor.nix;
+  niri = import ./compositor/niri;
   nixcord = import ./social/nixcord.nix;
   nixvim = import ./nvim/nixvim;
   nvf = import ./nvim/nvf;
-  mango = import ./compositor/mango.nix;
+  mango = import ./compositor/mango;
   swww = import ./wallpaper/swww.nix;
   tmux = import ./terminal/tmux.nix;
   rofi = import ./appLauncher/rofi.nix;

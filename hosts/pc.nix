@@ -8,11 +8,11 @@
     username = "adrien";
     monitor = {
       name = ["HDMI-A-1" "HDMI-A-2"];
-      width = ["1920" "1920"];
-      height = ["1080" "1080"];
-      xoffset = ["0" "1920"];
-      yoffset = ["0" "0"];
-      refreshRate = ["60" "60"];
+      width = [1920 1920];
+      height = [1080 1080];
+      xoffset = [0 1920];
+      yoffset = [0 0];
+      refreshRate = [60.0 60.0];
     };
   };
 in {

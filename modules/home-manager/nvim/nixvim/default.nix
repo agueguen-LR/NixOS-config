@@ -1,7 +1,12 @@
-{lib, ...}: let
+{
+  lib,
+  inputs,
+  ...
+}: let
   keybinds = import ./keybinds.nix;
 in {
   imports = [
+    inputs.nixvim.homeModules.nixvim
     ./dap.nix
   ];
   programs.nixvim = {

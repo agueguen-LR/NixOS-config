@@ -1,6 +1,14 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   keybinds = import ./keybinds.nix;
 in {
+  imports = [
+    inputs.nvf.homeManagerModules.default
+  ];
+
   programs.neovim = {
     enable = true;
     extraConfig = ''
