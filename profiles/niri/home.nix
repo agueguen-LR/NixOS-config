@@ -44,5 +44,7 @@ in {
 
   home.file = {};
 
-  home.sessionVariables = {};
+  home.sessionVariables = {
+		DISPLAY = ":0";
+	};
 }

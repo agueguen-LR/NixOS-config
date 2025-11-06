@@ -37,6 +37,9 @@ in {
     cursor = {
       size = 12;
     };
+		prefer-no-csd = true;
+
+		gestures.hot-corners.enable = false;
 
     layout = {
       gaps = 8;
@@ -65,6 +68,7 @@ in {
       "Mod+B".action = spawn "librewolf";
       "Mod+R".action = spawn "fuzzel";
       "Mod+Q".action = close-window;
+      "Mod+O".action = toggle-overview;
 
       "Mod+Left".action = focus-column-left;
       "Mod+Right".action = focus-column-right;
@@ -78,8 +82,8 @@ in {
 
       "Mod+Shift+Left".action = focus-monitor-left;
       "Mod+Shift+Right".action = focus-monitor-right;
-      "Mod+Shift+Up".action = focus-monitor-up;
-      "Mod+Shift+Down".action = focus-monitor-down;
+      "Mod+Shift+Up".action = focus-workspace-up;
+      "Mod+Shift+Down".action = focus-workspace-down;
 
       "Mod+Shift+Ctrl+Left".action = move-column-to-monitor-left;
       "Mod+Shift+Ctrl+Right".action = move-column-to-monitor-right;
