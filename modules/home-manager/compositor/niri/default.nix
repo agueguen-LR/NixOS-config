@@ -44,7 +44,7 @@ in {
     layout = {
       gaps = 8;
       struts = {
-        top = -4;
+        top = 0;
         bottom = -2;
       };
       always-center-single-column = true;
@@ -62,13 +62,18 @@ in {
     ];
 
     binds = with config.lib.niri.actions; let
-      sh = spawn "sh" "-c";
-    in {
-      "Mod+T".action = spawn "kitty";
-      "Mod+B".action = spawn "librewolf";
-      "Mod+R".action = spawn "fuzzel";
+			noctalia = cmd: [
+				"noctalia-shell" "ipc" "call"
+			] ++ (pkgs.lib.splitString " " cmd);
+		in {
+      "Mod+T".action.spawn = "kitty";
+      "Mod+B".action.spawn = "librewolf";
+      "Mod+R".action.spawn = noctalia "launcher toggle";
+      "Mod+S".action.spawn = noctalia "settings toggle";
       "Mod+Q".action = close-window;
       "Mod+O".action = toggle-overview;
+
+      "Print".action = spawn "sh" "-c" ''grim -g "$(slurp)" - | wl-copy'';
 
       "Mod+Left".action = focus-column-left;
       "Mod+Right".action = focus-column-right;
@@ -131,16 +136,20 @@ in {
       "Mod+F".action = maximize-column;
       "Mod+C".action = center-column;
 
-      "Print".action = sh ''grim -l 0 -g "$(slurp) - | wl-copy'';
       "Mod+Escape" = {
         action = toggle-keyboard-shortcuts-inhibit;
         allow-inhibiting = false;
       };
     };
+		
+		debug = {
+			honor-xdg-activation-with-invalid-serial = [];
+		};
 
     # Startup applications
     spawn-at-startup = [
-      {command = ["waybar"];}
+      # {command = ["waybar"];}
+      {command = ["noctalia-shell"];}
       {command = ["xwayland-satellite"];}
       {command = ["swww-daemon"];}
       {command = ["swww" "img" "${builtins.toString ../../wallpaper/catppuccin-nixos.png}"];}

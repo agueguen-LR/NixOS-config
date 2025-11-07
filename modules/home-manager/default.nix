@@ -14,6 +14,7 @@
   niri = import ./compositor/niri;
   nixcord = import ./social/nixcord.nix;
   nixvim = import ./nvim/nixvim;
+	noctalia = import ./desktopEnvironment/noctalia.nix;
   nvf = import ./nvim/nvf;
   mango = import ./compositor/mango;
   swww = import ./wallpaper/swww.nix;

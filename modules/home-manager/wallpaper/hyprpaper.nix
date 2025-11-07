@@ -1,5 +1,5 @@
 let
-  wallpaperPath = ./catppuccin-nixos.png;
+  wallpaperPath = ./wallpapers/catppuccin-nixos.png;
 in {
   services.hyprpaper = {
     enable = true;

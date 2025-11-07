@@ -25,6 +25,21 @@
         Folder = "Nix";
       }
       {
+        Title = "Niri-flake";
+        URL = "https://github.com/sodiboo/niri-flake/blob/main/docs.md";
+        Folder = "Nix";
+      }
+      {
+        Title = "MangoWC";
+        URL = "https://github.com/DreamMaoMao/mangowc/wiki";
+        Folder = "Nix";
+      }
+      {
+        Title = "Noctalia-shell";
+        URL = "https://docs.noctalia.dev/docs/";
+        Folder = "Nix";
+      }
+      {
         Title = "GitHub";
         URL = "https://github.com/agueguen-LR";
         Placement = "toolbar";

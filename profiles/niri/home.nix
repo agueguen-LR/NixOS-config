@@ -17,9 +17,10 @@ in {
     modules.niri
     modules.nixcord
     modules.nixvim
-    modules.swww
-    modules.fuzzel
-    modules.waybar
+		modules.noctalia
+    # modules.swww
+    # modules.fuzzel
+    # modules.waybar
     modules.yazi
   ];
 
