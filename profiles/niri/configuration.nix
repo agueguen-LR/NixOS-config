@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   outputs,
   config,
   ...
@@ -13,6 +12,7 @@ in {
     modules.neovim
     modules.niri
     modules.fish
+    # modules.stylix
     modules.tuigreet
     modules.virt-manager
   ];
@@ -56,7 +56,7 @@ in {
     jetbrains-mono
   ];
 
-	environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

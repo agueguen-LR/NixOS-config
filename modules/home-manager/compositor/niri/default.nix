@@ -1,6 +1,6 @@
 # No enable here, instead import the NixOS module and enable niri there.
 {
-	pkgs,
+  pkgs,
   config,
   lib,
   ...
@@ -19,9 +19,9 @@
     })
     cfg.name;
 in {
-	home.packages = [
-		pkgs.xwayland-satellite
-	];
+  home.packages = [
+    pkgs.xwayland-satellite
+  ];
 
   programs.niri.settings = {
     input.keyboard = {
@@ -37,9 +37,9 @@ in {
     cursor = {
       size = 12;
     };
-		prefer-no-csd = true;
+    prefer-no-csd = true;
 
-		gestures.hot-corners.enable = false;
+    gestures.hot-corners.enable = false;
 
     layout = {
       gaps = 8;
@@ -62,10 +62,14 @@ in {
     ];
 
     binds = with config.lib.niri.actions; let
-			noctalia = cmd: [
-				"noctalia-shell" "ipc" "call"
-			] ++ (pkgs.lib.splitString " " cmd);
-		in {
+      noctalia = cmd:
+        [
+          "noctalia-shell"
+          "ipc"
+          "call"
+        ]
+        ++ (pkgs.lib.splitString " " cmd);
+    in {
       "Mod+T".action.spawn = "kitty";
       "Mod+B".action.spawn = "librewolf";
       "Mod+R".action.spawn = noctalia "launcher toggle";
@@ -136,15 +140,17 @@ in {
       "Mod+F".action = maximize-column;
       "Mod+C".action = center-column;
 
+      "Mod+Tab".action = toggle-window-floating;
+
       "Mod+Escape" = {
         action = toggle-keyboard-shortcuts-inhibit;
         allow-inhibiting = false;
       };
     };
-		
-		debug = {
-			honor-xdg-activation-with-invalid-serial = [];
-		};
+
+    debug = {
+      honor-xdg-activation-with-invalid-serial = [];
+    };
 
     # Startup applications
     spawn-at-startup = [

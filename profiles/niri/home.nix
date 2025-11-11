@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   outputs,
   lib,
   ...
@@ -12,16 +11,15 @@ in {
     modules.catppuccin
     modules.direnv
     modules.fish
+    modules.fzf
     modules.kitty
     modules.librewolf
     modules.niri
     modules.nixcord
     modules.nixvim
-		modules.noctalia
-    # modules.swww
-    # modules.fuzzel
-    # modules.waybar
+    modules.noctalia
     modules.yazi
+    modules.zoxide
   ];
 
   services.gpg-agent = {
@@ -46,6 +44,6 @@ in {
   home.file = {};
 
   home.sessionVariables = {
-		DISPLAY = ":0";
-	};
+    DISPLAY = ":0";
+  };
 }

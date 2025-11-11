@@ -108,6 +108,8 @@ in {
       };
       java_language_server.enable = true;
       cmake.enable = true;
+      cssls.enable = true;
+      superhtml.enable = true;
       pylsp.enable = true;
       pyright.enable = true;
     };

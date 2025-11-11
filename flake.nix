@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -28,10 +28,10 @@
       url = "github:nix-community/impermanence";
     };
 
-		niri = {
-			url = "github:sodiboo/niri-flake";
-			inputs.nixpkgs.follows = "nixpkgs-unstable";
-		};
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     nixcord = {
       url = "github:kaylorben/nixcord";
@@ -46,7 +46,7 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.quickshell.follows = "quickshell";  # Use same quickshell version
+      inputs.quickshell.follows = "quickshell"; # Use same quickshell version
     };
 
     nvf = {
@@ -59,10 +59,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		stylix = {
-			url = "github:nix-community/stylix/release-25.05";
+    stylix = {
+      url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
-		};
+    };
 
     quickshell = {
       url = "github:outfoxxed/quickshell";
@@ -98,13 +98,13 @@
       laptop-hypr = mkHost "laptop" "hyprland";
       laptop-kde = mkHost "laptop" "kde";
       laptop-mango = mkHost "laptop" "mango";
-			laptop-niri = mkHost "laptop" "niri";
+      laptop-niri = mkHost "laptop" "niri";
       pc-default = mkHost "pc" "default";
       pc-qtile = mkHost "pc" "qtile";
       pc-hypr = mkHost "pc" "hyprland";
       pc-kde = mkHost "pc" "kde";
       pc-mango = mkHost "pc" "mango";
-			pc-niri = mkHost "pc" "niri";
+      pc-niri = mkHost "pc" "niri";
     };
   };
 }

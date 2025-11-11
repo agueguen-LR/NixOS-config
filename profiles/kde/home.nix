@@ -10,8 +10,8 @@ in {
   imports = [
     ../common-home.nix
     modules.alacritty
-		modules.catppuccin
-		modules.fish
+    modules.catppuccin
+    modules.fish
     modules.nixcord
     modules.nixvim
     modules.librewolf

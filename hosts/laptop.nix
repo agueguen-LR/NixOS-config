@@ -6,7 +6,7 @@
 }: let
   hostSpecs = {
     username = "adrien";
-		monitor = {
+    monitor = {
       name = ["eDP-1" "HDMI-A-2"];
       width = [1920 1920];
       height = [1080 1080];
@@ -57,20 +57,20 @@ in {
   services.libinput.enable = true;
 
   # Power management for laptops
-  powerManagement.enable = true;
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
-  };
+  # powerManagement.enable = true;
+  # services.auto-cpufreq = {
+  #   enable = true;
+  #   settings = {
+  #     battery = {
+  #       governor = "powersave";
+  #       turbo = "never";
+  #     };
+  #     charger = {
+  #       governor = "performance";
+  #       turbo = "auto";
+  #     };
+  #   };
+  # };
 
   home-manager.users.${hostSpecs.username}.hostSpec = hostSpecs;
   hostSpec = hostSpecs;

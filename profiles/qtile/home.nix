@@ -9,7 +9,7 @@
 in {
   imports = [
     ../common-home.nix
-		modules.catppuccin
+    modules.catppuccin
     modules.fish
     modules.kitty
     modules.librewolf

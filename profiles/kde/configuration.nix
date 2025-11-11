@@ -8,7 +8,7 @@
 in {
   imports = [
     ../common-config.nix
-		modules.catppuccin
+    modules.catppuccin
     modules.neovim
     modules.fish
   ];

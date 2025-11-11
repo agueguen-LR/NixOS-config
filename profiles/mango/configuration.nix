@@ -9,7 +9,7 @@
 in {
   imports = [
     ../common-config.nix
-		modules.catppuccin
+    modules.catppuccin
     modules.fish
     modules.neovim
     modules.mango

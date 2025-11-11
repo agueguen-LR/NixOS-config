@@ -5,7 +5,8 @@
   catppuccin = import ./style/catppuccin.nix;
   direnv = import ./devEnvironments/direnv.nix;
   fish = import ./terminal/fish.nix;
-	fuzzel = import ./appLauncher/fuzzel.nix;
+  fuzzel = import ./appLauncher/fuzzel.nix;
+  fzf = import ./terminal/fzf.nix;
   kitty = import ./terminal/kitty.nix;
   librewolf = import ./browser/librewolf.nix;
   hyprland = import ./compositor/hyprland;
@@ -14,7 +15,7 @@
   niri = import ./compositor/niri;
   nixcord = import ./social/nixcord.nix;
   nixvim = import ./nvim/nixvim;
-	noctalia = import ./desktopEnvironment/noctalia.nix;
+  noctalia = import ./desktopEnvironment/noctalia.nix;
   nvf = import ./nvim/nvf;
   mango = import ./compositor/mango;
   swww = import ./wallpaper/swww.nix;
@@ -22,5 +23,6 @@
   rofi = import ./appLauncher/rofi.nix;
   waybar = import ./statusBar/waybar.nix;
   yazi = import ./fileManager/yazi.nix;
+  zoxide = import ./terminal/zoxide.nix;
   zsh = import ./terminal/zsh.nix;
 }
