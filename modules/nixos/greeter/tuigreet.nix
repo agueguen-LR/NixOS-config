@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.services.greetd.tuigreet;
+  cfg = config.services.tuigreet;
 in {
-  options.services.greetd.tuigreet = {
+  options.services.tuigreet = {
     enable = lib.mkEnableOption "Enable tuigreet as greetd greeter.";
     command = lib.mkOption {
       type = lib.types.str;
@@ -20,7 +20,7 @@ in {
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd ${cfg.command}";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd ${cfg.command}";
           user = "greeter";
         };
       };

@@ -12,14 +12,13 @@ in {
     modules.neovim
     modules.niri
     modules.fish
-    # modules.stylix
     modules.tuigreet
     modules.virt-manager
   ];
 
   system.nixos.tags = ["niri"];
 
-  services.greetd.tuigreet = {
+  services.tuigreet = {
     enable = true;
     command = "niri";
   };

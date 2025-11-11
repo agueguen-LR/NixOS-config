@@ -19,7 +19,7 @@ in {
 
   system.nixos.tags = ["hyprland"];
 
-  services.greetd.tuigreet = {
+  services.tuigreet = {
     enable = true;
     command = "hyprland";
   };

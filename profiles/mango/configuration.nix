@@ -19,7 +19,7 @@ in {
 
   system.nixos.tags = ["mangoWC"];
 
-  services.greetd.tuigreet = {
+  services.tuigreet = {
     enable = true;
     command = "mango";
   };
