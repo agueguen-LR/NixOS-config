@@ -1,37 +1,45 @@
 # NixOS-config
 
-Dotfiles for my NixOS setup, currently there are three available configurations, each accessible through a different nix flake.
+Dotfiles for my NixOS setup, currently there are six available profiles.
 
 
-The default flake, is equivalent to a completely bare installation with only git and vim. There is no desktop environment or wayland compositor.
+Each profile is used with a host configuration file for hardware/user specific additions.
+
+
+The default profile is a completely bare installation with only git and vim.
 ```bash
-sudo nixos-rebuild switch --flake .#default
+sudo nixos-rebuild switch --flake .#<host>-default
 ```
 
 
-The qtile flake comes with the X11 window manager [Qtile](https://qtile.org/).
+The qtile profile comes with the X11 window manager [Qtile](https://qtile.org/).
 ```bash
-sudo nixos-rebuild switch --flake .#qtile
+sudo nixos-rebuild switch --flake .#<host>-qtile
 ```
 
 
-The hyprland flake comes with the wayland compositor [Hyprland](https://hypr.land/).
+The hyprland profile comes with the wayland compositor [Hyprland](https://hypr.land/).
 ```bash
-sudo nixos-rebuild switch --flake .#hyprland
+sudo nixos-rebuild switch --flake .#<host>-hypr
 ```
 
 
-The mango flake comes with the wayland compositor [MangoWC](https://github.com/DreamMaoMao/mangowc).
+The mango profile comes with the wayland compositor [MangoWC](https://github.com/DreamMaoMao/mangowc).
 ```bash
-sudo nixos-rebuild switch --flake .#mango
+sudo nixos-rebuild switch --flake .#<host>-mango
 ```
 
 
-The kde flake comes with the desktop environment [KDE Plasma 6](https://kde.org/plasma-desktop/).
+The niri profile comes with the wayland compositor [Niri](https://github.com/YaLTeR/niri).
 ```bash
-sudo nixos-rebuild switch --flake .#kde
+sudo nixos-rebuild switch --flake .#<host>-niri
 ```
 
+
+The kde profile comes with the desktop environment [KDE Plasma 6](https://kde.org/plasma-desktop/).
+```bash
+sudo nixos-rebuild switch --flake .#<host>-kde
+```
 
 ## Impermanence
 
