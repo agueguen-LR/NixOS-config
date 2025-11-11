@@ -6,6 +6,10 @@
 }: let
   hostSpecs = {
     username = "adrien";
+    keyboard = {
+      layout = "fr";
+      options = "eurosign:e,caps:escape";
+    };
     monitor = {
       name = ["eDP-1" "HDMI-A-2"];
       width = [1920 1920];
@@ -56,21 +60,8 @@ in {
   # Enable touchpad support.
   services.libinput.enable = true;
 
-  # Power management for laptops
-  # powerManagement.enable = true;
-  # services.auto-cpufreq = {
-  #   enable = true;
-  #   settings = {
-  #     battery = {
-  #       governor = "powersave";
-  #       turbo = "never";
-  #     };
-  #     charger = {
-  #       governor = "performance";
-  #       turbo = "auto";
-  #     };
-  #   };
-  # };
+  # Power management for noctalia-shell
+  services.power-profiles-daemon.enable = true;
 
   home-manager.users.${hostSpecs.username}.hostSpec = hostSpecs;
   hostSpec = hostSpecs;

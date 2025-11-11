@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -33,9 +37,14 @@
           ];
           right = [
             {
+              id = "Volume";
+              displayMode = "alwaysShow";
+            }
+            {
               id = "CustomButton";
               icon = "battery-4";
-              textCommand = "acpi -b | grep -Eo '[0-9]+%'";
+              leftClickExec = "noctalia-shell ipc call powerProfile cycle";
+              textCommand = "${pkgs.acpi}/bin/acpi -b | grep -Eo '[0-9]+%'";
               textIntervalMs = 3000;
             }
             {

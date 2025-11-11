@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   inputs,
   ...
@@ -9,6 +10,11 @@ in {
     inputs.nixvim.homeModules.nixvim
     ./dap.nix
   ];
+
+  home.packages = [
+    pkgs.ripgrep
+  ];
+
   programs.nixvim = {
     enable = true;
     nixpkgs.config.allowUnfreePredicate = pkg:
@@ -36,7 +42,10 @@ in {
       settings.flavour = "mocha";
     };
 
-    clipboard.providers.wl-copy.enable = true;
+    clipboard = {
+      register = "unnamedplus";
+      providers.wl-copy.enable = true;
+    };
 
     plugins = {
       bufferline.enable = true;

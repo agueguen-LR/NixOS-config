@@ -27,8 +27,8 @@ in {
     input.keyboard = {
       numlock = true;
       xkb = {
-        layout = "fr";
-        options = "eurosign:e,caps:escape";
+        layout = config.hostSpec.keyboard.layout;
+        options = config.hostSpec.keyboard.options;
       };
     };
 
@@ -77,7 +77,7 @@ in {
       "Mod+Q".action = close-window;
       "Mod+O".action = toggle-overview;
 
-      "Print".action = spawn "sh" "-c" ''grim -g "$(slurp)" - | wl-copy'';
+      "Print".action = spawn "sh" "-c" ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | wl-copy'';
 
       "Mod+Left".action = focus-column-left;
       "Mod+Right".action = focus-column-right;
@@ -154,11 +154,8 @@ in {
 
     # Startup applications
     spawn-at-startup = [
-      # {command = ["waybar"];}
       {command = ["noctalia-shell"];}
       {command = ["xwayland-satellite"];}
-      {command = ["swww-daemon"];}
-      {command = ["swww" "img" "${builtins.toString ../../wallpaper/catppuccin-nixos.png}"];}
     ];
   };
 }

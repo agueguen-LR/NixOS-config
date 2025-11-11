@@ -29,9 +29,11 @@ in {
     settings = lib.strings.concatStringsSep "\n" [
       configFile
       monitorRulesString
+      "xkb_rules_layout=${config.hostSpec.keyboard.layout}"
+      "xkb_rules_options=${config.hostSpec.keyboard.options}"
     ];
     autostart_sh = ''
-      swww img "${builtins.toString ../../wallpaper/catppuccin-nixos.png}"
+      swww img "${builtins.toString ../../wallpaper/wallpapers/catppuccin-nixos.png}"
     '';
   };
 }

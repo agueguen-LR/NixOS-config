@@ -37,14 +37,10 @@ in {
 
   users.users.${config.hostSpec.username} = {
     packages = with pkgs; [
-      acpi #battery info
       btop
       fastfetch
-      grim # screenshots
       librewolf
       pavucontrol #volume control
-      ripgrep
-      slurp # screenshots
       sysstat #system info commands: iostat mpstat pidstat ...
       wl-clipboard
     ];

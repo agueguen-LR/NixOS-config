@@ -16,9 +16,9 @@ in {
   system.nixos.tags = ["kde"];
 
   services = {
-    xserver = {
-      xkb.layout = "fr";
-      xkb.options = "eurosign:e,caps:escape";
+    xserver.xkb = {
+      layout = config.hostSpec.keyboard.layout;
+      options = config.hostSpec.keyboard.options;
     };
     displayManager.sddm.enable = true;
     desktopManager.plasma6.enable = true;
@@ -33,14 +33,11 @@ in {
     packages = with pkgs; [
       btop
       fastfetch
-      alacritty
       pavucontrol #volume control
       tree
       acpi #battery info
       sysstat #system info commands: iostat mpstat pidstat ...
-      librewolf
       wl-clipboard
-      unzip
     ];
     shell = pkgs.fish;
   };

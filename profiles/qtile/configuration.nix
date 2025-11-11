@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   outputs,
   config,
   ...
@@ -18,8 +17,10 @@ in {
   system.nixos.tags = ["qtile"];
 
   # Configure keymap in X11
-  services.xserver.xkb.layout = "fr";
-  services.xserver.xkb.options = "eurosign:e,caps:escape";
+  services.xserver.xkb = {
+    layout = config.hostSpec.keyboard.layout;
+    options = config.hostSpec.keyboard.options;
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -34,7 +35,6 @@ in {
       tree
       acpi
       sysstat
-      librewolf
     ];
     shell = pkgs.fish;
   };

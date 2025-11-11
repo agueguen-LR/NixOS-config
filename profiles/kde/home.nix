@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   outputs,
   lib,
   ...
@@ -9,9 +8,9 @@
 in {
   imports = [
     ../common-home.nix
-    modules.alacritty
     modules.catppuccin
     modules.fish
+    modules.kitty
     modules.nixcord
     modules.nixvim
     modules.librewolf

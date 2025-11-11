@@ -6,6 +6,10 @@
 }: let
   hostSpecs = {
     username = "adrien";
+    keyboard = {
+      layout = "fr";
+      options = "eurosign:e,caps:escape";
+    };
     monitor = {
       name = ["HDMI-A-1" "HDMI-A-2"];
       width = [1920 1920];

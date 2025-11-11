@@ -10,6 +10,18 @@
       default = "user";
       description = "Username for the host.";
     };
+    keyboard = {
+      layout = lib.mkOption {
+        type = lib.types.str;
+        default = "us";
+        description = "Xkb keyboard layout";
+      };
+      options = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Xkb keyboard options";
+      };
+    };
     monitor = {
       name = lib.mkOption {
         type = lib.types.listOf lib.types.str;

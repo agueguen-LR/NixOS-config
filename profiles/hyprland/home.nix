@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   outputs,
   lib,
   ...
@@ -37,13 +36,7 @@ in {
     };
   };
 
-  home.packages = with pkgs; [];
-
   home.activation.createDiscordConfigDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
     mkdir -p ~/.config/discord
   '';
-
-  home.file = {};
-
-  home.sessionVariables = {};
 }

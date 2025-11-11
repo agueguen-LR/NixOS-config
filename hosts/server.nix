@@ -6,6 +6,10 @@
 }: let
   hostSpecs = {
     username = "adrien";
+    keyboard = {
+      layout = "fr";
+      options = "eurosign:e,caps:escape";
+    };
   };
 in {
   imports = [

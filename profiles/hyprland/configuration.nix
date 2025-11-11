@@ -38,16 +38,11 @@ in {
 
   users.users.${config.hostSpec.username} = {
     packages = with pkgs; [
-      acpi #battery info
       btop
       fastfetch
-      grimblast #screenshots
-      librewolf
       pavucontrol #volume control
-      ripgrep
       sysstat #system info commands: iostat mpstat pidstat ...
       tree
-      unzip
       wl-clipboard
     ];
     shell = pkgs.fish;
