@@ -27,6 +27,15 @@ in {
     inputs.agenix.nixosModules.default # secret management
   ];
 
+  fileSystems."/persist".neededForBoot = true;
+
+  boot.initrd.postDeviceCommands = ''
+    echo 'starting rollback'
+      zpool import zroot
+      zfs rollback -r zroot/local/root@blank
+    echo 'finished rollback'
+  '';
+
   age = {
     identityPaths = ["/persist/home/${hostSpecs.username}/.secrets/agenix-rsa-4096"];
     secrets.user-password.file = ../secrets/user-password.age;

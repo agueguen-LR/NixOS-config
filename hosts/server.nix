@@ -23,6 +23,15 @@ in {
     secrets.user-password.file = ../secrets/user-password.age;
   };
 
+  fileSystems."/persist".neededForBoot = true;
+
+  boot.initrd.postDeviceCommands = ''
+    echo 'starting rollback'
+      zpool import zroot
+      zfs rollback -r zroot/local/root@blank
+    echo 'finished rollback'
+  '';
+
   users.users.${hostSpecs.username} = {
     # initialHashedPassword = # Set this and comment hashedPasswordFile during install
     hashedPasswordFile = config.age.secrets.user-password.path;

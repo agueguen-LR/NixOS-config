@@ -28,15 +28,6 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.optimise.automatic = true;
 
-  fileSystems."/persist".neededForBoot = true;
-
-  boot.initrd.postDeviceCommands = ''
-    echo 'starting rollback'
-      zpool import zroot
-      zfs rollback -r zroot/local/root@blank
-    echo 'finished rollback'
-  '';
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot = {
     enable = true;
