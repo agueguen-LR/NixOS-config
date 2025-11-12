@@ -76,12 +76,12 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    mkHost = hostFile: profileFile:
+    mkHost = host: profile:
       nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/${hostFile}.nix
-          ./profiles/${profileFile}/configuration.nix
+          ./hosts/${host}
+          ./profiles/${profile}/configuration.nix
         ];
       };
   in {

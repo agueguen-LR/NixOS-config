@@ -1,4 +1,5 @@
 # Module for managing host-specific configuration variables.
+# This should be imported by both the hosts and the profiles as it is the only way to share info between them.
 # This module needs to be imported into both the NixOS and Home Manager configurations to read the values with config.hostSpec.<var>,
 # to set a value for use within NixOS configuration, you can directly set `hostSpec.<var>`,
 # to set them in the NixOS context for home-manager, they need to be set under `home-manager.users.<username>.hostSpec.<var>`.
