@@ -41,9 +41,25 @@ The kde profile comes with the desktop environment [KDE Plasma 6](https://kde.or
 sudo nixos-rebuild switch --flake .#<host>-kde
 ```
 
+## Profiles vs Hosts
+
+Every configuration is a combination of a profile and a host. In general (ideally), a profile should work as expected independently of the specific machine — meaning it should not depend on the user’s filesystem, username, location, language, etc.
+
+
+The host defines all these user/machine-specific parameters. You can share common settings between hosts using [hosts/shared-config.nix](./hosts/shared-config.nix), like username or language, while [each host](./hosts/laptop/default.nix) imports their own hardware-configuration and sets their own machine-id.
+
+
+The [hostSpec module](./modules/hostSpec.nix) is the only channel through which profiles and hosts communicate.
+It allows modules and profiles to access host-specific information (such as monitor info or username) during their configuration. This is the only module that must be imported by both hosts and profiles: hosts set its values, and profiles (or other modules) read them.
+
+
+Thanks to hostSpec, modules can be written to be host-independent and are therefore typically used within profiles.
+However, hosts can import modules directly if you want them to be available only for that specific host.
+Just keep the host–profile separation in mind — in many cases, it’s cleaner to create a new profile for a host than to add modules directly to the host definition.
+
 ## Impermanence
 
-These configurations are built around a system with [ZFS impermanence](https://grahamc.com/blog/erase-your-darlings), as such, the root directory is reset at every reboot and only the files in the /persist directory or managed by the [impermanence module](https://github.com/nix-community/impermanence) are kept.
+My hosts use [ZFS impermanence](https://grahamc.com/blog/erase-your-darlings), as such, the root directory is reset at every reboot and only the files in the /persist directory or managed by the [impermanence module](https://github.com/nix-community/impermanence) are kept.
 
 
 The filesystems are handled by [disko](https://github.com/nix-community/disko).
@@ -79,17 +95,19 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 cp /mnt/etc/nixos/hardware-configuration.nix ./hardware/<your-host>-hardware.nix
 ```
 
-Copy a template from hosts/ and modify it to your needs, adding your hashed password to initialHashedPassword
+Create a host configuration for any "machine-specific" configuration and modify hosts/shared-config.nix for any extra settings you wish to share between hosts.
+Create your hashed password and add it to initialHashedPassword.
 !! Also set your hostId to the first 8 characters of your machine-id found in /etc/machine-id if you're using ZFS !!
 ```bash
-cp hosts/pc.nix hosts/<your-host>.nix
+cp -r hosts/laptop hosts/<your-host>
 
-#appends to end of <your-host.nix>, then copy-paste to users.users.${hostSpecs.username}.initialHashedPassword
-mkpasswd <your-password> >> hosts/<your-host>.nix
-#appends to end of <your-host.nix>, then copy-paste to networking.hostId
-head -c 8 /etc/machine-id >> hosts/<your-host>.nix
+#appends to end of shared-config.nix, then copy-paste to users.users.${hostSpecs.username}.initialHashedPassword
+mkpasswd <your-password> >> hosts/shared-config.nix
+#appends to end of <your-host>/default.nix, then copy-paste to networking.hostId
+head -c 8 /etc/machine-id >> hosts/<your-host>/default.nix
 
-nano hosts/<your-host>.nix
+nano hosts/shared-config.nix
+nano hosts/<your-host>/default.nix
 ```
 
 Edit flake.nix to set your desired nixosConfigurations
