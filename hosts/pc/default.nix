@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  outputs,
   ...
 }: let
   myMonitorInfo = {
@@ -16,6 +17,7 @@ in {
     ../../hardware/pc-hardware.nix
     ../../disko/pc-disko.nix
     ../shared-config.nix
+    outputs.nixosModules.steam
   ];
 
   specialisation.rollback.configuration = {
@@ -42,6 +44,7 @@ in {
     builtins.elem (lib.getName pkg) [
       "discord"
       "steam"
+      "steam-unwrapped"
     ];
 
   home-manager.users.${config.hostSpec.username} = {

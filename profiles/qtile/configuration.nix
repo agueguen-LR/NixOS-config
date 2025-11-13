@@ -16,7 +16,6 @@ in {
 
   system.nixos.tags = ["qtile"];
 
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = config.hostSpec.keyboard.layout;
     options = config.hostSpec.keyboard.options;

@@ -1,7 +1,6 @@
 # Anything you want to share between hosts
 {
   inputs,
-  outputs,
   config,
   ...
 }: let
@@ -14,10 +13,10 @@
   };
 in {
   imports = [
-    ../modules/hostSpec.nix
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.impermanence.nixosModules.impermanence
+    ../modules/hostSpec.nix
   ];
 
   fileSystems."/persist".neededForBoot = true;
@@ -54,6 +53,7 @@ in {
   home-manager.users.${mySpecs.username} = {
     imports = [
       inputs.impermanence.homeManagerModules.impermanence
+      ../modules/hostSpec.nix
     ];
     home.persistence."/persist/home/${mySpecs.username}" = {
       directories = [
