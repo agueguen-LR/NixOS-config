@@ -1,6 +1,8 @@
 {
   inputs,
   pkgs,
+	lib,
+	config,
   ...
 }: {
   imports = [
@@ -40,13 +42,15 @@
               id = "Volume";
               displayMode = "alwaysShow";
             }
-            {
+					] ++
+            lib.optional config.hostSpec.hasBattery {
               id = "CustomButton";
               icon = "battery-4";
               leftClickExec = "noctalia-shell ipc call powerProfile cycle";
               textCommand = "${pkgs.acpi}/bin/acpi -b | grep -Eo '[0-9]+%'";
               textIntervalMs = 3000;
             }
+					++ [
             {
               formatHorizontal = "HH:mm dd.MM.yyyy";
               formatVertical = "HH mm";

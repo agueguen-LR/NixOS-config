@@ -1,4 +1,4 @@
-{lib, ...}: {
+{lib, config, ...}: {
   programs.waybar = {
     enable = true;
 
@@ -14,7 +14,7 @@
         modules-center = [];
         modules-right = [
           "pulseaudio"
-          "battery"
+				] ++ lib.optional config.hostSpec.hasBattery "battery" ++ [
           "clock"
           "custom/power"
         ];

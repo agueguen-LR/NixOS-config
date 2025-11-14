@@ -42,6 +42,12 @@ in {
   # Power management for noctalia-shell
   services.power-profiles-daemon.enable = true;
 
-  home-manager.users.${config.hostSpec.username}.hostSpec.monitor = myMonitorInfo;
-  hostSpec.monitor = myMonitorInfo;
+  home-manager.users.${config.hostSpec.username}.hostSpec = {
+		hasBattery = true;
+		monitor = myMonitorInfo;
+	};
+  hostSpec = {
+		monitor = myMonitorInfo;
+		hasBattery = true;
+	};
 }

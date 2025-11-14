@@ -68,8 +68,8 @@ in {
       ];
       allowOther = true;
     };
-    hostSpec = mySpecs;
+    hostSpec = mySpecs; # Sets hostSpecs in home-manager context
   };
 
-  hostSpec = mySpecs;
+  hostSpec = mySpecs; # Sets hostSpecs in nixos context
 }
