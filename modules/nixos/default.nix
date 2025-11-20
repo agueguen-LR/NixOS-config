@@ -9,6 +9,7 @@
   mango = import ./compositor/mango.nix;
   neovim = import ./editor/neovim.nix;
   niri = import ./compositor/niri.nix;
+  postgresql = import ./database/postgreSQL.nix;
   qtile = import ./tilingWM/qtile.nix;
   steam = import ./gaming/steam.nix;
   stylix = import ./style/stylix.nix;

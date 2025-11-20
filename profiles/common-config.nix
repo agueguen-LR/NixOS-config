@@ -8,6 +8,7 @@
   imports = [
     ../modules/hostSpec.nix
     outputs.nixosModules.home-manager
+    outputs.nixosModules.postgresql
   ];
 
   system.autoUpgrade = {
