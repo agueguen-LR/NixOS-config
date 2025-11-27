@@ -43,11 +43,11 @@ in {
   services.power-profiles-daemon.enable = true;
 
   home-manager.users.${config.hostSpec.username}.hostSpec = {
-		hasBattery = true;
-		monitor = myMonitorInfo;
-	};
+    hasBattery = true;
+    monitor = myMonitorInfo;
+  };
   hostSpec = {
-		monitor = myMonitorInfo;
-		hasBattery = true;
-	};
+    monitor = myMonitorInfo;
+    hasBattery = true;
+  };
 }

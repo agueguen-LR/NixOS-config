@@ -23,11 +23,11 @@
         description = "Xkb keyboard options";
       };
     };
-		hasBattery = lib.mkOption {
-			type = lib.types.bool;
-			default = false;
-			description = "Whether the host has a battery.";
-		};
+    hasBattery = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether the host has a battery.";
+    };
     monitor = {
       name = lib.mkOption {
         type = lib.types.listOf lib.types.str;

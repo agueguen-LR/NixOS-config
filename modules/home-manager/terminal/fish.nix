@@ -10,7 +10,7 @@
       nrs = "
         git add .
         sudo nixos-rebuild switch --flake .\#$argv[1] --profile-name $argv[1]
-      ";
+				";
 
       nrb = "
         git add .

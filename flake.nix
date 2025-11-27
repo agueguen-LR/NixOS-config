@@ -10,7 +10,7 @@
     };
 
     catppuccin = {
-      url = "github:catppuccin/nix/ea7a3a665b8b64ca624932bf210a214372f6af38";
+      url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -60,7 +60,7 @@
     };
 
     stylix = {
-      url = "github:nix-community/stylix/release-25.05";
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

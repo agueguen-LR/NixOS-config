@@ -10,7 +10,8 @@
 
   stylix = {
     enable = true;
-    base16Scheme = ./customStyles/Noctalia-custom.yaml;
+    autoEnable = false;
+    base16Scheme = ./customStyles/Catppuccin.yaml;
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;

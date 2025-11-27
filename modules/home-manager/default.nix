@@ -18,6 +18,7 @@
   noctalia = import ./desktopEnvironment/noctalia.nix;
   nvf = import ./nvim/nvf;
   mango = import ./compositor/mango;
+  stylix = import ./style/stylix.nix;
   swww = import ./wallpaper/swww.nix;
   tmux = import ./terminal/tmux.nix;
   rofi = import ./appLauncher/rofi.nix;

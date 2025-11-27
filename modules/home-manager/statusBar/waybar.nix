@@ -1,4 +1,8 @@
-{lib, config, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   programs.waybar = {
     enable = true;
 
@@ -12,12 +16,15 @@
 
         modules-left = [];
         modules-center = [];
-        modules-right = [
-          "pulseaudio"
-				] ++ lib.optional config.hostSpec.hasBattery "battery" ++ [
-          "clock"
-          "custom/power"
-        ];
+        modules-right =
+          [
+            "pulseaudio"
+          ]
+          ++ lib.optional config.hostSpec.hasBattery "battery"
+          ++ [
+            "clock"
+            "custom/power"
+          ];
 
         "clock" = {
           timezone = "Europe/Paris";
