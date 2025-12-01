@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   outputs,
   ...
@@ -47,6 +48,15 @@ in {
       "steam-unwrapped"
     ];
 
+  users.users.${config.hostSpec.username}.packages = with pkgs; [
+    heroic
+  ];
+
+  environment.persistence."/persist".directories = [
+    "/var/lib/libvirt" # virt-manager
+    "/var/lib/bluetooth"
+  ];
+
   home-manager.users.${config.hostSpec.username} = {
     home.persistence."/persist/home/${config.hostSpec.username}".directories = [
       {
@@ -59,6 +69,18 @@ in {
       }
       {
         directory = ".local/share/PrismLauncher";
+        method = "symlink";
+      }
+      {
+        directory = ".config/heroic";
+        method = "symlink";
+      }
+      {
+        directory = ".config/heroic";
+        method = "symlink";
+      }
+      {
+        directory = "Games/Heroic";
         method = "symlink";
       }
     ];

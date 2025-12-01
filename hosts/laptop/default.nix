@@ -25,6 +25,8 @@ in {
     echo 'finished rollback'
   '';
 
+  boot.kernelModules = ["cp210x"];
+
   networking = {
     hostName = "nixos-laptop";
     hostId = "81cd2a4d"; # Needed for ZFS
@@ -42,12 +44,17 @@ in {
   # Power management for noctalia-shell
   services.power-profiles-daemon.enable = true;
 
+  environment.persistence."/persist".directories = [
+    "/var/lib/libvirt" # virt-manager
+    "/var/lib/bluetooth"
+  ];
+
   home-manager.users.${config.hostSpec.username}.hostSpec = {
     hasBattery = true;
     monitor = myMonitorInfo;
   };
   hostSpec = {
-    monitor = myMonitorInfo;
     hasBattery = true;
+    monitor = myMonitorInfo;
   };
 }
