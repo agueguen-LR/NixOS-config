@@ -9,9 +9,9 @@ in {
   imports = [
     ../common-config.nix
     modules.catppuccin
+    modules.fish
     modules.neovim
     modules.niri
-    modules.fish
     modules.tuigreet
     modules.virt-manager
   ];
@@ -28,8 +28,6 @@ in {
     users = [config.hostSpec.username];
   };
 
-  boot.kernelModules = ["cp210x"];
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -39,7 +37,6 @@ in {
     packages = with pkgs; [
       btop
       fastfetch
-      librewolf
       pavucontrol #volume control
       sysstat #system info commands: iostat mpstat pidstat ...
       wl-clipboard

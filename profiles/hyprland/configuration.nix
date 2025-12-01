@@ -9,9 +9,9 @@ in {
   imports = [
     ../common-config.nix
     modules.catppuccin
-    modules.neovim
-    modules.hyprland
     modules.fish
+    modules.hyprland
+    modules.neovim
     modules.tuigreet
     modules.virt-manager
   ];
@@ -28,8 +28,6 @@ in {
     users = [config.hostSpec.username];
   };
 
-  boot.kernelModules = ["cp210x"];
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -41,7 +39,6 @@ in {
       fastfetch
       pavucontrol #volume control
       sysstat #system info commands: iostat mpstat pidstat ...
-      tree
       wl-clipboard
     ];
     shell = pkgs.fish;

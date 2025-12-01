@@ -9,7 +9,9 @@ in {
   imports = [
     ../common-home.nix
     modules.catppuccin
+    modules.direnv
     modules.fish
+    modules.fzf
     modules.kitty
     modules.librewolf
     modules.nixcord
@@ -19,6 +21,7 @@ in {
     modules.rofi
     modules.waybar
     modules.yazi
+    modules.zoxide
   ];
 
   services.gpg-agent = {

@@ -9,8 +9,9 @@ in {
   imports = [
     ../common-config.nix
     modules.catppuccin
-    modules.neovim
     modules.fish
+    modules.neovim
+    modules.virt-manager
   ];
 
   system.nixos.tags = ["kde"];
@@ -24,6 +25,11 @@ in {
     desktopManager.plasma6.enable = true;
   };
 
+  virtualisation = {
+    enable = true;
+    users = [config.hostSpec.username];
+  };
+
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -34,8 +40,6 @@ in {
       btop
       fastfetch
       pavucontrol #volume control
-      tree
-      acpi #battery info
       sysstat #system info commands: iostat mpstat pidstat ...
       wl-clipboard
     ];

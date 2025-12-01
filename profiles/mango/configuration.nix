@@ -43,13 +43,10 @@ in {
       btop
       fastfetch
       grim # screenshots
-      librewolf
       pavucontrol #volume control
       ripgrep #nvim telescope live_grep
       slurp # screenshots
       sysstat #system info commands: iostat mpstat pidstat ...
-      tree
-      unzip
       wl-clipboard
     ];
     shell = pkgs.fish;

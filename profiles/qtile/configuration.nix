@@ -12,6 +12,7 @@ in {
     modules.fish
     modules.neovim
     modules.qtile
+    modules.virt-manager
   ];
 
   system.nixos.tags = ["qtile"];
@@ -19,6 +20,11 @@ in {
   services.xserver.xkb = {
     layout = config.hostSpec.keyboard.layout;
     options = config.hostSpec.keyboard.options;
+  };
+
+  virtualisation = {
+    enable = true;
+    users = [config.hostSpec.username];
   };
 
   # Enable CUPS to print documents.
@@ -31,7 +37,6 @@ in {
       btop
       fastfetch
       pavucontrol
-      tree
       acpi
       sysstat
     ];
