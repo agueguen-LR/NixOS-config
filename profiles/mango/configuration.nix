@@ -28,10 +28,6 @@ in {
     users = [config.hostSpec.username];
   };
 
-  boot.kernelModules = ["cp210x"];
-
-  catppuccin.enable = true;
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 

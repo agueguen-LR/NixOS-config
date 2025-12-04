@@ -76,10 +76,6 @@ in {
         method = "symlink";
       }
       {
-        directory = ".config/heroic";
-        method = "symlink";
-      }
-      {
         directory = "Games/Heroic";
         method = "symlink";
       }
