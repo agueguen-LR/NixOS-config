@@ -1,6 +1,7 @@
 {
   pkgs,
   outputs,
+  inputs,
   lib,
   config,
   ...
@@ -9,7 +10,9 @@
 in {
   imports = [
     ../common-home.nix
+    inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
     modules.catppuccin
+    modules.dankMaterial
     modules.direnv
     modules.fish
     modules.fzf
@@ -18,16 +21,23 @@ in {
     modules.niri
     modules.nixcord
     modules.nixvim
-    modules.noctalia
+    # modules.noctalia
     modules.yazi
     modules.zoxide
   ];
 
   programs.niri.settings = {
     binds = let
-      noctalia = cmd:
+      # noctalia = cmd:
+      #   [
+      #     "noctalia-shell"
+      #     "ipc"
+      #     "call"
+      #   ]
+      #   ++ (pkgs.lib.splitString " " cmd);
+      dms = cmd:
         [
-          "noctalia-shell"
+          "dms"
           "ipc"
           "call"
         ]
@@ -35,13 +45,18 @@ in {
     in {
       "Mod+T".action.spawn = "kitty";
       "Mod+B".action.spawn = "librewolf";
-      "Mod+R".action.spawn = noctalia "launcher toggle";
-      "Mod+S".action.spawn = noctalia "settings toggle";
+      # "Mod+R".action.spawn = noctalia "launcher toggle";
+      # "Mod+S".action.spawn = noctalia "settings toggle";
+      "Mod+R".action.spawn = dms "spotlight toggle";
+      "Mod+Shift+R".action.spawn = ["sh" "-c" ''dms restart''];
+      "Mod+S".action.spawn = dms "settings toggle";
     };
     spawn-at-startup = [
-      {command = ["noctalia-shell"];}
+      # {command = ["noctalia-shell"];}
     ];
   };
+
+  programs.dankMaterialShell.niri.enableSpawn = true;
 
   services.gpg-agent = {
     enable = true;

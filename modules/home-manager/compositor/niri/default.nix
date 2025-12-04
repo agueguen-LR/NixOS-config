@@ -62,7 +62,7 @@ in {
     ];
 
     binds = with config.lib.niri.actions; {
-      "Mod+T" = lib.mkDefault action.spawn."${pkgs.alacritty}/bin/alacritty";
+      "Mod+T".action = lib.mkDefault (spawn "${pkgs.alacritty}/bin/alacritty");
       "Mod+Q".action = close-window;
       "Mod+O".action = toggle-overview;
 

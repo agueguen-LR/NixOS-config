@@ -3,6 +3,7 @@
   # my-module = import ./my-module.nix;
   alacritty = import ./terminal/terminal-emulator/alacritty.nix;
   catppuccin = import ./style/catppuccin.nix;
+  dankMaterial = import ./quickshell/dankMaterial.nix;
   direnv = import ./devEnvironments/direnv.nix;
   fish = import ./terminal/shell/fish.nix;
   fuzzel = import ./appLauncher/fuzzel.nix;
