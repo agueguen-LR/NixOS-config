@@ -17,10 +17,10 @@ in {
   system.nixos.tags = ["kde"];
 
   services = {
-    xserver.xkb = {
-      layout = config.hostSpec.keyboard.layout;
-      options = config.hostSpec.keyboard.options;
-    };
+    # xserver.xkb = {
+    #   layout = config.hostSpec.keyboard.layout;
+    #   options = config.hostSpec.keyboard.options;
+    # };
     displayManager.sddm.enable = true;
     desktopManager.plasma6.enable = true;
   };

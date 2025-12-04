@@ -49,7 +49,7 @@ in {
     ];
 
   users.users.${config.hostSpec.username}.packages = with pkgs; [
-    heroic
+    heroic-unwrapped
   ];
 
   environment.persistence."/persist".directories = [

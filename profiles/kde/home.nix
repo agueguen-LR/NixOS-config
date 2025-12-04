@@ -16,6 +16,7 @@ in {
     modules.librewolf
     modules.nixcord
     modules.nixvim
+    modules.plasma
     modules.yazi
     modules.zoxide
   ];
