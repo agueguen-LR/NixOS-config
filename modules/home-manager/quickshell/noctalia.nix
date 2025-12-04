@@ -20,7 +20,7 @@
         widgets = {
           left = [
             {
-              id = "SidePanelToggle";
+              id = "ControlCenter";
               useDistroLogo = true;
             }
             {
@@ -75,7 +75,7 @@
         enabled = true;
         overviewEnabled = false;
         directory = ./. + "/../wallpaper/wallpapers";
-        defaultWallpaper = ./. + "/../wallpaper/wallpapers/catppuccin-nixos.png";
+        randomEnabled = true;
       };
 
       colorSchemes.predefinedScheme = "Catppuccin";

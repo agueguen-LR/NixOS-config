@@ -61,23 +61,12 @@ in {
       }
     ];
 
-    binds = with config.lib.niri.actions; let
-      noctalia = cmd:
-        [
-          "noctalia-shell"
-          "ipc"
-          "call"
-        ]
-        ++ (pkgs.lib.splitString " " cmd);
-    in {
-      "Mod+T".action.spawn = "kitty";
-      "Mod+B".action.spawn = "librewolf";
-      "Mod+R".action.spawn = noctalia "launcher toggle";
-      "Mod+S".action.spawn = noctalia "settings toggle";
+    binds = with config.lib.niri.actions; {
+      "Mod+T" = lib.mkDefault action.spawn."${pkgs.alacritty}/bin/alacritty";
       "Mod+Q".action = close-window;
       "Mod+O".action = toggle-overview;
 
-      "Print".action = spawn "sh" "-c" ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | wl-copy'';
+      "Print".action = spawn "sh" "-c" ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy'';
 
       "Mod+Left".action = focus-column-left;
       "Mod+Right".action = focus-column-right;
@@ -154,7 +143,6 @@ in {
 
     # Startup applications
     spawn-at-startup = [
-      {command = ["noctalia-shell"];}
       {command = ["xwayland-satellite"];}
     ];
   };

@@ -2,6 +2,7 @@
   pkgs,
   outputs,
   lib,
+  config,
   ...
 }: let
   modules = outputs.homeManagerModules;
@@ -21,6 +22,26 @@ in {
     modules.yazi
     modules.zoxide
   ];
+
+  programs.niri.settings = {
+    binds = let
+      noctalia = cmd:
+        [
+          "noctalia-shell"
+          "ipc"
+          "call"
+        ]
+        ++ (pkgs.lib.splitString " " cmd);
+    in {
+      "Mod+T".action.spawn = "kitty";
+      "Mod+B".action.spawn = "librewolf";
+      "Mod+R".action.spawn = noctalia "launcher toggle";
+      "Mod+S".action.spawn = noctalia "settings toggle";
+    };
+    spawn-at-startup = [
+      {command = ["noctalia-shell"];}
+    ];
+  };
 
   services.gpg-agent = {
     enable = true;
