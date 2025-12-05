@@ -2,6 +2,7 @@
 {
   inputs,
   config,
+  lib,
   ...
 }: let
   mySpecs = {
@@ -20,6 +21,12 @@ in {
   ];
 
   fileSystems."/persist".neededForBoot = true;
+
+  boot.initrd.postResumeCommands = lib.mkAfter ''
+    echo 'starting rollback'
+    zfs rollback -r zroot/local/root@blank
+    echo 'finished rollback'
+  '';
 
   age = {
     identityPaths = ["/persist/home/${mySpecs.username}/.secrets/agenix-rsa-4096"];

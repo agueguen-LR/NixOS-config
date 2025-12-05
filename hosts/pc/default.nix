@@ -21,15 +21,6 @@ in {
     outputs.nixosModules.steam
   ];
 
-  specialisation.rollback.configuration = {
-    boot.initrd.postDeviceCommands = ''
-      echo 'starting rollback'
-        zpool import zroot
-        zfs rollback -r zroot/local/root@blank
-      echo 'finished rollback'
-    '';
-  };
-
   boot.loader.systemd-boot.extraEntries."Windows11.conf" = ''
     title Windows 11
     efi /EFI/Microsoft/Boot/bootmgfw.efi

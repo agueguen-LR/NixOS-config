@@ -18,13 +18,6 @@ in {
     ../shared-config.nix
   ];
 
-  boot.initrd.postDeviceCommands = ''
-    echo 'starting rollback'
-      zpool import zroot
-      zfs rollback -r zroot/local/root@blank
-    echo 'finished rollback'
-  '';
-
   boot.kernelModules = ["cp210x"];
 
   networking = {
@@ -43,6 +36,7 @@ in {
 
   # Power management for noctalia-shell
   services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
 
   environment.persistence."/persist".directories = [
     "/var/lib/libvirt" # virt-manager
