@@ -22,11 +22,6 @@ in {
     options = config.hostSpec.keyboard.options;
   };
 
-  virtualisation = {
-    enable = true;
-    users = [config.hostSpec.username];
-  };
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 

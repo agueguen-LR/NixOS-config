@@ -23,11 +23,6 @@ in {
     command = "hyprland";
   };
 
-  virtualisation = {
-    enable = true;
-    users = [config.hostSpec.username];
-  };
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 

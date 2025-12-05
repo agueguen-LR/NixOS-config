@@ -2,8 +2,6 @@
   pkgs,
   outputs,
   inputs,
-  lib,
-  config,
   ...
 }: let
   modules = outputs.homeManagerModules;
@@ -70,10 +68,6 @@ in {
       program = "pinentry-rofi";
     };
   };
-
-  home.activation.createDiscordConfigDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    mkdir -p ~/.config/discord
-  '';
 
   home.sessionVariables = {
     DISPLAY = ":0";
