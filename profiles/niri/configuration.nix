@@ -12,15 +12,25 @@ in {
     modules.fish
     modules.neovim
     modules.niri
-    modules.tuigreet
+    modules.dankgreet
     modules.virt-manager
   ];
 
   system.nixos.tags = ["niri"];
 
-  services.tuigreet = {
-    enable = true;
-    command = "niri";
+  programs.dankMaterialShell.greeter.compositor = {
+    name = "niri";
+    customConfig = ''
+      input {
+      	keyboard {
+      			xkb {
+      					layout "${config.hostSpec.keyboard.layout}"
+      					options "${config.hostSpec.keyboard.options}"
+      			}
+      			numlock
+      	}
+      }
+    '';
   };
 
   # Enable CUPS to print documents.

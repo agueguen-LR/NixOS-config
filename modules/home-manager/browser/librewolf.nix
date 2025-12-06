@@ -40,6 +40,11 @@
         Folder = "Nix";
       }
       {
+        Title = "DankMaterial-shell";
+        URL = "https://danklinux.com/docs/";
+        Folder = "Nix";
+      }
+      {
         Title = "GitHub";
         URL = "https://github.com/agueguen-LR";
         Placement = "toolbar";

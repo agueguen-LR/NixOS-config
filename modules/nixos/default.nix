@@ -2,6 +2,7 @@
   # List module files here
   # my-module = import ./my-module.nix;
   catppuccin = import ./style/catppuccin.nix;
+  dankgreet = import ./greeter/dankgreet.nix;
   firefox = import ./browser/firefox.nix;
   fish = import ./shell/fish.nix;
   home-manager = import ./home-manager/home-manager.nix;

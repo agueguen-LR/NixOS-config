@@ -1,9 +1,13 @@
-{inputs, lib, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.nixcord.homeModules.nixcord
   ];
 
-	# for impermanence, make sure config folder exists
+  # for impermanence, make sure config folder exists
   home.activation.createDiscordConfigDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
     mkdir -p ~/.config/discord
   '';

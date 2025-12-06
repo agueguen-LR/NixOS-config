@@ -2,16 +2,15 @@
   config,
   pkgs,
   ...
-}:
-{
-	programs.virt-manager.enable = true;
+}: {
+  programs.virt-manager.enable = true;
 
-	users.groups.libvirtd.members = [config.hostSpec.username];
+  users.groups.libvirtd.members = [config.hostSpec.username];
 
-	virtualisation.libvirtd = {
-		enable = true;
-		qemu.vhostUserPackages = [pkgs.virtiofsd];
-	};
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.vhostUserPackages = [pkgs.virtiofsd];
+  };
 
-	virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 }
