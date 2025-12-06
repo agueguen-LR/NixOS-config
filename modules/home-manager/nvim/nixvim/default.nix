@@ -11,8 +11,10 @@ in {
     ./dap.nix
   ];
 
-  home.packages = [
-    pkgs.ripgrep
+  home.packages = with pkgs; [
+    alejandra
+    ripgrep
+    ruff
   ];
 
   programs.nixvim = {
@@ -57,13 +59,28 @@ in {
       lspconfig.enable = true;
       markdown-preview.enable = true;
       otter.enable = true;
-      quarto.enable = true;
+      # quarto.enable = true;
       telescope.enable = true;
       toggleterm.enable = true;
       neo-tree.enable = true;
       nvim-autopairs.enable = true;
       which-key.enable = true;
       web-devicons.enable = true;
+
+      conform-nvim = {
+        enable = true;
+        settings = {
+          log_level = "debug";
+          format_on_save = {
+            timeout_ms = 500;
+            lsp_fallback = true;
+          };
+          formatters_by_ft = {
+            nix = ["alejandra"];
+            python = ["ruff_format"];
+          };
+        };
+      };
 
       image = {
         enable = true;
@@ -75,14 +92,14 @@ in {
         };
       };
 
-      molten = {
-        #jupyter
-        enable = true;
-        settings = {
-          auto_image_popup = true;
-          image_provider = "image.nvim";
-        };
-      };
+      # molten = {
+      #   #jupyter
+      #   enable = true;
+      #   settings = {
+      #     auto_image_popup = true;
+      #     image_provider = "image.nvim";
+      #   };
+      # };
 
       treesitter = {
         enable = true;
@@ -102,25 +119,37 @@ in {
     }; # end of plugins
 
     lsp.servers = {
-      nixd.enable = true;
-      clangd = {
+      arduino_language_server = {
         enable = true;
-        settings = {
-          filetypes = [
-            "c"
-            "cpp"
-            "h"
-            "inc"
-            "ino"
+        config = {
+          cmd = [
+            "${pkgs.arduino-language-server}/bin/arduino-language-server"
+            "-cli"
+            "${pkgs.arduino-cli}/bin/arduino-cli"
+            "-clangd"
+            "${pkgs.clang-tools}/bin/clangd"
+            "-fqbn"
+            "esp32:esp32:featheresp32" # You will need to change this to your board's fqdn for this to work
+          ];
+          root_markers = [
+            "shell.nix"
           ];
         };
       };
+      clangd = {
+        enable = true;
+        config.filetypes = [
+          "c"
+          "cpp"
+          "h"
+          "inc"
+        ];
+      };
       java_language_server.enable = true;
       cmake.enable = true;
-      cssls.enable = true;
-      superhtml.enable = true;
       pylsp.enable = true;
       pyright.enable = true;
+      nixd.enable = true;
     };
   };
 }
