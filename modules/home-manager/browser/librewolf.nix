@@ -1,6 +1,13 @@
-{...}: {
+{config, ...}: {
   programs.librewolf = {
     enable = true;
+
+    profiles."${config.hostSpec.username}" = {
+      name = config.hostSpec.username;
+      path = config.hostSpec.username;
+      isDefault = true;
+      extensions.force = true;
+    };
 
     policies.Bookmarks = [
       {

@@ -68,6 +68,10 @@ in {
           method = "symlink";
         }
         ".gnupg"
+        {
+          directory = ".librewolf/${mySpecs.username}/storage/default"; # extension data and cookies, manage carefully
+          method = "symlink";
+        }
       ];
       files = [
         ".gitconfig"

@@ -23,12 +23,15 @@ in {
     customConfig = ''
       input {
       	keyboard {
-      			xkb {
-      					layout "${config.hostSpec.keyboard.layout}"
-      					options "${config.hostSpec.keyboard.options}"
-      			}
-      			numlock
+      		xkb {
+      			layout "${config.hostSpec.keyboard.layout}"
+      			options "${config.hostSpec.keyboard.options}"
+      		}
+      		numlock
       	}
+      }
+      hotkey-overlay {
+      	skip-at-startup
       }
     '';
   };

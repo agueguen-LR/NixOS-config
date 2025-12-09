@@ -50,6 +50,11 @@ in {
       always-center-single-column = true;
     };
 
+    hotkey-overlay = {
+      hide-not-bound = false;
+      skip-at-startup = true;
+    };
+
     window-rules = [
       {
         geometry-corner-radius = {
