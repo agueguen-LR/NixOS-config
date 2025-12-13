@@ -71,7 +71,7 @@ in {
       "Mod+Q".action = close-window;
       "Mod+O".action = toggle-overview;
 
-      "Print".action = spawn "sh" "-c" ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy'';
+      "Print".action = lib.mkDefault (spawn "sh" "-c" ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy'');
 
       "Mod+Left".action = focus-column-left;
       "Mod+Right".action = focus-column-right;

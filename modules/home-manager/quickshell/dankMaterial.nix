@@ -18,8 +18,9 @@
     # These settings are only applied if ~/.config/DankMaterialShell doesn't exist
     # A nixos-rebuild switch will therefore not apply these, unless you delete that file beforehand
     default.settings = {
-      currentThemeName = "cat-blue"; # doesn't work for some reason ???
+      currentThemeName = "cat-blue";
       customThemeFile = "";
+      dynamicTheming = true;
 
       matugenScheme = "scheme-tonal-spot";
       runUserMatugenTemplates = true;

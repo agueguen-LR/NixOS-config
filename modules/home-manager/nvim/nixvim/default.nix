@@ -15,6 +15,7 @@ in {
     alejandra
     ripgrep
     ruff
+    rustfmt
   ];
 
   programs.nixvim = {
@@ -78,6 +79,7 @@ in {
           formatters_by_ft = {
             nix = ["alejandra"];
             python = ["ruff_format"];
+            rust = ["rustfmt"];
           };
         };
       };
@@ -150,6 +152,7 @@ in {
       pylsp.enable = true;
       pyright.enable = true;
       nixd.enable = true;
+      rust_analyzer.enable = true;
     };
   };
 }

@@ -46,15 +46,17 @@ in {
       # "Mod+R".action.spawn = noctalia "launcher toggle";
       # "Mod+S".action.spawn = noctalia "settings toggle";
       "Mod+R".action.spawn = dms "spotlight toggle";
-      "Mod+Shift+R".action.spawn = ["sh" "-c" ''dms restart''];
+      "Mod+Shift+R".action.spawn = ["sh" "-c" ''dms kill && dms run -d''];
       "Mod+S".action.spawn = dms "settings toggle";
+      "Print".action.spawn = ["dms" "screenshot"];
     };
     spawn-at-startup = [
       # {command = ["noctalia-shell"];}
+      {command = ["dms" "run" "-d"];}
     ];
   };
 
-  programs.dankMaterialShell.niri.enableSpawn = true;
+  # programs.dankMaterialShell.niri.enableSpawn = true;
 
   services.gpg-agent = {
     enable = true;
