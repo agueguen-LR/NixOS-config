@@ -69,7 +69,7 @@ in {
         }
         ".gnupg"
         {
-          directory = ".librewolf/${mySpecs.username}/storage/default"; # extension data and cookies, manage carefully
+          directory = ".librewolf/${mySpecs.username}/extensions"; # installed extensions
           method = "symlink";
         }
       ];

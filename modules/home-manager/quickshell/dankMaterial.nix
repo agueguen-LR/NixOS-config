@@ -53,7 +53,6 @@
       controlCenterShowNetworkIcon = true;
       controlCenterShowBluetoothIcon = true;
       controlCenterShowAudioIcon = true;
-      controlCenterShowBatteryIcon = config.hostSpec.hasBattery;
       controlCenterWidgets = [
         {
           id = "volumeSlider";
