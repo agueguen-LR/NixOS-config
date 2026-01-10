@@ -36,11 +36,15 @@ in {
     builtins.elem (lib.getName pkg) [
       "discord"
       "steam"
+      "steam-original"
       "steam-unwrapped"
+      "steam-run"
     ];
 
   users.users.${config.hostSpec.username}.packages = with pkgs; [
     heroic-unwrapped
+    prismlauncher
+    zulu25 # java
   ];
 
   environment.persistence."/persist".directories = [

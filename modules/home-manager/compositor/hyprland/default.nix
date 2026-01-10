@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{config, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -36,10 +32,10 @@
       };
 
       bind = [
-        "$mod, B, exec, librewolf" # Open browser
-        "$mod, T, exec, kitty" # Open terminal
-        "$mod, D, exec, vesktop" # Open discord
-        "$mod, R, exec, rofi -show drun" # Open rofi
+        # "$mod, B, exec, librewolf" # Open browser
+        # "$mod, T, exec, kitty" # Open terminal
+        # "$mod, D, exec, vesktop" # Open discord
+        # "$mod, R, exec, rofi -show drun" # Open rofi
 
         "$mod, Q, killactive" # Kill active window
         "$mod, H, movefocus, l" # Move focus left
@@ -87,7 +83,7 @@
 
         "$mod, F, fullscreen, 1" # Maximize window
 
-        ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area" # Screenshot
+        # ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area" # Screenshot
       ];
     };
   };
