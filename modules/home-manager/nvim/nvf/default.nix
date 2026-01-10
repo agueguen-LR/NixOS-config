@@ -1,20 +1,9 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
+{inputs, ...}: let
   keybinds = import ./keybinds.nix;
 in {
   imports = [
     inputs.nvf.homeManagerModules.default
   ];
-
-  programs.neovim = {
-    enable = true;
-    extraConfig = ''
-      set langmap=zw,wz
-    ''; # Swap keys for azerty
-  };
 
   programs.nvf = {
     enable = true;
@@ -27,6 +16,11 @@ in {
       utility.images.image-nvim = {
         enable = true;
         setupOpts.backend = "kitty";
+      };
+
+      visuals = {
+        indent-blankline.enable = true;
+        nvim-web-devicons.enable = true;
       };
 
       theme = {
@@ -46,7 +40,6 @@ in {
 
       statusline.lualine.enable = true;
       telescope.enable = true;
-      #autocomplete.nvim-cmp.enable = true;
       filetree.neo-tree.enable = true;
       tabline.nvimBufferline.enable = true;
 
@@ -68,6 +61,7 @@ in {
         providers = {
           wl-copy.enable = true;
         };
+        registers = "unnamedplus";
       };
 
       options = {
@@ -77,43 +71,60 @@ in {
 
       debugger.nvim-dap = {
         enable = true;
-        mappings = {};
-        sources = {};
         ui.enable = true;
       };
 
-      lsp.enable = true;
+      formatter.conform-nvim = {
+        enable = true;
+      };
+
+      lsp = {
+        enable = true;
+        otter-nvim.enable = true;
+        formatOnSave = true;
+      };
+
       languages = {
         enableTreesitter = true;
         enableDAP = true;
+        enableFormat = true;
 
         nix = {
           enable = true;
-          lsp.server = "nixd";
+          format.enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
         };
 
         clang = {
           # c and c++
           enable = true;
-          lsp.server = "clangd";
+          lsp.enable = true;
           dap.enable = true;
+          treesitter.enable = true;
         };
 
-        java.enable = true;
+        java = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+        };
 
         python = {
           enable = true;
+          lsp.enable = true;
           format.enable = true;
           dap.enable = true;
+          treesitter.enable = true;
         };
-      };
 
-      extraPlugins = {
-        nvim-java.package = pkgs.vimPlugins.nvim-java;
-        nvim-java-dap.package = pkgs.vimPlugins.nvim-java-dap;
-        nvim-java-test.package = pkgs.vimPlugins.nvim-java-test;
-        nvim-java-refactor.package = pkgs.vimPlugins.nvim-java-refactor;
-        nvim-java-core.package = pkgs.vimPlugins.nvim-java-core;
+        rust = {
+          enable = true;
+          format.enable = true;
+          dap.enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+        };
       };
     };
   };
