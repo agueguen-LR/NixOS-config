@@ -63,6 +63,22 @@ in {
         method = "symlink";
       }
       {
+        directory = ".java/.userPrefs/ninjabrainbot";
+        method = "symlink";
+      }
+      {
+        directory = ".config/waywall";
+        method = "symlink";
+      }
+      {
+        directory = ".local/share/flatpak/app/com.hypixel.HytaleLauncher";
+        method = "symlink";
+      }
+      {
+        directory = ".var/app/com.hypixel.HytaleLauncher";
+        method = "symlink";
+      }
+      {
         directory = ".local/share/PrismLauncher";
         method = "symlink";
       }
