@@ -8,7 +8,6 @@
   imports = [
     ../modules/hostSpec.nix
     outputs.nixosModules.home-manager
-    outputs.nixosModules.postgresql
   ];
 
   system.autoUpgrade = {
@@ -62,6 +61,8 @@
       extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     };
   };
+
+  nix.settings.trusted-users = ["root" "@wheel"];
 
   programs = {
     fuse.userAllowOther = true; # see https://github.com/nix-community/impermanence#home-manager
