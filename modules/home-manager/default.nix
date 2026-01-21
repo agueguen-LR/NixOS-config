@@ -15,9 +15,9 @@
   hyprcursor = import ./cursor/hyprcursor.nix;
   niri = import ./compositor/niri;
   nixcord = import ./social/nixcord.nix;
-  nixvim = import ./nvim/nixvim;
+  nixvim = import ./ide/nvim/nixvim;
   noctalia = import ./quickshell/noctalia.nix;
-  nvf = import ./nvim/nvf;
+  nvf = import ./ide/nvim/nvf;
   mango = import ./compositor/mango;
   plasma = import ./desktopEnvironment/plasma.nix;
   stylix = import ./style/stylix.nix;
@@ -26,6 +26,7 @@
   rofi = import ./appLauncher/rofi.nix;
   waybar = import ./statusBar/waybar.nix;
   yazi = import ./fileManager/yazi.nix;
+	zed = import ./ide/zed;
   zoxide = import ./terminal/utilities/zoxide.nix;
   zsh = import ./terminal/shell/zsh.nix;
 }

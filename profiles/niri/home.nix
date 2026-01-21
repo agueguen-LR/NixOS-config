@@ -22,6 +22,7 @@ in {
     modules.nvf
     # modules.noctalia
     modules.yazi
+		modules.zed
     modules.zoxide
   ];
 
