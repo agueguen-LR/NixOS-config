@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   myMonitorInfo = {
@@ -29,6 +30,7 @@ in {
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
+      "android-studio-stable"
     ];
 
   # Enable touchpad support.
@@ -37,6 +39,12 @@ in {
   # Power management for noctalia-shell
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
+
+  users.users.${config.hostSpec.username}.packages = with pkgs; [
+    android-studio
+    android-tools
+    zulu17
+  ];
 
   environment.persistence."/persist".directories = [
     "/var/lib/libvirt" # virt-manager
