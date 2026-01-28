@@ -147,7 +147,10 @@ in {
           "inc"
         ];
       };
-      java_language_server.enable = true;
+      java_language_server = {
+        enable = true;
+        config.cmd = ["${pkgs.java-language-server}/bin/java-language-server"];
+      };
       cmake.enable = true;
       pylsp.enable = true;
       pyright.enable = true;

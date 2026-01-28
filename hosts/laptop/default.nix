@@ -44,6 +44,7 @@ in {
     android-studio
     android-tools
     zulu17
+    zulu21
   ];
 
   environment.persistence."/persist".directories = [

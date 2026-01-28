@@ -18,11 +18,11 @@ in {
     modules.librewolf
     modules.niri
     modules.nixcord
-    # modules.nixvim
-    modules.nvf
+    modules.nixvim
+    # modules.nvf
     # modules.noctalia
     modules.yazi
-		modules.zed
+    modules.zed
     modules.zoxide
   ];
 
