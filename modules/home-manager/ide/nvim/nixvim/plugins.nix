@@ -45,12 +45,14 @@
           python = ["ruff_format"];
           rust = ["rustfmt"];
           java = ["google-java-format"];
+          kotlin = [];
         };
         formatters = {
           alejandra.command = lib.getExe pkgs.alejandra;
           ruff_format.command = lib.getExe pkgs.ruff;
           rustfmt.command = lib.getExe pkgs.rustfmt;
           google-java-format.command = lib.getExe pkgs.google-java-format;
+          ktfmt.command = lib.getExe pkgs.ktfmt;
         };
       };
     };

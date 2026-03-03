@@ -32,6 +32,14 @@
     };
     cmake.enable = true;
     lua_ls.enable = true;
+    kotlin_language_server = {
+      enable = true;
+      config.filetypes = ["kotlin"];
+      config.onAttach.function = ''
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      '';
+    };
     pylsp.enable = true;
     pyright.enable = true;
     nixd.enable = true;
