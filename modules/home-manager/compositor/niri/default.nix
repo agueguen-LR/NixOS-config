@@ -36,6 +36,8 @@ in {
 
     cursor = {
       size = 12;
+      hide-after-inactive-ms = 2000;
+      hide-when-typing = true;
     };
     prefer-no-csd = true;
 
