@@ -27,7 +27,10 @@
     # quarto.enable = true;
     telescope.enable = true;
     toggleterm.enable = true;
-    neo-tree.enable = true;
+    neo-tree = {
+      enable = true;
+      log_to_file = true;
+    };
     nvim-autopairs.enable = true;
     which-key.enable = true;
     web-devicons.enable = true;

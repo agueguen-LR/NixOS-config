@@ -35,6 +35,7 @@ in {
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
+      "android-studio-stable"
       "steam"
       "steam-original"
       "steam-unwrapped"
@@ -44,6 +45,7 @@ in {
   users.users.${config.hostSpec.username}.packages = with pkgs; [
     heroic-unwrapped
     prismlauncher
+    android-studio
     zulu25 # java
   ];
 

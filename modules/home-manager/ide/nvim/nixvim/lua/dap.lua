@@ -21,7 +21,7 @@ dap.configurations.c = {
 			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
 		end,
 		args = {}, -- provide arguments if needed
-		cwd = "''${workspaceFolder}",
+		cwd = "${workspaceFolder}",
 		stopAtBeginningOfMainSubprogram = false,
 	}
 }
@@ -33,7 +33,7 @@ dap.configurations.python = {
 		name = "Launch",
 		type = "python",
 		request = "launch",
-		program = "''${file}",
+		program = "${file}",
 		pythonPath = vim.fn.getcwd() .. '/.venv/bin/python',
 		-- pythonPath = '~/.conda/bin/python3.13',
 		env = {

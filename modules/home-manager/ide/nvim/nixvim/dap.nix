@@ -17,9 +17,9 @@
     };
 
     extraConfigLuaPre = ''
-      _G.nix = {}
+         _G.nix = _G.nix or {}
       _G.nix.dap = {
-      	  gdb = "${pkgs.gdb}/bin/gdb",
+      	gdb = "${pkgs.gdb}/bin/gdb",
       }
     '';
 

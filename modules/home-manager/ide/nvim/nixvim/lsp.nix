@@ -30,6 +30,7 @@
       enable = true;
       config.cmd = ["${pkgs.java-language-server}/bin/java-language-server"];
     };
+    jdtls.enable = true;
     cmake.enable = true;
     lua_ls.enable = true;
     kotlin_language_server = {

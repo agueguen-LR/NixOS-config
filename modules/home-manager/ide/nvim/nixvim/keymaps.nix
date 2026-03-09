@@ -21,6 +21,8 @@
         desc = "Open Neotree";
       };
     }
+
+    # buffers
     {
       key = "<leader>bd";
       mode = "n";
@@ -29,6 +31,39 @@
         desc = "Write and close all buffers, keeps current one open for editing";
       };
     }
+    {
+      key = "<leader>bl";
+      mode = "n";
+      action = "<Cmd>BufferLineCycleNext<CR>";
+      options = {
+        desc = "Open next buffer on BufferLine";
+      };
+    }
+    {
+      key = "<leader>bh";
+      mode = "n";
+      action = "<Cmd>BufferLineCyclePrev<CR>";
+      options = {
+        desc = "Open previous buffer on BufferLine";
+      };
+    }
+    {
+      key = "<leader>bs";
+      mode = "n";
+      action = "<Cmd>BufferLineSortByExtension<CR>";
+      options = {
+        desc = "Sort buffers on BufferLine by extension";
+      };
+    }
+    {
+      key = "<leader>bc";
+      mode = "n";
+      action = "<Cmd>BufferLineCloseOthers<CR>";
+      options = {
+        desc = "Close other buffers on BufferLine";
+      };
+    }
+
     {
       key = "<leader>g";
       mode = "n";
