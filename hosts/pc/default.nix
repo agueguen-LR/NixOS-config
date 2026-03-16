@@ -19,6 +19,7 @@ in {
     ../../disko/pc-disko.nix
     ../shared-config.nix
     outputs.nixosModules.steam
+    outputs.nixosModules.postgresql
   ];
 
   boot.loader.systemd-boot.extraEntries."Windows11.conf" = ''

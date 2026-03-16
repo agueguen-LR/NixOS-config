@@ -23,17 +23,19 @@
     lualine.enable = true;
     lspconfig.enable = true;
     markdown-preview.enable = true;
+    oil.enable = true;
     otter.enable = true;
     # quarto.enable = true;
     telescope.enable = true;
     toggleterm.enable = true;
-    neo-tree = {
-      enable = true;
-      log_to_file = true;
-    };
+    # neo-tree = {
+    #   enable = true;
+    #   log_to_file = true;
+    # };
     nvim-autopairs.enable = true;
     which-key.enable = true;
     web-devicons.enable = true;
+    yazi.enable = true;
 
     conform-nvim = {
       enable = true;

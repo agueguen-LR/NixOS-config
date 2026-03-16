@@ -14,23 +14,64 @@
       action = "<C-\\><C-n>";
     }
     {
-      key = "<C-b>";
+      key = "<C-h>";
       mode = "n";
-      action = "<Cmd>Neotree toggle action=show<CR>";
+      action = "<C-w>h";
       options = {
-        desc = "Open Neotree";
+        desc = "Move to left window";
       };
     }
+    {
+      key = "<C-l>";
+      mode = "n";
+      action = "<C-w>l";
+      options = {
+        desc = "Move to right window";
+      };
+    }
+    {
+      key = "<C-j>";
+      mode = "n";
+      action = "<C-w>j";
+      options = {
+        desc = "Move to window below";
+      };
+    }
+    {
+      key = "<C-k>";
+      mode = "n";
+      action = "<C-w>k";
+      options = {
+        desc = "Move to window above";
+      };
+    }
+    {
+      key = "<C-s>";
+      mode = "n";
+      action = "<C-w>v | <Cmd>Oil<CR>";
+      options = {
+        desc = "Split window vertically";
+      };
+    }
+    # {
+    #   key = "<C-b>";
+    #   mode = "n";
+    #   action = "<Cmd>Neotree toggle action=show<CR>";
+    #   options = {
+    #     desc = "Open Neotree";
+    #   };
+    # }
+
+    # {
+    #   key = "<leader>bd";
+    #   mode = "n";
+    #   action = "<Cmd>wa | %bd! | e\# | bd\#<CR>";
+    #   options = {
+    #     desc = "Write and close all buffers, keeps current one open for editing";
+    #   };
+    # }
 
     # buffers
-    {
-      key = "<leader>bd";
-      mode = "n";
-      action = "<Cmd>wa | %bd! | e\# | bd\#<CR>";
-      options = {
-        desc = "Write and close all buffers, keeps current one open for editing";
-      };
-    }
     {
       key = "<leader>bl";
       mode = "n";
@@ -63,7 +104,16 @@
         desc = "Close other buffers on BufferLine";
       };
     }
+    {
+      key = "<leader>bp";
+      mode = "n";
+      action = "<Cmd>BufferLinePick<CR>";
+      options = {
+        desc = "Pick a buffer on BufferLine to open";
+      };
+    }
 
+    # leader plugins
     {
       key = "<leader>g";
       mode = "n";
@@ -73,7 +123,7 @@
       };
     }
     {
-      key = "<leader>ff";
+      key = "<leader>f";
       mode = "n";
       action = "<Cmd>Telescope find_files<CR>";
       options = {
@@ -81,11 +131,27 @@
       };
     }
     {
-      key = "<leader>fg";
+      key = "<leader>r";
       mode = "n";
       action = "<Cmd>Telescope live_grep<CR>";
       options = {
         desc = "Telescope grep";
+      };
+    }
+    {
+      key = "<leader>y";
+      mode = "n";
+      action = "<Cmd>Yazi<CR>";
+      options = {
+        desc = "Open Yazi";
+      };
+    }
+    {
+      key = "<leader>o";
+      mode = "n";
+      action = "<Cmd>Oil --float<CR>";
+      options = {
+        desc = "Open Oil";
       };
     }
 
