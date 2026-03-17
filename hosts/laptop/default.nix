@@ -40,6 +40,14 @@ in {
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
+  };
+
   users.users.${config.hostSpec.username}.packages = with pkgs; [
     android-studio
     android-tools
