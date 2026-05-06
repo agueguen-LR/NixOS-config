@@ -23,9 +23,21 @@
     lualine.enable = true;
     lspconfig.enable = true;
     markdown-preview.enable = true;
+    neogen = {
+      enable = true;
+      settings = {
+        languages = {
+          python.template.annotation_convention = "google_docstrings";
+          c.template.annotation_convention = "doxygen";
+          java.template.annotation_convention = "javadoc";
+          kotlin.template.annotation_convention = "kdoc";
+          rust.template.annotation_convention = "rustdoc";
+        };
+      };
+    };
     oil.enable = true;
     otter.enable = true;
-    # quarto.enable = true;
+    quarto.enable = true;
     telescope.enable = true;
     toggleterm.enable = true;
     # neo-tree = {
@@ -72,14 +84,13 @@
       };
     };
 
-    # molten = {
-    #   #jupyter
-    #   enable = true;
-    #   settings = {
-    #     auto_image_popup = true;
-    #     image_provider = "image.nvim";
-    #   };
-    # };
+    molten = {
+      enable = true;
+      settings = {
+        auto_image_popup = true;
+        image_provider = "image.nvim";
+      };
+    };
 
     treesitter = {
       enable = true;

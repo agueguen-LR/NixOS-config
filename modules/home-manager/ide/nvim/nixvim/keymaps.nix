@@ -154,6 +154,14 @@
         desc = "Open Oil";
       };
     }
+    {
+      key = "<leader>n";
+      mode = "n";
+      action = "<Cmd>Neogen<CR>";
+      options = {
+        desc = "Generate documentation with Neogen";
+      };
+    }
 
     # AI Copilot keybindings
     {
