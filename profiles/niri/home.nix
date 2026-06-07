@@ -8,7 +8,7 @@
 in {
   imports = [
     ../common-home.nix
-    inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
+    inputs.dankMaterialShell.homeModules.niri
     modules.catppuccin
     modules.dankMaterial
     modules.direnv
@@ -58,11 +58,8 @@ in {
     ];
   };
 
-  # programs.dankMaterialShell.niri.enableSpawn = true;
-
   services.gpg-agent = {
     enable = true;
-    enableSshSupport = true;
     enableFishIntegration = true;
     extraConfig = ''
       allow-loopback-pinentry

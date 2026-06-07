@@ -1,14 +1,12 @@
 {
+  pkgs,
   inputs,
   config,
   ...
 }: {
-  imports = [
-    inputs.dankMaterialShell.nixosModules.greeter
-  ];
-
-  programs.dankMaterialShell.greeter = {
+  services.displayManager.dms-greeter = {
     enable = true;
+    package = inputs.dankMaterialShell.packages.${pkgs.stdenv.hostPlatform.system}.default;
     # compositor.name = ""; ! MUST BE SET IN PROFILE !
 
     # Sync your user's DankMaterialShell theme with the greeter.

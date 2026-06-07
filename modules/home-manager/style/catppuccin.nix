@@ -3,5 +3,8 @@
     inputs.catppuccin.homeModules.catppuccin
   ];
 
-  catppuccin.enable = true;
+  catppuccin = {
+    autoEnable = true;
+    enable = true;
+  };
 }

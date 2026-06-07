@@ -3,6 +3,7 @@
   pkgs,
   lib,
   outputs,
+  inputs,
   ...
 }: let
   myMonitorInfo = {
@@ -36,7 +37,6 @@ in {
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
-      "android-studio-stable"
       "steam"
       "steam-original"
       "steam-unwrapped"
@@ -45,53 +45,67 @@ in {
 
   users.users.${config.hostSpec.username}.packages = with pkgs; [
     heroic-unwrapped
-    prismlauncher
-    android-studio
+    umu-launcher
     zulu25 # java
+
+    inputs.mcsr-nixos.packages.${pkgs.stdenv.hostPlatform.system}.ninjabrain-bot
+    prismlauncher
+    xwayland
+    kdePackages.dolphin
+    nautilus
   ];
 
   environment.persistence."/persist".directories = [
+    "/var/lib/systemd/"
     "/var/lib/libvirt" # virt-manager
     "/var/lib/bluetooth"
   ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
+  };
+
   home-manager.users.${config.hostSpec.username} = {
-    home.persistence."/persist/home/${config.hostSpec.username}".directories = [
+    home.persistence."/persist".directories = [
       {
         directory = ".local/share/soh"; #Ship of harkinian
-        method = "symlink";
       }
       {
         directory = ".local/share/Steam";
-        method = "symlink";
       }
       {
         directory = ".java/.userPrefs/ninjabrainbot";
-        method = "symlink";
       }
       {
         directory = ".config/waywall";
-        method = "symlink";
       }
       {
         directory = ".local/share/flatpak/app/com.hypixel.HytaleLauncher";
-        method = "symlink";
       }
       {
         directory = ".var/app/com.hypixel.HytaleLauncher";
-        method = "symlink";
       }
       {
         directory = ".local/share/PrismLauncher";
-        method = "symlink";
+      }
+      {
+        directory = ".local/share/TwilitRealm";
+      }
+      {
+        directory = ".local/share/osu";
       }
       {
         directory = ".config/heroic";
-        method = "symlink";
       }
       {
         directory = "Games/Heroic";
-        method = "symlink";
+      }
+      {
+        directory = "Games/umu";
       }
     ];
     hostSpec.monitor = myMonitorInfo;

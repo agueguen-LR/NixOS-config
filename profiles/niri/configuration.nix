@@ -13,12 +13,13 @@ in {
     modules.neovim
     modules.niri
     modules.dankgreet
+    # modules.dank-material-shell
     modules.virt-manager
   ];
 
   system.nixos.tags = ["niri"];
 
-  programs.dankMaterialShell.greeter.compositor = {
+  services.displayManager.dms-greeter.compositor = {
     name = "niri";
     customConfig = ''
       input {

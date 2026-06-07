@@ -30,7 +30,6 @@ in {
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
-      "android-studio-stable"
     ];
 
   # Enable touchpad support.
@@ -49,13 +48,14 @@ in {
   };
 
   users.users.${config.hostSpec.username}.packages = with pkgs; [
-    android-studio
-    android-tools
     zulu17
     zulu21
+    kdePackages.dolphin
+    nautilus
   ];
 
   environment.persistence."/persist".directories = [
+    "/var/lib/systemd/"
     "/var/lib/libvirt" # virt-manager
     "/var/lib/bluetooth"
   ];

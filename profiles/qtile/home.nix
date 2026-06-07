@@ -21,7 +21,6 @@ in {
 
   services.gpg-agent = {
     enable = true;
-    enableSshSupport = true;
     enableFishIntegration = true;
     extraConfig = ''
       allow-loopback-pinentry

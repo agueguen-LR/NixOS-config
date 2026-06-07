@@ -17,7 +17,6 @@
     dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.dgop.follows = "dgop";
     };
 
     disko = {
@@ -51,7 +50,6 @@
 
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     noctalia = {
@@ -66,6 +64,11 @@
 
     mango = {
       url = "github:DreamMaoMao/mangowc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mcsr-nixos = {
+      url = "https://git.uku3lig.net/uku/mcsr-nixos/archive/main.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

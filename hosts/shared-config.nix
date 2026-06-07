@@ -3,6 +3,7 @@
   inputs,
   config,
   lib,
+  pkgs,
   ...
 }: let
   mySpecs = {
@@ -22,11 +23,38 @@ in {
 
   fileSystems."/persist".neededForBoot = true;
 
-  boot.initrd.postResumeCommands = lib.mkAfter ''
-    echo 'starting rollback'
-    zfs rollback -r zroot/local/root@blank
-    echo 'finished rollback'
-  '';
+  boot.zfs.forceImportRoot = false;
+
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback root filesystem";
+
+    wantedBy = [
+      "initrd.target"
+    ];
+    after = [
+      "zfs-import-zroot.service"
+    ];
+    before = [
+      "sysroot.mount"
+    ];
+
+    path = with pkgs; [
+      zfs
+    ];
+
+    serviceConfig.Type = "oneshot";
+    script = ''
+      echo 'starting rollback'
+      zfs rollback -r zroot/local/root@blank
+      echo 'finished rollback'
+    '';
+  };
+
+  # boot.initrd.postResumeCommands = lib.mkAfter ''
+  #   echo 'starting rollback'
+  #   zfs rollback -r zroot/local/root@blank
+  #   echo 'finished rollback'
+  # '';
 
   age = {
     identityPaths = ["/persist/home/${mySpecs.username}/.secrets/agenix-rsa-4096"];
@@ -58,21 +86,18 @@ in {
   };
   home-manager.users.${mySpecs.username} = {
     imports = [
-      inputs.impermanence.homeManagerModules.impermanence
       ../modules/hostSpec.nix
     ];
-    home.persistence."/persist/home/${mySpecs.username}" = {
+    home.persistence."/persist" = {
       directories = [
         {
           directory = ".ssh";
-          method = "symlink";
         }
         ".gnupg"
       ];
       files = [
         ".gitconfig"
       ];
-      allowOther = true;
     };
     hostSpec = mySpecs; # Sets hostSpecs in home-manager context
   };

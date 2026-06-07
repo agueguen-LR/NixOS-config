@@ -5,21 +5,25 @@
   ...
 }: {
   imports = [
-    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+    inputs.dankMaterialShell.homeModules.default
   ];
 
-  programs.dankMaterialShell = {
+  programs.dank-material-shell = {
     enable = true;
 
-    default.session = {
+    niri.includes.enable = false; #isn't good with impermanence (uses files not declared with nix)
+
+    session = {
       wallpaperPath = ./.. + "/wallpaper/wallpapers/catppuccin-nixos.png";
+      weatherLocation = "La Rochelle, 17000";
+      weatherCoordinates = "46.1597320,-1.1515951";
     };
 
     # These settings are only applied if ~/.config/DankMaterialShell doesn't exist
     # A nixos-rebuild switch will therefore not apply these, unless you delete that file beforehand
-    default.settings = {
-      currentThemeName = "cat-blue";
-      customThemeFile = "";
+    settings = {
+      currentThemeName = "custom";
+      customThemeFile = ./themes + "/catppuccin.json";
       dynamicTheming = true;
 
       matugenScheme = "scheme-tonal-spot";
@@ -29,8 +33,6 @@
       fontFamily = "Inter Variable"; # default
       monoFontFamily = "JetBrainsMono NF";
 
-      weatherLocation = "La Rochelle, 17000";
-      weatherCoordinates = "46.1597320,-1.1515951";
       useAutoLocation = false;
       weatherEnabled = true;
 
