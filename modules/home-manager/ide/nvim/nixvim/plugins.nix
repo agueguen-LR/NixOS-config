@@ -12,6 +12,7 @@
   programs.nixvim.nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "copilot.vim"
+      "wezterm.nvim"
     ];
 
   programs.nixvim.plugins = {

@@ -57,6 +57,11 @@
         Placement = "toolbar";
       }
       {
+        Title = "Codeberg";
+        URL = "https://codeberg.org/agueguen-LR";
+        Placement = "toolbar";
+      }
+      {
         Title = "Youtube";
         URL = "https://www.youtube.com/";
         Placement = "toolbar";
