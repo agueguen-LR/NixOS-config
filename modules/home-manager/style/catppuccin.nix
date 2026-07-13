@@ -6,5 +6,6 @@
   catppuccin = {
     autoEnable = true;
     enable = true;
+    cache.enable = true;
   };
 }

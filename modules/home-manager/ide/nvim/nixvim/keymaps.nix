@@ -255,6 +255,16 @@
       };
     }
 
+    #LaTex keybindings
+    {
+      mode = "n";
+      key = "<leader>tt";
+      action = ":TeXpresso %<cr>";
+      options = {
+        desc = "Open TeXpresso";
+      };
+    }
+
     # DAP keybindings
     {
       mode = "n";

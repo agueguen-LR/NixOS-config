@@ -2,10 +2,29 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  tex = pkgs.texlive.combine {
+    inherit
+      (pkgs.texlive)
+      scheme-basic
+      amsmath
+      amsfonts
+      amscls
+      geometry
+      hyperref
+      fancyhdr
+      lastpage
+      graphics
+      booktabs
+      mlmodern
+      setspace
+      ;
+  };
+in {
   # Make ripgrep available to telescope
   home.packages = with pkgs; [
     ripgrep
+    tex
     texlivePackages.latexmk
   ];
 
@@ -118,7 +137,7 @@
     texpresso.enable = true;
     vimtex = {
       enable = true;
-      texlivePackage = pkgs.texliveBasic;
+      texlivePackage = tex;
     };
   };
 }
