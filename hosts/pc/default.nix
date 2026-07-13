@@ -53,6 +53,10 @@ in {
     xwayland
     kdePackages.dolphin
     nautilus
+
+    #emulators
+    cemu
+    eden
   ];
 
   environment.persistence."/persist".directories = [
@@ -99,6 +103,12 @@ in {
         directory = ".local/share/osu";
       }
       {
+        directory = ".local/share/Cemu";
+      }
+      {
+        directory = ".local/share/eden";
+      }
+      {
         directory = ".config/heroic";
       }
       {
@@ -106,6 +116,9 @@ in {
       }
       {
         directory = "Games/umu";
+      }
+      {
+        directory = ".factorio";
       }
     ];
     hostSpec.monitor = myMonitorInfo;

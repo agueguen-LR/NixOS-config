@@ -66,6 +66,7 @@
           java = ["google-java-format"];
           kotlin = [];
           tex = ["tex-fmt"];
+          lua = ["stylua"];
         };
         formatters = {
           alejandra.command = lib.getExe pkgs.alejandra;
@@ -74,6 +75,7 @@
           google-java-format.command = lib.getExe pkgs.google-java-format;
           ktfmt.command = lib.getExe pkgs.ktfmt;
           tex-fmt.command = lib.getExe pkgs.tex-fmt;
+          stylua.command = lib.getExe pkgs.stylua;
         };
       };
     };
