@@ -6,6 +6,7 @@
   # Make ripgrep available to telescope
   home.packages = with pkgs; [
     ripgrep
+    texlivePackages.latexmk
   ];
 
   # Allow unfree copilot plugins
@@ -64,6 +65,7 @@
           rust = ["rustfmt"];
           java = ["google-java-format"];
           kotlin = [];
+          tex = ["tex-fmt"];
         };
         formatters = {
           alejandra.command = lib.getExe pkgs.alejandra;
@@ -71,6 +73,7 @@
           rustfmt.command = lib.getExe pkgs.rustfmt;
           google-java-format.command = lib.getExe pkgs.google-java-format;
           ktfmt.command = lib.getExe pkgs.ktfmt;
+          tex-fmt.command = lib.getExe pkgs.tex-fmt;
         };
       };
     };
@@ -107,6 +110,13 @@
         surround = {};
         completion = {};
       };
+    };
+
+    #latex
+    texpresso.enable = true;
+    vimtex = {
+      enable = true;
+      texlivePackage = pkgs.texliveBasic;
     };
   };
 }
