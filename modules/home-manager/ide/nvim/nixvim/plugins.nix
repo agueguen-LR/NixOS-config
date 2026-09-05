@@ -86,6 +86,8 @@ in {
           kotlin = [];
           tex = ["tex-fmt"];
           lua = ["stylua"];
+          c = ["clang-format"];
+          arduino = ["clang-format"];
         };
         formatters = {
           alejandra.command = lib.getExe pkgs.alejandra;
@@ -95,6 +97,7 @@ in {
           ktfmt.command = lib.getExe pkgs.ktfmt;
           tex-fmt.command = lib.getExe pkgs.tex-fmt;
           stylua.command = lib.getExe pkgs.stylua;
+          clang-format.command = pkgs.clang-tools + "/bin/clang-format";
         };
       };
     };

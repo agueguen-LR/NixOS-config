@@ -43,6 +43,13 @@
     pylsp.enable = true;
     pyright.enable = true;
     nixd.enable = true;
-    rust_analyzer.enable = true;
+    rust_analyzer = {
+      enable = true;
+      config.files.excludeDirs = [
+        ".direnv"
+        "target"
+        ".git"
+      ];
+    };
   };
 }
