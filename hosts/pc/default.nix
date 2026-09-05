@@ -50,6 +50,8 @@ in {
 
     inputs.mcsr-nixos.packages.${pkgs.stdenv.hostPlatform.system}.ninjabrain-bot
     prismlauncher
+    waywall
+
     xwayland
     kdePackages.dolphin
     nautilus
