@@ -88,6 +88,11 @@ in {
     imports = [
       ../modules/hostSpec.nix
     ];
+
+    home.packages = with pkgs; [
+      pixi
+    ];
+
     home.persistence."/persist" = {
       directories = [
         {

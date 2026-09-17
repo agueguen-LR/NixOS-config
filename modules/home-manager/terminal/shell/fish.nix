@@ -20,14 +20,17 @@
 
     shellAliases = {
       ide = "nvim .";
-      l = "ls -l";
+      l = "ls -la";
       nix-shell = "nix-shell --run 'fish'";
+      pixi-init = "pixi init --format pyproject";
     };
 
     shellInit = ''
       if test -S "$XDG_RUNTIME_DIR/ssh-agent"
         set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
       end
+
+      pixi completion --shell fish | source
     '';
 
     plugins = [
