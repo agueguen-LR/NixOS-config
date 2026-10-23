@@ -434,5 +434,31 @@
       action = "<CMD>lua require('dap.ext.vscode').load_launchjs()<CR><CMD>Telescope dap configurations<CR>";
       options = {desc = "Debug Configurations";};
     }
+
+    # Snippets
+    {
+      mode = "n";
+      key = "<C-Tab>";
+      action.__raw = ''
+        function()
+          if vim.snippet.active({ direction = 1 }) then
+            vim.snippet.jump(1)
+          end
+        end
+      '';
+      options.desc = "Jump to next snippet placeholder";
+    }
+    {
+      mode = "n";
+      key = "<C-S-Tab>";
+      action.__raw = ''
+        function()
+          if vim.snippet.active({ direction = -1 }) then
+            vim.snippet.jump(-1)
+          end
+        end
+      '';
+      options.desc = "Jump to previous snippet placeholder";
+    }
   ];
 }

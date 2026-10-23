@@ -23,11 +23,6 @@ in {
     outputs.nixosModules.postgresql
   ];
 
-  boot.loader.systemd-boot.extraEntries."Windows11.conf" = ''
-    title Windows 11
-    efi /EFI/Microsoft/Boot/bootmgfw.efi
-  '';
-
   networking = {
     hostName = "nixos-pc";
     hostId = "466b81e1"; # Needed for ZFS
@@ -59,6 +54,8 @@ in {
     #emulators
     cemu
     eden
+
+    archipelago
   ];
 
   environment.persistence."/persist".directories = [
@@ -109,6 +106,15 @@ in {
       }
       {
         directory = ".local/share/eden";
+      }
+      {
+        directory = ".local/share/Archipelago";
+      }
+      {
+        directory = ".local/share/Cogfly";
+      }
+      {
+        directory = ".config/unity3d/Team Cherry";
       }
       {
         directory = ".config/heroic";
