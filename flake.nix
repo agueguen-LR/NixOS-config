@@ -43,11 +43,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixcord = {
-      url = "github:kaylorben/nixcord";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixvim = {
       url = "github:nix-community/nixvim";
     };
