@@ -20,13 +20,12 @@
   nvf = import ./ide/nvim/nvf;
   mango = import ./compositor/mango;
   plasma = import ./desktopEnvironment/plasma.nix;
-  stylix = import ./style/stylix.nix;
   swww = import ./wallpaper/swww.nix;
   tmux = import ./terminal/utilities/tmux.nix;
   rofi = import ./appLauncher/rofi.nix;
   waybar = import ./statusBar/waybar.nix;
   yazi = import ./fileManager/yazi.nix;
-	zed = import ./ide/zed;
+  zed = import ./ide/zed;
   zoxide = import ./terminal/utilities/zoxide.nix;
   zsh = import ./terminal/shell/zsh.nix;
 }
