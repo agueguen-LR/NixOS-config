@@ -8,7 +8,6 @@
   modules = outputs.homeManagerModules;
 in {
   imports = [
-    ../common-home.nix
     modules.fish
     modules.kitty
     modules.nixvim

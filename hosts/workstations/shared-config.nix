@@ -24,6 +24,19 @@
     ];
   };
 
+  services = {
+    blueman.enable = true;
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   environment.persistence."/persist".directories = [
     "/var/lib/systemd/"
     "/var/lib/libvirt" # virt-manager

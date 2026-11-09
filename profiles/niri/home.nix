@@ -7,7 +7,6 @@
   modules = outputs.homeManagerModules;
 in {
   imports = [
-    ../common-home.nix
     inputs.dankMaterialShell.homeModules.niri
     modules.catppuccin
     modules.dankMaterial

@@ -1,6 +1,5 @@
 {config, ...}: {
   imports = [
-    ../common-config.nix
   ];
 
   system.nixos.tags = ["default"];

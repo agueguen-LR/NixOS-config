@@ -8,7 +8,6 @@
   modules = outputs.nixosModules;
 in {
   imports = [
-    ../common-config.nix
     modules.neovim
     modules.fish
   ];

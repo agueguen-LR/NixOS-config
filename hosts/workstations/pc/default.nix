@@ -56,64 +56,77 @@ in {
   ];
 
   home-manager.users.${config.hostSpec.username} = {
-    home.persistence."/persist".directories = [
-      {
-        directory = ".local/share/soh"; #Ship of harkinian
-      }
-      {
-        directory = ".local/share/Steam";
-      }
-      {
-        directory = ".java/.userPrefs/ninjabrainbot";
-      }
-      {
-        directory = ".config/waywall";
-      }
-      {
-        directory = ".local/share/flatpak/app/com.hypixel.HytaleLauncher";
-      }
-      {
-        directory = ".var/app/com.hypixel.HytaleLauncher";
-      }
-      {
-        directory = ".local/share/PrismLauncher";
-      }
-      {
-        directory = ".local/share/TwilitRealm";
-      }
-      {
-        directory = ".local/share/osu";
-      }
-      {
-        directory = ".local/share/Cemu";
-      }
-      {
-        directory = ".local/share/eden";
-      }
-      {
-        directory = ".local/share/Archipelago";
-      }
-      {
-        directory = ".local/share/Cogfly";
-      }
-      {
-        directory = ".config/unity3d/Team Cherry";
-      }
-      {
-        directory = ".config/heroic";
-      }
-      {
-        directory = "Games/Heroic";
-      }
-      {
-        directory = "Games/umu";
-      }
-      {
-        directory = ".factorio";
-      }
-    ];
+    home = {
+      stateVersion = "25.05";
+      persistence."/persist".directories = [
+        {
+          directory = ".local/share/soh"; #Ship of harkinian
+        }
+        {
+          directory = ".local/share/Steam";
+        }
+        {
+          directory = ".java/.userPrefs/ninjabrainbot";
+        }
+        {
+          directory = ".config/waywall";
+        }
+        {
+          directory = ".local/share/flatpak/app/com.hypixel.HytaleLauncher";
+        }
+        {
+          directory = ".var/app/com.hypixel.HytaleLauncher";
+        }
+        {
+          directory = ".local/share/PrismLauncher";
+        }
+        {
+          directory = ".local/share/TwilitRealm";
+        }
+        {
+          directory = ".local/share/osu";
+        }
+        {
+          directory = ".local/share/Cemu";
+        }
+        {
+          directory = ".local/share/eden";
+        }
+        {
+          directory = ".local/share/Archipelago";
+        }
+        {
+          directory = ".local/share/Cogfly";
+        }
+        {
+          directory = ".config/unity3d/Team Cherry";
+        }
+        {
+          directory = ".config/heroic";
+        }
+        {
+          directory = "Games/Heroic";
+        }
+        {
+          directory = "Games/umu";
+        }
+        {
+          directory = ".factorio";
+        }
+      ];
+    };
     hostSpec.monitor = myMonitorInfo;
   };
 
   hostSpec.monitor = myMonitorInfo;
+
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  system.stateVersion = "25.05";
 }

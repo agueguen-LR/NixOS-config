@@ -6,7 +6,6 @@
   modules = outputs.homeManagerModules;
 in {
   imports = [
-    ../common-home.nix
     modules.catppuccin
     modules.direnv
     modules.fish

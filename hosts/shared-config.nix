@@ -1,6 +1,7 @@
 # Anything you want to share between all hosts
 {
   inputs,
+  outputs,
   config,
   root,
   pkgs,
@@ -18,6 +19,7 @@ in {
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.impermanence.nixosModules.impermanence
+    outputs.nixosModules.home-manager
     (root + /modules/hostSpec.nix)
   ];
 
@@ -50,25 +52,68 @@ in {
     '';
   };
 
-  # boot.initrd.postResumeCommands = lib.mkAfter ''
-  #   echo 'starting rollback'
-  #   zfs rollback -r zroot/local/root@blank
-  #   echo 'finished rollback'
-  # '';
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 10;
+    };
+  };
+
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+  };
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 10d";
+    };
+    optimise.automatic = true;
+    settings.experimental-features = ["nix-command" "flakes"];
+  };
 
   age = {
     identityPaths = ["/persist/home/${mySpecs.username}/.secrets/agenix-rsa-4096"];
     secrets.user-password.file = ../secrets/user-password.age;
   };
 
-  users.users.${mySpecs.username} = {
-    # initialHashedPassword = # Set this and comment hashedPasswordFile during install
-    hashedPasswordFile = config.age.secrets.user-password.path;
+  users = {
+    mutableUsers = false;
+    users.${mySpecs.username} = {
+      # initialHashedPassword = # Set this and comment hashedPasswordFile during install
+      hashedPasswordFile = config.age.secrets.user-password.path;
+      isNormalUser = true;
+      extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    };
   };
+
+  nix.settings.trusted-users = ["root" "@wheel"];
+
+  networking.networkmanager.enable = true;
 
   i18n.defaultLocale = "en_GB.UTF-8";
 
   time.timeZone = "Europe/Paris";
+
+  console = {
+    keyMap = config.hostSpec.keyboard.layout;
+    font = "Lat2-Terminus16";
+  };
+
+  services.openssh.enable = true;
+
+  environment.systemPackages = [
+    pkgs.vim
+    pkgs.git
+  ];
+
+  programs = {
+    fuse.userAllowOther = true; # see https://github.com/nix-community/impermanence#home-manager
+    nix-ld.enable = true;
+  };
 
   # impermanence module settings
   environment.persistence."/persist" = {
@@ -89,17 +134,28 @@ in {
       ../modules/hostSpec.nix
     ];
 
-    home.persistence."/persist" = {
-      directories = [
-        {
-          directory = ".ssh";
-        }
-        ".gnupg"
-      ];
-      files = [
-        ".gitconfig"
-      ];
+    home = {
+      username = config.hostSpec.username;
+      homeDirectory = "/home/${config.hostSpec.username}";
+
+      persistence."/persist" = {
+        directories = [
+          {
+            directory = ".ssh";
+          }
+          ".gnupg"
+        ];
+        files = [
+          ".gitconfig"
+        ];
+      };
     };
+
+    programs = {
+      gpg.enable = true;
+      home-manager.enable = true; # Let Home Manager install and manage itself.
+    };
+
     hostSpec = mySpecs; # Sets hostSpecs in home-manager context
   };
 

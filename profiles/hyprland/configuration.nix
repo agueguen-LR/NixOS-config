@@ -7,7 +7,6 @@
   modules = outputs.nixosModules;
 in {
   imports = [
-    ../common-config.nix
     modules.catppuccin
     modules.fish
     modules.hyprland

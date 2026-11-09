@@ -104,7 +104,7 @@
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
-      server = mkHost "server" "server";
+      server = mkHost "servers" "server";
       laptop-default = mkHost "workstations/laptop" "default";
       laptop-qtile = mkHost "workstations/laptop" "qtile";
       laptop-hypr = mkHost "workstations/laptop" "hyprland";
