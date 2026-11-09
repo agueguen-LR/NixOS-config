@@ -1,4 +1,5 @@
 {
+  root,
   config,
   pkgs,
   lib,
@@ -16,9 +17,9 @@
   };
 in {
   imports = [
-    ../../hardware/pc-hardware.nix
-    ../../disko/pc-disko.nix
-    ../shared-config.nix
+    (root + /hardware/pc-hardware.nix)
+    (root + /disko/pc-disko.nix)
+    (root + /hosts/workstations/shared-config.nix)
     outputs.nixosModules.steam
     outputs.nixosModules.postgresql
   ];
@@ -31,7 +32,6 @@ in {
   # Any unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      "discord"
       "steam"
       "steam-original"
       "steam-unwrapped"
@@ -41,15 +41,12 @@ in {
   users.users.${config.hostSpec.username}.packages = with pkgs; [
     heroic-unwrapped
     umu-launcher
-    zulu25 # java
 
     inputs.mcsr-nixos.packages.${pkgs.stdenv.hostPlatform.system}.ninjabrain-bot
     prismlauncher
     waywall
 
     xwayland
-    kdePackages.dolphin
-    nautilus
 
     #emulators
     cemu
@@ -57,20 +54,6 @@ in {
 
     archipelago
   ];
-
-  environment.persistence."/persist".directories = [
-    "/var/lib/systemd/"
-    "/var/lib/libvirt" # virt-manager
-    "/var/lib/bluetooth"
-  ];
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
-    ];
-  };
 
   home-manager.users.${config.hostSpec.username} = {
     home.persistence."/persist".directories = [

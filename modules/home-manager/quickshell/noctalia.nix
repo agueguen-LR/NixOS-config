@@ -93,7 +93,5 @@
         name = "La Rochelle, France";
       };
     };
-    # this may also be a string or a path to a JSON file,
-    # but in this case must include *all* settings.
   };
 }

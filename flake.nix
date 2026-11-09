@@ -87,7 +87,10 @@
     inherit (self) outputs;
     mkHost = host: profile:
       nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {
+          inherit inputs outputs;
+          root = self;
+        };
         modules = [
           ./hosts/${host}
           ./profiles/${profile}/configuration.nix
@@ -102,18 +105,18 @@
 
     nixosConfigurations = {
       server = mkHost "server" "server";
-      laptop-default = mkHost "laptop" "default";
-      laptop-qtile = mkHost "laptop" "qtile";
-      laptop-hypr = mkHost "laptop" "hyprland";
-      laptop-kde = mkHost "laptop" "kde";
-      laptop-mango = mkHost "laptop" "mango";
-      laptop-niri = mkHost "laptop" "niri";
-      pc-default = mkHost "pc" "default";
-      pc-qtile = mkHost "pc" "qtile";
-      pc-hypr = mkHost "pc" "hyprland";
-      pc-kde = mkHost "pc" "kde";
-      pc-mango = mkHost "pc" "mango";
-      pc-niri = mkHost "pc" "niri";
+      laptop-default = mkHost "workstations/laptop" "default";
+      laptop-qtile = mkHost "workstations/laptop" "qtile";
+      laptop-hypr = mkHost "workstations/laptop" "hyprland";
+      laptop-kde = mkHost "workstations/laptop" "kde";
+      laptop-mango = mkHost "workstations/laptop" "mango";
+      laptop-niri = mkHost "workstations/laptop" "niri";
+      pc-default = mkHost "workstations/pc" "default";
+      pc-qtile = mkHost "workstations/pc" "qtile";
+      pc-hypr = mkHost "workstations/pc" "hyprland";
+      pc-kde = mkHost "workstations/pc" "kde";
+      pc-mango = mkHost "workstations/pc" "mango";
+      pc-niri = mkHost "workstations/pc" "niri";
     };
   };
 }

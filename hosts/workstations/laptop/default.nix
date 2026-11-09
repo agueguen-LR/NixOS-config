@@ -1,7 +1,6 @@
 {
+  root,
   config,
-  lib,
-  pkgs,
   ...
 }: let
   myMonitorInfo = {
@@ -14,9 +13,9 @@
   };
 in {
   imports = [
-    ../../hardware/laptop-hardware.nix
-    ../../disko/laptop-disko.nix
-    ../shared-config.nix
+    (root + /hardware/laptop-hardware.nix)
+    (root + /disko/laptop-disko.nix)
+    (root + /hosts/workstations/shared-config.nix)
   ];
 
   boot.kernelModules = ["cp210x"];
@@ -26,39 +25,12 @@ in {
     hostId = "81cd2a4d"; # Needed for ZFS
   };
 
-  # Any unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "discord"
-    ];
-
   # Enable touchpad support.
   services.libinput.enable = true;
 
-  # Power management for noctalia-shell
+  # Power management
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
-    ];
-  };
-
-  users.users.${config.hostSpec.username}.packages = with pkgs; [
-    zulu17
-    zulu21
-    kdePackages.dolphin
-    nautilus
-  ];
-
-  environment.persistence."/persist".directories = [
-    "/var/lib/systemd/"
-    "/var/lib/libvirt" # virt-manager
-    "/var/lib/bluetooth"
-  ];
 
   home-manager.users.${config.hostSpec.username}.hostSpec = {
     hasBattery = true;

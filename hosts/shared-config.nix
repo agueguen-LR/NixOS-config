@@ -1,8 +1,8 @@
-# Anything you want to share between hosts
+# Anything you want to share between all hosts
 {
   inputs,
   config,
-  lib,
+  root,
   pkgs,
   ...
 }: let
@@ -18,7 +18,7 @@ in {
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.impermanence.nixosModules.impermanence
-    ../modules/hostSpec.nix
+    (root + /modules/hostSpec.nix)
   ];
 
   fileSystems."/persist".neededForBoot = true;
@@ -87,10 +87,6 @@ in {
   home-manager.users.${mySpecs.username} = {
     imports = [
       ../modules/hostSpec.nix
-    ];
-
-    home.packages = with pkgs; [
-      pixi
     ];
 
     home.persistence."/persist" = {
