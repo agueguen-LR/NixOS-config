@@ -56,20 +56,4 @@ in {
       {command = ["dms" "run" "-d"];}
     ];
   };
-
-  services.gpg-agent = {
-    enable = true;
-    enableFishIntegration = true;
-    extraConfig = ''
-      allow-loopback-pinentry
-    '';
-    pinentry = {
-      package = pkgs.pinentry-rofi;
-      program = "pinentry-rofi";
-    };
-  };
-
-  home.sessionVariables = {
-    DISPLAY = ":0";
-  };
 }

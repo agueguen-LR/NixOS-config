@@ -5,159 +5,158 @@
   config,
   root,
   pkgs,
+  hm,
   ...
-}: let
-  mySpecs = {
-    username = "adrien";
-    keyboard = {
-      layout = "fr";
-      options = "eurosign:e,caps:escape";
-    };
-  };
-in {
+}: {
   imports = [
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.disko
+    inputs.home-manager.nixosModules.home-manager
     inputs.impermanence.nixosModules.impermanence
-    outputs.nixosModules.home-manager
-    (root + /modules/hostSpec.nix)
   ];
+  config =
+    {
+      hostSpecs = {
+        username = "adrien";
+        keyboard = {
+          layout = "fr";
+          options = "eurosign:e,caps:escape";
+        };
+      };
 
-  fileSystems."/persist".neededForBoot = true;
+      fileSystems."/persist".neededForBoot = true;
 
-  boot.zfs.forceImportRoot = false;
+      boot.zfs.forceImportRoot = false;
 
-  boot.initrd.systemd.services.rollback = {
-    description = "Rollback root filesystem";
+      boot.initrd.systemd.services.rollback = {
+        description = "Rollback root filesystem";
 
-    wantedBy = [
-      "initrd.target"
-    ];
-    after = [
-      "zfs-import-zroot.service"
-    ];
-    before = [
-      "sysroot.mount"
-    ];
+        wantedBy = [
+          "initrd.target"
+        ];
+        after = [
+          "zfs-import-zroot.service"
+        ];
+        before = [
+          "sysroot.mount"
+        ];
 
-    path = with pkgs; [
-      zfs
-    ];
+        path = with pkgs; [
+          zfs
+        ];
 
-    serviceConfig.Type = "oneshot";
-    script = ''
-      echo 'starting rollback'
-      zfs rollback -r zroot/local/root@blank
-      echo 'finished rollback'
-    '';
-  };
+        serviceConfig.Type = "oneshot";
+        script = ''
+          echo 'starting rollback'
+          zfs rollback -r zroot/local/root@blank
+          echo 'finished rollback'
+        '';
+      };
 
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 10;
-    };
-  };
+      boot.loader = {
+        efi.canTouchEfiVariables = true;
+        systemd-boot = {
+          enable = true;
+          configurationLimit = 10;
+        };
+      };
 
-  system.autoUpgrade = {
-    enable = true;
-    dates = "weekly";
-  };
+      system.autoUpgrade = {
+        enable = true;
+        dates = "weekly";
+      };
 
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 10d";
-    };
-    optimise.automatic = true;
-    settings.experimental-features = ["nix-command" "flakes"];
-  };
+      nix = {
+        gc = {
+          automatic = true;
+          dates = "daily";
+          options = "--delete-older-than 10d";
+        };
+        optimise.automatic = true;
+        settings.experimental-features = ["nix-command" "flakes"];
+      };
 
-  age = {
-    identityPaths = ["/persist/home/${mySpecs.username}/.secrets/agenix-rsa-4096"];
-    secrets.user-password.file = ../secrets/user-password.age;
-  };
+      age = {
+        identityPaths = ["/persist/home/${config.hostSpecs.username}/.secrets/agenix-rsa-4096"];
+        secrets.user-password.file = ../secrets/user-password.age;
+      };
 
-  users = {
-    mutableUsers = false;
-    users.${mySpecs.username} = {
-      # initialHashedPassword = # Set this and comment hashedPasswordFile during install
-      hashedPasswordFile = config.age.secrets.user-password.path;
-      isNormalUser = true;
-      extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    };
-  };
+      users = {
+        mutableUsers = false;
+        users.${config.hostSpecs.username} = {
+          # initialHashedPassword = # Set this and comment hashedPasswordFile during install
+          hashedPasswordFile = config.age.secrets.user-password.path;
+          isNormalUser = true;
+          extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+        };
+      };
 
-  nix.settings.trusted-users = ["root" "@wheel"];
+      nix.settings.trusted-users = ["root" "@wheel"];
 
-  networking.networkmanager.enable = true;
+      networking.networkmanager.enable = true;
 
-  i18n.defaultLocale = "en_GB.UTF-8";
+      i18n.defaultLocale = "en_GB.UTF-8";
 
-  time.timeZone = "Europe/Paris";
+      time.timeZone = "Europe/Paris";
 
-  console = {
-    keyMap = config.hostSpec.keyboard.layout;
-    font = "Lat2-Terminus16";
-  };
+      console = {
+        keyMap = config.hostSpecs.keyboard.layout;
+        font = "Lat2-Terminus16";
+      };
 
-  services.openssh.enable = true;
+      services.openssh.enable = true;
 
-  environment.systemPackages = [
-    pkgs.vim
-    pkgs.git
-  ];
+      environment.systemPackages = [
+        pkgs.vim
+        pkgs.git
+      ];
 
-  programs = {
-    fuse.userAllowOther = true; # see https://github.com/nix-community/impermanence#home-manager
-    nix-ld.enable = true;
-  };
+      programs = {
+        fuse.userAllowOther = true; # see https://github.com/nix-community/impermanence#home-manager
+        nix-ld.enable = true;
+      };
 
-  # impermanence module settings
-  environment.persistence."/persist" = {
-    directories = [
-      "/var/lib/nixos" #see https://github.com/nix-community/impermanence/issues/178
-      "/etc/NetworkManager/system-connections"
-    ];
-    files = [
-      "/etc/machine-id" # networking.hostId first 8 chars
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
-    ];
-  };
-  home-manager.users.${mySpecs.username} = {
-    imports = [
-      ../modules/hostSpec.nix
-    ];
-
-    home = {
-      username = config.hostSpec.username;
-      homeDirectory = "/home/${config.hostSpec.username}";
-
-      persistence."/persist" = {
+      # impermanence module settings
+      environment.persistence."/persist" = {
         directories = [
-          {
-            directory = ".ssh";
-          }
-          ".gnupg"
+          "/var/lib/nixos" #see https://github.com/nix-community/impermanence/issues/178
+          "/etc/NetworkManager/system-connections"
         ];
         files = [
-          ".gitconfig"
+          "/etc/machine-id" # networking.hostId first 8 chars
+          "/etc/ssh/ssh_host_ed25519_key"
+          "/etc/ssh/ssh_host_ed25519_key.pub"
+          "/etc/ssh/ssh_host_rsa_key"
+          "/etc/ssh/ssh_host_rsa_key.pub"
         ];
       };
+
+      home-manager = {
+        useGlobalPkgs = true; # Use same instance of nixpkgs for nixos and hm
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+    }
+    // hm {
+      home = {
+        username = config.hostSpecs.username;
+        homeDirectory = "/home/${config.hostSpecs.username}";
+
+        persistence."/persist" = {
+          directories = [
+            {
+              directory = ".ssh";
+            }
+            ".gnupg"
+          ];
+          files = [
+            ".gitconfig"
+          ];
+        };
+      };
+
+      programs = {
+        gpg.enable = true;
+        home-manager.enable = true; # Let Home Manager install and manage itself.
+      };
     };
-
-    programs = {
-      gpg.enable = true;
-      home-manager.enable = true; # Let Home Manager install and manage itself.
-    };
-
-    hostSpec = mySpecs; # Sets hostSpecs in home-manager context
-  };
-
-  hostSpec = mySpecs; # Sets hostSpecs in nixos context
 }

@@ -1,0 +1,211 @@
+# No enable here, instead import the NixOS module and enable niri there.
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  mkFeature,
+  ...
+}: let
+  cfg = config.hostSpecs.monitor;
+  monitorAttrs =
+    lib.lists.imap0 (i: name: {
+      name = name;
+      value = {
+        mode.width = builtins.elemAt cfg.width i;
+        mode.height = builtins.elemAt cfg.height i;
+        mode.refresh = builtins.elemAt cfg.refreshRate i;
+        position.x = builtins.elemAt cfg.xoffset i;
+        position.y = builtins.elemAt cfg.yoffset i;
+      };
+    })
+    cfg.name;
+
+  mkSpawnBinds = keybinds: actions:
+    lib.mapAttrs' (
+      action: key: {
+        name = key;
+        value.action.spawn = actions.${action};
+      }
+    ) (
+      lib.filterAttrs (
+        action: _: builtins.hasAttr action actions
+      )
+      keybinds
+    );
+in
+  mkFeature config {
+    name = "niri";
+
+    imports = [inputs.niri.nixosModules.niri];
+
+    options.runOnLaunch = lib.mkOption {
+      type = lib.types.listOf (lib.types.listOf lib.types.str);
+      default = [];
+      example = [
+        ["dms" "run" "-d"]
+        ["noctalia-shell"]
+      ];
+      description = "Commands to execute when Niri starts.";
+    };
+
+    nixos = {
+      system.nixos.tags = ["niri"];
+
+      programs.niri = {
+        enable = true;
+        package = pkgs.niri; # optional
+      };
+
+      niri-flake.cache.enable = false;
+
+      environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Enable Electron-based applications on Wayland
+    };
+
+    home = {
+      home.packages = [
+        pkgs.xwayland-satellite
+      ];
+
+      programs.niri.settings = {
+        input.keyboard = {
+          numlock = true;
+          xkb = {
+            layout = config.hostSpecs.keyboard.layout;
+            options = config.hostSpecs.keyboard.options;
+          };
+        };
+
+        outputs = builtins.listToAttrs monitorAttrs;
+
+        cursor = {
+          size = 12;
+          hide-after-inactive-ms = 2000;
+          hide-when-typing = true;
+        };
+        prefer-no-csd = true;
+
+        gestures.hot-corners.enable = false;
+
+        layout = {
+          gaps = 8;
+          struts = {
+            top = 0;
+            bottom = -2;
+          };
+          always-center-single-column = true;
+        };
+
+        hotkey-overlay = {
+          hide-not-bound = false;
+          skip-at-startup = true;
+        };
+
+        window-rules = [
+          {
+            geometry-corner-radius = {
+              top-left = 8.0;
+              top-right = 8.0;
+              bottom-left = 8.0;
+              bottom-right = 8.0;
+            };
+          }
+        ];
+
+        # generate keybinds from hostSpecs and combine with compositor specific ones
+        binds =
+          mkSpawnBinds (cfg.keybinds or {}) (cfg.actions or {})
+          // {
+            "Mod+T".action.spawn = lib.mkDefault ["${pkgs.alacritty}/bin/alacritty"];
+            "Mod+Q".action.close-window = [];
+            "Mod+O".action.toggle-overview = [];
+
+            "Print".action.spawn = lib.mkDefault [
+              "sh"
+              "-c"
+              ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy''
+            ];
+
+            "Mod+Left".action.focus-column-left = [];
+            "Mod+Right".action.focus-column-right = [];
+            "Mod+Up".action.focus-window-up = [];
+            "Mod+Down".action.focus-window-down = [];
+
+            "Mod+Ctrl+Left".action.move-column-left = [];
+            "Mod+Ctrl+Right".action.move-column-right = [];
+            "Mod+Ctrl+Up".action.move-window-up-or-to-workspace-up = [];
+            "Mod+Ctrl+Down".action.move-window-down-or-to-workspace-down = [];
+
+            "Mod+Shift+Left".action.focus-monitor-left = [];
+            "Mod+Shift+Right".action.focus-monitor-right = [];
+            "Mod+Shift+Up".action.focus-workspace-up = [];
+            "Mod+Shift+Down".action.focus-workspace-down = [];
+
+            "Mod+Shift+Ctrl+Left".action.move-column-to-monitor-left = [];
+            "Mod+Shift+Ctrl+Right".action.move-column-to-monitor-right = [];
+            "Mod+Shift+Ctrl+Up".action.move-column-to-monitor-up = [];
+            "Mod+Shift+Ctrl+Down".action.move-column-to-monitor-down = [];
+
+            "Mod+WheelScrollDown" = {
+              action.focus-workspace-down = [];
+              cooldown-ms = 150;
+            };
+            "Mod+WheelScrollUp" = {
+              action.focus-workspace-up = [];
+              cooldown-ms = 150;
+            };
+            "Mod+Shift+WheelScrollDown" = {
+              action.focus-column-right = [];
+              cooldown-ms = 150;
+            };
+            "Mod+Shift+WheelScrollUp" = {
+              action.focus-column-left = [];
+              cooldown-ms = 150;
+            };
+            "Mod+Ctrl+WheelScrollDown" = {
+              action.move-column-to-workspace-down = [];
+              cooldown-ms = 150;
+            };
+            "Mod+Ctrl+WheelScrollUp" = {
+              action.move-column-to-workspace-up = [];
+              cooldown-ms = 150;
+            };
+            "Mod+Shift+Ctrl+WheelScrollDown" = {
+              action.move-column-right = [];
+              cooldown-ms = 150;
+            };
+            "Mod+Shift+Ctrl+WheelScrollUp" = {
+              action.move-column-left = [];
+              cooldown-ms = 150;
+            };
+
+            "Mod+Comma".action.consume-or-expel-window-left = [];
+            "Mod+Semicolon".action.consume-or-expel-window-right = [];
+
+            "Mod+N".action.switch-preset-column-width = [];
+            "Mod+Shift+F".action.fullscreen-window = [];
+            "Mod+F".action.maximize-column = [];
+            "Mod+C".action.center-column = [];
+
+            "Mod+Tab".action.toggle-window-floating = [];
+
+            "Mod+Escape" = {
+              action.toggle-keyboard-shortcuts-inhibit = [];
+              allow-inhibiting = false;
+            };
+          };
+
+        debug = {
+          honor-xdg-activation-with-invalid-serial = [];
+        };
+
+        # Startup applications
+        spawn-at-startup =
+          [
+            {command = ["xwayland-satellite"];}
+          ]
+          ++ map (command: {inherit command;})
+          config.features.niri.spawnAtStartup;
+      };
+    };
+  }

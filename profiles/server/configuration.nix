@@ -17,7 +17,7 @@ in {
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  home-manager.users.${config.hostSpec.username} = import ./home.nix;
+  home-manager.users.${config.hostSpecs.username} = import ./home.nix;
 
   users.users.${config.hostSpec.username} = {
     packages = with pkgs; [

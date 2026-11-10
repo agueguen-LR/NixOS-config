@@ -40,21 +40,4 @@ in {
   # services.printing.enable = true;
 
   home-manager.users.${config.hostSpec.username} = import ./home.nix;
-
-  users.users.${config.hostSpec.username} = {
-    packages = with pkgs; [
-      btop
-      fastfetch
-      pavucontrol #volume control
-      sysstat #system info commands: iostat mpstat pidstat ...
-      wl-clipboard
-    ];
-    shell = pkgs.fish;
-  };
-
-  fonts.packages = with pkgs.nerd-fonts; [
-    jetbrains-mono
-  ];
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

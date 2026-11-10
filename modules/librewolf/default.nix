@@ -1,0 +1,102 @@
+{
+  config,
+  mkFeature,
+  lib,
+  ...
+}:
+mkFeature config {
+  name = "librewolf";
+
+  nixos = {
+    hostSpecs.browser = lib.mkDefault ["librewolf"];
+  };
+
+  home.programs.librewolf = {
+    enable = true;
+
+    profiles."${config.hostSpecs.username}" = {
+      name = config.hostSpecs.username;
+      path = config.hostSpecs.username;
+      isDefault = true;
+      extensions.force = true;
+    };
+
+    policies.Bookmarks = [
+      {
+        Title = "NixPkgs";
+        URL = "https://search.nixos.org/packages";
+        Placement = "toolbar";
+        Folder = "Nix";
+      }
+      {
+        Title = "Home-manager";
+        URL = "https://nix-community.github.io/home-manager/options.xhtml";
+        Folder = "Nix";
+      }
+      {
+        Title = "Hyprland";
+        URL = "https://wiki.hypr.land/";
+        Folder = "Nix";
+      }
+      {
+        Title = "NixVim";
+        URL = "https://mattsturgeon.github.io/nixvim/";
+        Folder = "Nix";
+      }
+      {
+        Title = "Niri-flake";
+        URL = "https://github.com/sodiboo/niri-flake/blob/main/docs.md";
+        Folder = "Nix";
+      }
+      {
+        Title = "MangoWC";
+        URL = "https://github.com/DreamMaoMao/mangowc/wiki";
+        Folder = "Nix";
+      }
+      {
+        Title = "Noctalia-shell";
+        URL = "https://docs.noctalia.dev/docs/";
+        Folder = "Nix";
+      }
+      {
+        Title = "DankMaterial-shell";
+        URL = "https://danklinux.com/docs/";
+        Folder = "Nix";
+      }
+      {
+        Title = "GitHub";
+        URL = "https://github.com/agueguen-LR";
+        Placement = "toolbar";
+      }
+      {
+        Title = "Codeberg";
+        URL = "https://codeberg.org/agueguen-LR";
+        Placement = "toolbar";
+      }
+      {
+        Title = "Youtube";
+        URL = "https://www.youtube.com/";
+        Placement = "toolbar";
+      }
+    ];
+
+    policies.ExtensionSettings = with builtins; let
+      extension = shortId: uuid: {
+        name = uuid;
+        value = {
+          install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+      };
+    in
+      listToAttrs [
+        (extension "ublock-origin" "uBlock0@raymondhill.net")
+        (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
+        (extension "matte-black-red" "{a7589411-c5f6-41cf-8bdc-f66527d9d930}")
+        (extension "darkreader" "addon@darkreader.org")
+      ];
+
+    # To add additional extensions, find the short ID on addons.mozilla.org,
+    # install it, then find its UUID under about:debugging#/runtime/this-firefox.
+  };
+}

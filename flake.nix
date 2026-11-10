@@ -85,38 +85,62 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    mkHost = host: profile:
+
+    mkHost = host:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           root = self;
+
+          # Shorthand to write modules that contain both NixOS and homeManager config
+          # This function returns an entire module, so you can write modules as:
+          # {mkFeature, config, ...}:
+          # mkFeature config {
+          #   name = <module_name>;
+          #   imports = <module_imports>;
+          #		options = <define additional options>;
+          #	  nixos = {<NixOS config>};
+          #   home = {<homeManager config>};
+          # };
+          # You can then enable the feature with features.<name>.enable = true;
+          mkFeature = moduleConfig: {
+            name,
+            imports ? [],
+            options ? {},
+            nixos ? {},
+            home ? {},
+          }: {
+            inherit imports;
+
+            options.features.${name} =
+              {
+                enable = nixpkgs.lib.mkEnableOption name;
+              }
+              // options;
+
+            config = nixpkgs.lib.mkIf moduleConfig.features.${name}.enable (
+              nixpkgs.lib.mkMerge [
+                nixos
+                {
+                  home-manager.users.${moduleConfig.hostSpecs.username} = home;
+                }
+              ]
+            );
+          };
         };
         modules = [
+          ./options.nix
           ./hosts/${host}
-          ./profiles/${profile}/configuration.nix
+          ./modules
         ];
       };
   in {
     system = "x86_64-linux";
 
-    nixosModules = import ./modules/nixos;
-
-    homeManagerModules = import ./modules/home-manager;
-
     nixosConfigurations = {
-      server = mkHost "servers" "server";
-      laptop-default = mkHost "workstations/laptop" "default";
-      laptop-qtile = mkHost "workstations/laptop" "qtile";
-      laptop-hypr = mkHost "workstations/laptop" "hyprland";
-      laptop-kde = mkHost "workstations/laptop" "kde";
-      laptop-mango = mkHost "workstations/laptop" "mango";
-      laptop-niri = mkHost "workstations/laptop" "niri";
-      pc-default = mkHost "workstations/pc" "default";
-      pc-qtile = mkHost "workstations/pc" "qtile";
-      pc-hypr = mkHost "workstations/pc" "hyprland";
-      pc-kde = mkHost "workstations/pc" "kde";
-      pc-mango = mkHost "workstations/pc" "mango";
-      pc-niri = mkHost "workstations/pc" "niri";
+      server = mkHost "servers";
+      laptop = mkHost "workstations/laptop";
+      pc = mkHost "workstations/pc";
     };
   };
 }
