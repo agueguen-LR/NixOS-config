@@ -1,8 +1,8 @@
 {
   root,
+  config,
   pkgs,
   lib,
-  outputs,
   inputs,
   hm,
   ...
@@ -53,7 +53,7 @@
       # out of date, out of support, or vulnerable.
       system.stateVersion = "25.05";
     }
-    // hm {
+    // hm config {
       home = {
         stateVersion = "25.05";
         persistence."/persist".directories = [
@@ -112,23 +112,23 @@
             directory = ".factorio";
           }
         ];
+
+        packages = with pkgs; [
+          heroic-unwrapped
+          umu-launcher
+
+          inputs.mcsr-nixos.packages.${pkgs.stdenv.hostPlatform.system}.ninjabrain-bot
+          prismlauncher
+          waywall
+
+          xwayland
+
+          #emulators
+          cemu
+          eden
+
+          archipelago
+        ];
       };
-
-      packages = with pkgs; [
-        heroic-unwrapped
-        umu-launcher
-
-        inputs.mcsr-nixos.packages.${pkgs.stdenv.hostPlatform.system}.ninjabrain-bot
-        prismlauncher
-        waywall
-
-        xwayland
-
-        #emulators
-        cemu
-        eden
-
-        archipelago
-      ];
     };
 }

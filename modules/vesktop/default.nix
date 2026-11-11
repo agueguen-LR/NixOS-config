@@ -1,8 +1,8 @@
 {
   mkFeature,
   pkgs,
-  lib,
   config,
+  inputs,
   ...
 }:
 mkFeature config {
@@ -10,7 +10,7 @@ mkFeature config {
 
   home = {
     # for impermanence, make sure config folder exists
-    home.activation.createDiscordConfigDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    home.activation.createDiscordConfigDir = inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
       mkdir -p ~/.config/discord
     '';
 

@@ -7,7 +7,7 @@ mkFeature config {
   name = "rofi";
 
   nixos = {
-    hostSpecs.appLauncher = ["rofi"];
+    hostSpecs.quickActions.appLauncher = ["rofi"];
   };
 
   home.programs.rofi = {

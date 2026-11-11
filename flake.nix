@@ -92,12 +92,19 @@
           inherit inputs outputs;
           root = self;
 
+          # Shorthand to write homeManager config from same context as NixOS config
+          # Writes as: config = {<nixos options>} // hm config {<home manager options>}
+          hm = localConfig: cfg: {
+            home-manager.users.${localConfig.hostSpecs.username} = cfg;
+          };
+
           # Shorthand to write modules that contain both NixOS and homeManager config
           # This function returns an entire module, so you can write modules as:
           # {mkFeature, config, ...}:
           # mkFeature config {
           #   name = <module_name>;
-          #   imports = <module_imports>;
+          #   nixosImports = <imports in nixos context>;
+          #   hmImports = <imports in home-manager context>;
           #		options = <define additional options>;
           #	  nixos = {<NixOS config>};
           #   home = {<homeManager config>};
@@ -105,12 +112,13 @@
           # You can then enable the feature with features.<name>.enable = true;
           mkFeature = moduleConfig: {
             name,
-            imports ? [],
+            nixosImports ? [],
+            hmImports ? [],
             options ? {},
             nixos ? {},
             home ? {},
           }: {
-            inherit imports;
+            imports = nixosImports;
 
             options.features.${name} =
               {
@@ -122,7 +130,10 @@
               nixpkgs.lib.mkMerge [
                 nixos
                 {
-                  home-manager.users.${moduleConfig.hostSpecs.username} = home;
+                  home-manager.users.${moduleConfig.hostSpecs.username} = {
+                    imports = hmImports;
+                    config = home;
+                  };
                 }
               ]
             );

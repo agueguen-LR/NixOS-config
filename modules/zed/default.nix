@@ -5,7 +5,7 @@
   ...
 }:
 mkFeature config {
-  name = "zoxide";
+  name = "zed";
 
   home.programs.zed-editor = {
     enable = true;

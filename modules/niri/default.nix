@@ -1,4 +1,3 @@
-# No enable here, instead import the NixOS module and enable niri there.
 {
   pkgs,
   config,
@@ -25,7 +24,9 @@
     lib.mapAttrs' (
       action: key: {
         name = key;
-        value.action.spawn = actions.${action};
+        value = {
+          action.spawn = actions.${action};
+        };
       }
     ) (
       lib.filterAttrs (
@@ -37,7 +38,7 @@ in
   mkFeature config {
     name = "niri";
 
-    imports = [inputs.niri.nixosModules.niri];
+    nixosImports = [inputs.niri.nixosModules.niri];
 
     options.runOnLaunch = lib.mkOption {
       type = lib.types.listOf (lib.types.listOf lib.types.str);
@@ -114,17 +115,23 @@ in
 
         # generate keybinds from hostSpecs and combine with compositor specific ones
         binds =
-          mkSpawnBinds (cfg.keybinds or {}) (cfg.actions or {})
+          mkSpawnBinds
+          (config.hostSpecs.keybinds or {})
+          (config.hostSpecs.quickActions or {})
           // {
-            "Mod+T".action.spawn = lib.mkDefault ["${pkgs.alacritty}/bin/alacritty"];
+            # "Mod+T".action = lib.mkDefault {
+            #   spawn = ["${pkgs.alacritty}/bin/alacritty"];
+            # };
             "Mod+Q".action.close-window = [];
             "Mod+O".action.toggle-overview = [];
 
-            "Print".action.spawn = lib.mkDefault [
-              "sh"
-              "-c"
-              ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy''
-            ];
+            # "Print".action = lib.mkDefault {
+            #   spawn = [
+            #     "sh"
+            #     "-c"
+            #     ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy''
+            #   ];
+            # };
 
             "Mod+Left".action.focus-column-left = [];
             "Mod+Right".action.focus-column-right = [];
@@ -205,7 +212,7 @@ in
             {command = ["xwayland-satellite"];}
           ]
           ++ map (command: {inherit command;})
-          config.features.niri.spawnAtStartup;
+          config.features.niri.runOnLaunch;
       };
     };
   }

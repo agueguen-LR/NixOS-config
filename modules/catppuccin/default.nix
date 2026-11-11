@@ -7,8 +7,11 @@
 mkFeature config {
   name = "catppuccin";
 
-  imports = [
+  nixosImports = [
     inputs.catppuccin.nixosModules.catppuccin
+  ];
+
+  hmImports = [
     inputs.catppuccin.homeModules.catppuccin
   ];
 

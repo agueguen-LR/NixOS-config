@@ -7,7 +7,7 @@
 mkFeature config {
   name = "nixvim";
 
-  imports = [
+  hmImports = [
     inputs.nixvim.homeModules.nixvim
     ./dap.nix
     ./keymaps.nix

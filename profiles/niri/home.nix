@@ -7,7 +7,6 @@
   modules = outputs.homeManagerModules;
 in {
   imports = [
-    inputs.dankMaterialShell.homeModules.niri
     modules.catppuccin
     modules.dankMaterial
     modules.direnv

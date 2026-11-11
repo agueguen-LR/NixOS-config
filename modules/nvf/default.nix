@@ -9,7 +9,7 @@ in
   mkFeature config {
     name = "nvf";
 
-    imports = [
+    hmImports = [
       inputs.nvf.homeManagerModules.default
     ];
 

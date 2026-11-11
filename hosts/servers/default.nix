@@ -1,4 +1,5 @@
 {
+  config,
   root,
   hm,
   ...
@@ -26,7 +27,7 @@
       # out of date, out of support, or vulnerable.
       system.stateVersion = "25.05";
     }
-    // hm {
+    // hm config {
       home = {
         stateVersion = "25.05";
       };

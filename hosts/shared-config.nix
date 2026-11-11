@@ -136,7 +136,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
       };
     }
-    // hm {
+    // hm config {
       home = {
         username = config.hostSpecs.username;
         homeDirectory = "/home/${config.hostSpecs.username}";

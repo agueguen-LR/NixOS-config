@@ -10,13 +10,14 @@
 mkFeature config {
   name = "dms";
 
-  imports = [
+  hmImports = [
     inputs.dankMaterialShell.homeModules.default
+    inputs.dankMaterialShell.homeModules.niri
   ];
 
   options = {
     compositor = lib.mkOption {
-      types = lib.types.str;
+      type = lib.types.str;
       default = "niri";
       description = "Compositor launched by dms";
     };
@@ -63,8 +64,8 @@ mkFeature config {
           input {
             keyboard {
               xkb {
-                layout "${config.hostSpec.keyboard.layout}"
-                options "${config.hostSpec.keyboard.options}"
+                layout "${config.hostSpecs.keyboard.layout}"
+                options "${config.hostSpecs.keyboard.options}"
               }
               numlock
             }
@@ -76,10 +77,10 @@ mkFeature config {
         '';
       };
 
-      configHome = "/home/${config.hostSpec.username}";
+      configHome = "/home/${config.hostSpecs.username}";
 
       configFiles = [
-        "/home/${config.hostSpec.username}/.config/DankMaterialShell/settings.json"
+        "/home/${config.hostSpecs.username}/.config/DankMaterialShell/settings.json"
       ];
 
       logs = {

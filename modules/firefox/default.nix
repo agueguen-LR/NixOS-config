@@ -8,7 +8,7 @@ mkFeature config {
   name = "firefox";
 
   nixos = {
-    hostSpecs.browser = lib.mkDefault ["firefox"];
+    hostSpecs.quickActions.browser = lib.mkDefault ["firefox"];
   };
 
   home.programs.firefox = {

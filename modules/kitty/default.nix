@@ -9,7 +9,7 @@ mkFeature config {
   name = "kitty";
 
   nixos = {
-    hostSpecs.quickActions.terminal = lib.mkDefault ["kitty"];
+    hostSpecs.quickActions.terminal = lib.mkOverride 999 ["kitty"];
   };
 
   home.programs.kitty = {

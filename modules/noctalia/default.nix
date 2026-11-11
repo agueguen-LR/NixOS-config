@@ -9,7 +9,7 @@
 mkFeature config {
   name = "noctalia";
 
-  imports = [
+  hmImports = [
     inputs.noctalia.homeModules.default
   ];
 

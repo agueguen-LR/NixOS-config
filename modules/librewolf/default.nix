@@ -8,7 +8,7 @@ mkFeature config {
   name = "librewolf";
 
   nixos = {
-    hostSpecs.browser = lib.mkDefault ["librewolf"];
+    hostSpecs.quickActions.browser = lib.mkDefault ["librewolf"];
   };
 
   home.programs.librewolf = {

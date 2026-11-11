@@ -14,7 +14,7 @@ mkFeature config {
   };
 
   nixos = {
-    hostSpecs.appLauncher = ["fuzzel"];
+    hostSpecs.quickActions.appLauncher = ["fuzzel"];
   };
 
   home.programs.fuzzel = {

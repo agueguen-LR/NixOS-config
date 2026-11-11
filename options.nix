@@ -1,20 +1,7 @@
-# Globally imported module that provides access to helpers functions and options that can be shared
-# between many hosts or modules to avoid repeatedly setting values that are often reused in the codebase.
-{
-  lib,
-  config,
-  ...
-}: let
-  # Shorthand to write homeManager config from same context as NixOS config
-  # Writes as: config = {<nixos options>} // hm {<home manager options>}
-  hm = cfg: {
-    home-manager.users.${config.hostSpecs.username} = cfg;
-  };
-in {
-  config._module.args = {
-    inherit hm;
-  };
-
+# Globally imported module that provides access to options that can be shared
+# between many hosts or modules to avoid repeatedly setting values
+# that are often reused in the codebase.
+{lib, ...}: {
   options.hostSpecs = {
     username = lib.mkOption {
       type = lib.types.str;

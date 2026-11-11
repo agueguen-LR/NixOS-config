@@ -8,7 +8,7 @@
 mkFeature config {
   name = "kde-plasma";
 
-  imports = [
+  hmImports = [
     inputs.plasma-manager.homeModules.plasma-manager
   ];
 

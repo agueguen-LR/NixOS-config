@@ -1,5 +1,6 @@
 # Anything you want to share between all workstations
 {
+  config,
   pkgs,
   root,
   lib,
@@ -80,7 +81,7 @@
         restartQuickshell = "Mod+Shift+R";
       };
     }
-    // hm {
+    // hm config {
       home.packages = with pkgs; [
         btop
         fastfetch

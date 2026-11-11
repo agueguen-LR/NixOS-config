@@ -24,9 +24,12 @@ in
   mkFeature config {
     name = "mango";
 
-    imports = [
-      inputs.mango.hmModules.mango
+    nixosImports = [
       inputs.mango.nixosModules.mango
+    ];
+
+    hmImports = [
+      inputs.mango.hmModules.mango
     ];
 
     options.swww.enable =
