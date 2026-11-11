@@ -80,6 +80,31 @@
         settings = "Mod+S";
         restartQuickshell = "Mod+Shift+R";
       };
+
+      # Fix pixi failing to build in current nixpkgs
+      nixpkgs.overlays = [
+        (final: prev: {
+          pixi = prev.pixi.overrideAttrs (old: {
+            nativeBuildInputs =
+              (old.nativeBuildInputs or [])
+              ++ [
+                final.pkg-config
+              ];
+
+            buildInputs =
+              (old.buildInputs or [])
+              ++ [
+                final.zstd
+              ];
+
+            preBuild =
+              (old.preBuild or "")
+              + ''
+                export AWS_LC_SYS_USE_SYSTEM=0
+              '';
+          });
+        })
+      ];
     }
     // hm config {
       home.packages = with pkgs; [

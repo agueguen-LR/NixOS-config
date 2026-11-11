@@ -36,45 +36,18 @@ mkFeature config {
       restartQuickshell = lib.mkDefault ["sh" "-c" ''dms kill''];
     };
 
-    programs.dms-shell = {
+    programs.dux-shell = {
       enable = true;
 
       systemd = {
         enable = true;
         restartIfChanged = true;
       };
-
-      enableSystemMonitoring = true;
-      enableVPN = true;
-      enableDynamicTheming = true;
-      enableAudioWavelength = true;
-      enableCalendarEvents = true;
-      enableClipboardPaste = true;
     };
 
-    services.displayManager.dms-greeter = {
+    services.displayManager.dux-greeter = {
       enable = true;
-      package = inputs.dankMaterialShell.packages.${pkgs.stdenv.hostPlatform.system}.default;
-
-      compositor = {
-        name = config.features.dms.compositor;
-
-        customConfig = lib.mkIf (config.features.dms.compositor == "niri") ''
-          input {
-            keyboard {
-              xkb {
-                layout "${config.hostSpecs.keyboard.layout}"
-                options "${config.hostSpecs.keyboard.options}"
-              }
-              numlock
-            }
-          }
-
-          hotkey-overlay {
-            skip-at-startup
-          }
-        '';
-      };
+      compositor.name = config.features.dms.compositor;
 
       configHome = "/home/${config.hostSpecs.username}";
 

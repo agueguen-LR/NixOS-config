@@ -3,23 +3,24 @@
   pkgs,
   ...
 }: let
-  tex = pkgs.texlive.combine {
-    inherit
-      (pkgs.texlive)
-      scheme-basic
-      amsmath
-      amsfonts
-      amscls
-      geometry
-      hyperref
-      fancyhdr
-      lastpage
-      graphics
-      booktabs
-      mlmodern
-      setspace
-      ;
-  };
+  tex = pkgs.texliveSmall.withPackages (
+    ps:
+      with ps; [
+        texdoc
+        scheme-basic
+        amsmath
+        amsfonts
+        amscls
+        geometry
+        hyperref
+        fancyhdr
+        lastpage
+        graphics
+        booktabs
+        mlmodern
+        setspace
+      ]
+  );
 in {
   # Make ripgrep available to telescope
   home.packages = with pkgs; [
@@ -32,6 +33,7 @@ in {
   programs.nixvim.nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "copilot.vim"
+      "copilot-language-server"
       "wezterm.nvim"
     ];
 
