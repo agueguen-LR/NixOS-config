@@ -8,7 +8,7 @@ mkFeature config {
   name = "alacritty";
 
   nixos = {
-    hostSpecs.quickActions.terminal = lib.mkOverride 999 ["alacritty"];
+    hostSpecs.quickActions.terminal = lib.mkDefault ["alacritty"];
   };
 
   home.programs.alacritty = {

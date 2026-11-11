@@ -1,13 +1,14 @@
 {
   mkFeature,
   config,
+  lib,
   ...
 }:
 mkFeature config {
   name = "rofi";
 
   nixos = {
-    hostSpecs.quickActions.appLauncher = ["rofi"];
+    hostSpecs.quickActions.appLauncher = lib.mkDefault ["rofi"];
   };
 
   home.programs.rofi = {

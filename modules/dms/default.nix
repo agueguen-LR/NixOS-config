@@ -12,7 +12,6 @@ mkFeature config {
 
   hmImports = [
     inputs.dankMaterialShell.homeModules.default
-    inputs.dankMaterialShell.homeModules.niri
   ];
 
   options = {
@@ -30,11 +29,11 @@ mkFeature config {
   };
 
   nixos = {
-    hostSpecs.quickActions = lib.mkDefault {
-      screenshot = ["dms" "screenshot"];
-      settings = ["dms" "ipc" "call" "settings" "toggle"];
-      appLauncher = ["dms" "ipc" "call" "spotlight" "toggle"];
-      restartQuickshell = ["sh" "-c" ''dms kill && dms run -d''];
+    hostSpecs.quickActions = {
+      screenshot = lib.mkDefault ["dms" "screenshot"];
+      settings = lib.mkDefault ["dms" "ipc" "call" "settings" "toggle"];
+      appLauncher = lib.mkDefault ["dms" "ipc" "call" "spotlight" "toggle"];
+      restartQuickshell = lib.mkDefault ["sh" "-c" ''dms kill''];
     };
 
     programs.dms-shell = {
@@ -92,8 +91,6 @@ mkFeature config {
 
   home.programs.dank-material-shell = {
     enable = true;
-
-    niri.includes.enable = false;
 
     session = {
       wallpaperPath = config.features.dms.wallpaper;
