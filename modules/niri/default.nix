@@ -47,7 +47,7 @@ in
       default = [];
       example = [
         ["dms" "run" "-d"]
-        ["noctalia-shell"]
+        ["noctalia"]
       ];
       description = "Commands to execute when Niri starts.";
     };
@@ -77,8 +77,15 @@ in
           substitute ${./config.kdl} $out \
             --replace-fail "// @MONITORS@" '${monitorKdl}' \
             --replace-fail "// @KEYBOARD@" '${keyboardKdl}' \
-            --replace-fail "// @BINDS@" '${keybindKdl}'
-
+            --replace-fail "// @BINDS@" '${keybindKdl}' \
+            --replace-fail "// @STARTUP@" '${
+            lib.concatMapStringsSep "\n" (
+              command: ''spawn-at-startup ${
+                  lib.concatMapStringsSep " " builtins.toJSON command
+                } ''
+            )
+            config.features.niri.runOnLaunch
+          }'
           niri validate --config $out
         '';
     };

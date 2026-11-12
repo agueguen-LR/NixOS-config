@@ -92,8 +92,9 @@ mkFeature config {
       listToAttrs [
         (extension "ublock-origin" "uBlock0@raymondhill.net")
         (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
-        (extension "matte-black-red" "{a7589411-c5f6-41cf-8bdc-f66527d9d930}")
+        # (extension "matte-black-red" "{a7589411-c5f6-41cf-8bdc-f66527d9d930}")
         (extension "darkreader" "addon@darkreader.org")
+        (extension "into-the-black-hole" "{57016d44-6d64-463c-99a1-f3c547ce39f8}")
       ];
 
     # To add additional extensions, find the short ID on addons.mozilla.org,

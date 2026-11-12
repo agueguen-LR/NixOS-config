@@ -25,5 +25,7 @@ mkFeature config {
     shellIntegration.enableFishIntegration = true;
 
     settings.confirm_os_window_close = 0;
+
+    extraConfig = lib.readFile ./OLEDppuccin.conf;
   };
 }

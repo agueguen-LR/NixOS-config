@@ -1,11 +1,10 @@
 system: "base16"
-name: "Catppuccin Mocha"
-author: "https://github.com/catppuccin/catppuccin"
+name: "CatppuccinOLED"
 variant: "dark"
 palette:
-  base00: "#1e1e2e" # base
-  base01: "#181825" # mantle
-  base02: "#313244" # surface0
+  base00: "#000000" # base
+  base01: "#010101" # mantle
+  base02: "#020202" # surface0
   base03: "#45475a" # surface1
   base04: "#585b70" # surface2
   base05: "#cdd6f4" # text

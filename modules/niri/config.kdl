@@ -73,6 +73,7 @@ binds {
 // @BINDS@
 }
 spawn-at-startup "xwayland-satellite"
+// @STARTUP@
 window-rule { geometry-corner-radius 8.000000 8.000000 8.000000 8.000000; }
 gestures { hot-corners { off; }; }
 debug { honor-xdg-activation-with-invalid-serial; }

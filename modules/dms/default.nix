@@ -2,7 +2,6 @@
   inputs,
   config,
   lib,
-  pkgs,
   mkFeature,
   root,
   ...
@@ -18,7 +17,7 @@ mkFeature config {
     compositor = lib.mkOption {
       type = lib.types.str;
       default = "niri";
-      description = "Compositor launched by dms";
+      description = "Compositor launched by dux-greet";
     };
 
     wallpaper = lib.mkOption {
@@ -29,6 +28,8 @@ mkFeature config {
   };
 
   nixos = {
+    system.nixos.tags = ["dms"];
+
     hostSpecs.quickActions = {
       screenshot = lib.mkDefault ["dms" "screenshot"];
       settings = lib.mkDefault ["dms" "ipc" "call" "settings" "toggle"];
@@ -47,7 +48,17 @@ mkFeature config {
 
     services.displayManager.dux-greeter = {
       enable = true;
-      compositor.name = config.features.dms.compositor;
+      compositor = {
+        name = config.features.dms.compositor;
+        customConfig =
+          lib.mkIf
+          (config.features.dms.compositor == "niri")
+          (
+            builtins.readFile
+            config.home-manager.users.${config.hostSpecs.username}
+          .xdg.configFile."niri/config.kdl".source
+          );
+      };
 
       configHome = "/home/${config.hostSpecs.username}";
 

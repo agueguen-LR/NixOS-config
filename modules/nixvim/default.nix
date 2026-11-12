@@ -34,11 +34,21 @@ mkFeature config {
     globalOpts = {
       shiftwidth = 2;
       tabstop = 2;
+      laststatus = 3;
     };
 
     colorschemes.catppuccin = {
       enable = true;
-      settings.flavour = "mocha";
+      settings = {
+        flavour = "mocha";
+        color_overrides = {
+          mocha = {
+            base = "#000000";
+            mantle = "#010101";
+            crust = "#020202";
+          };
+        };
+      };
     };
 
     clipboard = {
@@ -53,8 +63,29 @@ mkFeature config {
           vim.opt_local.shiftwidth = 2
           vim.opt_local.tabstop = 2
           vim.opt_local.softtabstop = 2
-        end
+          end
+        })
+
+      local colors = require("catppuccin.palettes").get_palette("mocha")
+
+      -- Vertical and horizontal split separators
+      vim.api.nvim_set_hl(0, "WinSeparator", {
+        fg = colors.surface1,
+        bg = colors.base,
       })
+      vim.api.nvim_set_hl(0, "VertSplit", {
+        fg = colors.surface1,
+        bg = colors.base,
+      })
+      vim.opt.fillchars = {
+        horiz = "─",
+        vert = "│",
+        horizup = "┴",
+        horizdown = "┬",
+        vertleft = "┤",
+        vertright = "├",
+        verthoriz = "┼",
+      }
     '';
   };
 }
