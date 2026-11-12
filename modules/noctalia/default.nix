@@ -90,6 +90,8 @@ mkFeature config {
     settings = {
       shell.font_family = "JetBrainsMono Nerd Font";
 
+      osd.kinds.media = false;
+
       bar.default = {
         position = "top";
         margin_ends = 0;
@@ -101,7 +103,8 @@ mkFeature config {
 
         start = [
           "control-center"
-          "launcher"
+          "cpu"
+          "ram"
           "media"
           "audio-vis"
         ];
@@ -135,6 +138,18 @@ mkFeature config {
           vertical_format = "{:%H\\n%M}";
           tooltip_format = "{:%A, %B %d, %Y}";
           timezone = "";
+        };
+
+        cpu = {
+          type = "sysmon";
+          stat = "cpu_usage";
+          visualization = "none";
+        };
+
+        ram = {
+          type = "sysmon";
+          stat = "ram_used";
+          visualization = "none";
         };
 
         session.color = "tertiary";

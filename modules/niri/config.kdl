@@ -12,7 +12,7 @@ input {
     }
 }
 // @MONITORS@
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Screenshot_%Y-%m-%d_%H-%M-%S.png"
 prefer-no-csd
 layout {
     gaps 8
@@ -22,7 +22,7 @@ layout {
         top 0
         bottom -2
     }
-    focus-ring { width 4; }
+    focus-ring { width 2; }
     border { off; }
     default-column-width
     center-focused-column "never"
@@ -30,7 +30,7 @@ layout {
 }
 cursor {
     xcursor-theme "default"
-    xcursor-size 12
+    xcursor-size 10
     hide-when-typing
     hide-after-inactive-ms 2000
 }
@@ -74,6 +74,9 @@ binds {
 }
 spawn-at-startup "xwayland-satellite"
 // @STARTUP@
-window-rule { geometry-corner-radius 8.000000 8.000000 8.000000 8.000000; }
+window-rule {
+    geometry-corner-radius 6 6 6 6
+    clip-to-geometry true
+}
 gestures { hot-corners { off; }; }
 debug { honor-xdg-activation-with-invalid-serial; }
