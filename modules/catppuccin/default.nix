@@ -49,13 +49,21 @@ in
       inputs.catppuccin.homeModules.catppuccin
     ];
 
+    options = {
+      oled = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Override catppuccin/nix sources to use OLEDppuccin theme. Requires non-cached compilation of 'whiskers'";
+      };
+    };
+
     nixos = {
       catppuccin = {
         autoEnable = true;
         enable = true;
         cache.enable = false;
 
-        sources = oledSources;
+        sources = lib.mkIf config.features.catppuccin.oled oledSources;
       };
     };
 
@@ -67,7 +75,7 @@ in
 
         kitty.enable = false;
 
-        sources = oledSources;
+        sources = lib.mkIf config.features.catppuccin.oled oledSources;
       };
     };
   }

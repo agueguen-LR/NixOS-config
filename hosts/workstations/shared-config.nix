@@ -52,8 +52,11 @@
 
       # enabling modules from root/modules
       features = {
-        catppuccin.enable = true;
-        dms.enable = false;
+        catppuccin = {
+          enable = true;
+          oled = true;
+        };
+        dms.enable = true;
         direnv.enable = true;
         fish.enable = true;
         fzf.enable = true;
@@ -61,7 +64,7 @@
         librewolf.enable = true;
         niri.enable = true;
         nixvim.enable = true;
-        noctalia.enable = true;
+        noctalia.enable = false;
         yazi.enable = true;
         vesktop.enable = true;
         virt-manager.enable = true;

@@ -1,61 +1,40 @@
 # NixOS-config
 
-Dotfiles for my NixOS setup, currently there are six available profiles.
+Dotfiles for my NixOS setup, implementing system and home configuration for 3 different hosts: 'pc', 'laptop' and 'server'.
+
+## Hosts
+
+Hosts are per-device configurations, defining the majority of system and per-user configuration.
 
 
-Each profile is used with a host configuration file for hardware/user specific additions.
+To avoid code duplication, sharing relevant configuration between all hosts is done through [./hosts/shared-config.nix](./hosts/shared-config.nix).
 
 
-The default profile is a completely bare installation with only git and vim.
-```bash
-sudo nixos-rebuild switch --flake .#<host>-default
+Sharing between specific hosts is done by creating sub-folders with their own shared-config.nix, which I currently only do for [workstations](./hosts/workstations/shared-config.nix) which need GUI (compositors, quickshells...) as opposed to my server.
+
+
+Hosts can also provide general information by setting options defined in [options.nix](./options.nix) which will be used to avoid repeatedly needing to set common values such as username or keyboard settings.
+
+
+## Modules
+
+Modules are implemented in the [modules/](./modules/) directory with the mkFeature function defined in my [flake](./flake.nix).
+
+
+They define complex configurations of isolated features (compositors, IDEs...) that can combine NixOS system and home-manager configuration, and can contain additional options for hosts to set.
+
+
+They are [automatically imported](./modules/default.nix), must be stored in ./modules/<feature-name>/default.nix, and are enabled by hosts with:
+
+```nix
+features.<feature-name> = {
+  enable = true;
+  # additional options...
+};
 ```
 
 
-The qtile profile comes with the X11 window manager [Qtile](https://qtile.org/).
-```bash
-sudo nixos-rebuild switch --flake .#<host>-qtile
-```
-
-
-The hyprland profile comes with the wayland compositor [Hyprland](https://hypr.land/).
-```bash
-sudo nixos-rebuild switch --flake .#<host>-hypr
-```
-
-
-The mango profile comes with the wayland compositor [MangoWC](https://github.com/DreamMaoMao/mangowc).
-```bash
-sudo nixos-rebuild switch --flake .#<host>-mango
-```
-
-
-The niri profile comes with the wayland compositor [Niri](https://github.com/YaLTeR/niri).
-```bash
-sudo nixos-rebuild switch --flake .#<host>-niri
-```
-
-
-The kde profile comes with the desktop environment [KDE Plasma 6](https://kde.org/plasma-desktop/).
-```bash
-sudo nixos-rebuild switch --flake .#<host>-kde
-```
-
-## Profiles vs Hosts
-
-Every configuration is a combination of a profile and a host. In general (ideally), a profile should work as expected independently of the specific machine — meaning it should not depend on the user’s filesystem, username, location, language, etc.
-
-
-The host defines all these user/machine-specific parameters. You can share common settings between hosts using [hosts/shared-config.nix](./hosts/shared-config.nix), like username or language, while [each host](./hosts/laptop/default.nix) imports their own hardware-configuration and sets their own machine-id.
-
-
-The [hostSpec module](./modules/hostSpec.nix) is the only channel through which profiles and hosts communicate.
-It allows modules and profiles to access host-specific information (such as monitor info or username) during their configuration. This is the only module that must be imported by both hosts and profiles: hosts set its values, and profiles (or other modules) read them.
-
-
-Thanks to hostSpec, modules can be written to be host-independent and are therefore typically used within profiles.
-However, hosts can import modules directly if you want them to be available only for that specific host.
-Just keep the host–profile separation in mind — in many cases, it’s cleaner to create a new profile for a host than to add modules directly to the host definition.
+Modules should read options the hosts have set from [options.nix](./options.nix) to avoid to avoid re-defining more options asking for common information such as username or keyboard settings.
 
 ## Impermanence
 
@@ -95,15 +74,18 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 cp /mnt/etc/nixos/hardware-configuration.nix ./hardware/<your-host>-hardware.nix
 ```
 
-Create a host configuration for any "machine-specific" configuration and modify hosts/shared-config.nix for any extra settings you wish to share between hosts.
+Create a host configuration and modify hosts/shared-config.nix or hosts/workstations/shared-config.nix for any extra settings you wish to share between hosts.
 Create your hashed password and add it to initialHashedPassword.
-!! Also set your hostId to the first 8 characters of your machine-id found in /etc/machine-id if you're using ZFS !!
-```bash
-cp -r hosts/laptop hosts/<your-host>
+> You might not want to share this password between hosts, modify commands accordingly, or handle that later, when moving to an agenix encrypted secret
 
-#appends to end of shared-config.nix, then copy-paste to users.users.${hostSpecs.username}.initialHashedPassword
+>!! Also set your hostId to the first 8 characters of your machine-id found in /etc/machine-id if you're using ZFS !!
+```bash
+cp -r hosts/workstations/laptop hosts/workstations/<your-host>
+
+# Appends to end of shared-config.nix, then copy-paste to users.users.${hostSpecs.username}.initialHashedPassword
+
 mkpasswd <your-password> >> hosts/shared-config.nix
-#appends to end of <your-host>/default.nix, then copy-paste to networking.hostId
+# Appends to end of <your-host>/default.nix, then copy-paste to networking.hostId
 head -c 8 /etc/machine-id >> hosts/<your-host>/default.nix
 
 nano hosts/shared-config.nix
@@ -111,14 +93,13 @@ nano hosts/<your-host>/default.nix
 ```
 
 Edit flake.nix to set your desired nixosConfigurations
-> !!! You should remove the others to avoid building them, as that could break things by loading wrong hardware configs, or break ZFS by loading the wrong hostId. 
+> !!! It may be good to remove the others to avoid building them, as that could break things by loading wrong hardware configs, or break ZFS by loading the wrong hostId. 
 ```bash
 nano flake.nix
 ```
 ```nix
 nixosConfigurations = {
-  <your-host>-kde = mkHost "<your-host>.nix" "kde/configuration.nix";
-  <your-host>-<other-profile> = mkHost "<your-host>.nix" "<other-profile>/configuration.nix";
+  <your-host> = mkHost "<path-to-host-config>";
   # ...
 };
 ```
@@ -131,7 +112,7 @@ cd /mnt/etc/nixos
 
 Install your configuration and reboot
 ```bash
-sudo nixos-install --flake .#<your-chosen-config>
+sudo nixos-install --flake .#<your-host>
 reboot
 ```
 

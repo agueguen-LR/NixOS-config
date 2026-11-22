@@ -17,14 +17,55 @@ mkFeature config {
     enable = true;
 
     functions = {
-      nrs = ''
+      check-flake = ''
+        if not test -f flake.nix
+          echo "Error: Not inside a Nix flake directory (flake.nix not found)." >&2
+          return 1
+        end
+      '';
+
+      nix-profile-from-tags = ''
+        check-flake; or return 1
         git add .
-        sudo nixos-rebuild switch --flake .\#$argv[1] --profile-name $argv[1]
+        set -l attr $argv[1]
+
+        set -l profile (
+          nix eval --raw \
+            ".#nixosConfigurations.$attr.config.system.nixos.tags" \
+            --apply 'tags: builtins.concatStringsSep "-" (builtins.sort builtins.lessThan tags)'
+        )
+
+        if test -z "$profile"
+          echo "No tags found for $attr" >&2
+          return 1
+        end
+
+        echo $profile
+      '';
+
+      nrs = ''
+        check-flake; or return 1
+        git add .
+        set -l attr $argv[1]
+        set -l profile (nix-profile-from-tags $attr)
+        or return 1
+
+        git add .
+        sudo nixos-rebuild switch \
+          --flake ".#$attr" \
+          --profile-name "$profile"
       '';
 
       nrb = ''
+        check-flake; or return 1
         git add .
-        sudo nixos-rebuild boot --flake .\#$argv[1] --profile-name $argv[1]
+        set -l attr $argv[1]
+        set -l profile (nix-profile-from-tags $attr)
+        or return 1
+
+        sudo nixos-rebuild boot \
+          --flake ".#$attr" \
+          --profile-name "$profile"
       '';
     };
 
