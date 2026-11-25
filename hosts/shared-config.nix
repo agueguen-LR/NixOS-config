@@ -3,7 +3,6 @@
   inputs,
   outputs,
   config,
-  root,
   pkgs,
   hm,
   ...

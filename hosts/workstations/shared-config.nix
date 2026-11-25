@@ -19,14 +19,6 @@
           "discord"
         ];
 
-      xdg.portal = {
-        enable = true;
-        extraPortals = [
-          pkgs.xdg-desktop-portal-gtk
-          pkgs.xdg-desktop-portal-wlr
-        ];
-      };
-
       services = {
         blueman.enable = true;
         pipewire = {
@@ -56,7 +48,7 @@
           enable = true;
           oled = true;
         };
-        dms.enable = true;
+        dms.enable = false;
         direnv.enable = true;
         fish.enable = true;
         fzf.enable = true;
@@ -64,10 +56,11 @@
         librewolf.enable = true;
         niri.enable = true;
         nixvim.enable = true;
-        noctalia.enable = false;
+        noctalia.enable = true;
         yazi.enable = true;
         vesktop.enable = true;
         virt-manager.enable = true;
+        xdg.enable = true;
         zoxide.enable = true;
       };
 
