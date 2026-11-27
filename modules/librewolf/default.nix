@@ -9,6 +9,9 @@ mkFeature config {
 
   nixos = {
     hostSpecs.quickActions.browser = lib.mkDefault ["librewolf"];
+    features.xdg.defaultApps = lib.mkDefault {
+      "application/pdf" = ["librewolf.desktop"];
+    };
   };
 
   home.programs.librewolf = {
